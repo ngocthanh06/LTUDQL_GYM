@@ -1,0 +1,42 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data;
+using DAL;
+
+namespace BLLayer
+{
+    public class TaiKhoan_BLL
+    {
+        TaiKhoan TK = new TaiKhoan();
+        public DataTable select_TaiKhoan()
+        {
+            return TK.select_TaiKhoan();
+        }
+
+        public DataTable select_TaiKhoanMa(string MaKH)
+        {
+            return TK.select_TaiKhoanMa(MaKH);
+        }
+
+        //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
+        public int insert_TaiKhoan(string TenDN, string MatKhau, int quyen)
+        {
+            return TK.insert_TaiKhoan( TenDN,  MatKhau, quyen);
+        }
+
+        //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)
+        public int update_TaiKhoan(string MaTK, string TenDN, string MatKhau, int quyen)
+        {
+            return TK.update_TaiKhoan(MaTK, TenDN, MatKhau, quyen);
+        }
+
+        //phương thức này gọi phương thức sv_delete() ở lớp SinhVien_DAL (tầng DAL)
+        public int delete_TaiKhoan(string MaTK)
+        {
+            return TK.delete_TaiKhoan(MaTK);
+        }
+    }
+}
