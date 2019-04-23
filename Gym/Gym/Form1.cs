@@ -105,6 +105,7 @@ namespace Gym
         {
             dataGridView1.DataSource = KH.select_KhachHang();
             MaKH.Visible = false;
+            MaThe.Visible = false;
         }
 
 
@@ -166,32 +167,40 @@ namespace Gym
             int MaKHCu = 1;
             //int MaKHMoi = 0;
             DataTable dtAdd = KH.select_KhachHang();
-
-            //Xử lý ảnh
-            Image img = pictureBox1.Image;
-            byte[] arr;
-            ImageConverter converter = new ImageConverter();
-            arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-
-
-            foreach(DataRow row in dtAdd.Rows)
+            //Xử lý lấy mã KH
+            foreach (DataRow row in dtAdd.Rows)
             {
                 MaKHCu++;
             }
 
-
-
-            if(Th.insert_The("MT"+MaKHCu.ToString(),dateNgayBD.Value.ToString(),cbbDichvu.SelectedValue.ToString())>0)
+            if (pictureBox1.Image != null && txtTenKH.Text != null && cbbDichvu.SelectedValue != null)
             {
-                if (KH.insert_KhachHang("KH" + MaKHCu.ToString(), txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr, "MT" + MaKHCu.ToString()) > 0)
+                //Xử lý ảnh
+                Image img = pictureBox1.Image;
+                byte[] arr;
+                ImageConverter converter = new ImageConverter();
+                arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
+
+                if (Th.insert_The("MT" + MaKHCu.ToString(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString()) > 0)
                 {
-                    MessageBox.Show("Thành công ");
-                    dataGridView1.DataSource = KH.select_KhachHang();
+                    if (KH.insert_KhachHang("KH" + MaKHCu.ToString(), txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr, "MT" + MaKHCu.ToString()) > 0)
+                    {
+                        MessageBox.Show("Thành công ");
+                        clearbutton();
+                        pictureBox1.Image = null;
+                        dataGridView1.DataSource = KH.select_KhachHang();
+
+                    }
+                    else
+                        MessageBox.Show("Thất bại");
                 }
-                else
-                    MessageBox.Show("Thất bại");
             }
-   
+            else if (txtTenKH.Text == "")
+                MessageBox.Show("Chưa có tên khách hàng");
+            else if (cbbDichvu.SelectedValue == null)
+                MessageBox.Show("Chưa chọn dịch vụ");
+            else
+                MessageBox.Show("Chưa có ảnh");
         }
 
         //Đổ dữ liệu trong lưới của danh sách thành viên
@@ -199,42 +208,40 @@ namespace Gym
         {
             if (e.RowIndex >= 0)
             {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
                 //Hiển thị ảnh
                 //Kiểm tra tồn tại của ảnh
-                if (!Convert.IsDBNull(dataGridView1.Rows[e.RowIndex].Cells[7].Value))
+                if (!Convert.IsDBNull(row.Cells[7].Value))
                 {
-                    var data = (Byte[])(dataGridView1.Rows[e.RowIndex].Cells[7].Value);
+                    var data = (Byte[])(row.Cells[7].Value);
                     var stream = new MemoryStream(data);
                     pictureBox1.Image = Image.FromStream(stream);
                 }
                 else
-                    pictureBox1.Update();
-
-                
-
+                    pictureBox1.Image = null;
 
                 dataGridView1.CurrentRow.Selected = true;
-                txtTenKH.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtDiaChi.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
-                txtSDT.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
-                MaKH.Text = dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                dateNgaySinh.Text = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
-                MaKH.Visible = true;
-
+                txtTenKH.Text = row.Cells[1].Value.ToString();
+                txtDiaChi.Text = row.Cells[2].Value.ToString();
+                txtSDT.Text = row.Cells[3].Value.ToString();
+                MaKH.Text = row.Cells[0].Value.ToString();
+                dateNgaySinh.Text = row.Cells[4].Value.ToString();
+                //MaKH.Visible = true;
+                MaThe.Text = row.Cells[8].Value.ToString();
                 if (dataGridView1.CurrentRow.Cells[5].Value.ToString() == "True")
                     nam.Checked = true;
                 else
                     nu.Checked = true;
 
-                ricktbGhiChu.Text = dataGridView1.Rows[e.RowIndex].Cells[6].Value.ToString();
+                ricktbGhiChu.Text = row.Cells[6].Value.ToString();
 
                 //combb dịch vụ
-                cbbDichvu.DataSource = DV.select_DichVu_TheByMa(dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                cbbDichvu.DataSource = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
                 cbbDichvu.DisplayMember = "TenDV";
                 cbbDichvu.ValueMember = "MaDV";
                 
                 //Dịch vụ thẻ
-                DataTable dvthe = DV.select_DichVu_TheByMa(dataGridView1.Rows[e.RowIndex].Cells[8].Value.ToString());
+                DataTable dvthe = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
                 if (dvthe.Rows.Count > 0)
                 {
                     txtSoNgay.Text = dvthe.Rows[0]["ThoiHan"].ToString();
@@ -271,16 +278,43 @@ namespace Gym
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
-            if(KH.update_KhachHang(MaKH.Text,txtTenKH.Text,txtDiaChi.Text,txtSDT.Text,dateNgaySinh.Value.ToString(),RadioBT(),ricktbGhiChu.Text,pictureBox1.Image)>0)
-            {
+            //Xử lý ảnh
+            Image img = pictureBox1.Image;
+            byte[] arr;
+            ImageConverter converter = new ImageConverter();
+            arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
 
+            if (KH.update_KhachHang(MaKH.Text, txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
+            {
+                MessageBox.Show("Thành công");
+                clearbutton();
+                dataGridView1.DataSource = KH.select_KhachHang();
             }
+            else
+                MessageBox.Show("Thất bại");
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if(KH.delete_KhachHang(MaKH.Text)>0)
+            {
+                if(Th.delete_The(MaThe.Text)>0)
+                {
+                    MessageBox.Show("Thành công");
+                    clearbutton();
+                    pictureBox1.Image = null;
+                    dataGridView1.DataSource = KH.select_KhachHang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else
+                MessageBox.Show("Thất bại");
         }
 
         
