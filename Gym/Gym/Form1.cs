@@ -28,9 +28,11 @@ namespace Gym
         TaiKhoan_BLL TK = new TaiKhoan_BLL();
         The_BLL Th = new The_BLL();
 
-        string strfilePath = "";
-        Image DefaultImage;
-        Byte[] ImageByteArray;
+        
+
+        //string strfilePath = "";
+        //Image DefaultImage;
+        //Byte[] ImageByteArray;
         void clearbutton()
         {
             txtTenKH.Clear();
@@ -149,7 +151,7 @@ namespace Gym
             drAdd["GioiTinh"] = RadioBT(); 
             drAdd["GhiChu"] = ricktbGhiChu.Text;
             drAdd["Avatar"] = img;
-            drAdd["MaThe"] = createMaThe();
+            //drAdd["MaThe"] = createMaThe();
             //Add dữ liệu vào bảng
             dataTable.Rows.Add(drAdd);
             //Chấp nhận thay đổi
@@ -165,13 +167,32 @@ namespace Gym
         private void button2_Click(object sender, EventArgs e)
         {
             int MaKHCu = 1;
+            int MaThecu = 1;
             //int MaKHMoi = 0;
             DataTable dtAdd = KH.select_KhachHang();
             //Xử lý lấy mã KH
             foreach (DataRow row in dtAdd.Rows)
             {
-                MaKHCu++;
+                string b = row["MaKH"].ToString();
+                string c = b.Substring(2);
+                int Ma = Convert.ToInt32(c);
+                if (Ma > MaKHCu)
+                    MaKHCu = Ma;
             }
+            MaKHCu++;
+          
+            DataTable dtMathe = Th.select_The();
+            foreach (DataRow row in dtMathe.Rows)
+            {
+                string b = row["MaThe"].ToString();
+                string c = b.Substring(2);
+                int Mathe = Convert.ToInt32(c);
+                if (Mathe > MaThecu)
+                    MaThecu = Mathe;
+            }
+            MaThecu++;
+
+
 
             if (pictureBox1.Image != null && txtTenKH.Text != null && cbbDichvu.SelectedValue != null)
             {
@@ -180,10 +201,9 @@ namespace Gym
                 byte[] arr;
                 ImageConverter converter = new ImageConverter();
                 arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-
-                if (Th.insert_The("MT" + MaKHCu.ToString(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString()) > 0)
+                if (KH.insert_KhachHang("KH" + MaKHCu.ToString(), txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
                 {
-                    if (KH.insert_KhachHang("KH" + MaKHCu.ToString(), txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr, "MT" + MaKHCu.ToString()) > 0)
+                    if (Th.insert_The("MT" + MaThecu.ToString(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(), "KH" + MaKHCu.ToString()) > 0)
                     {
                         MessageBox.Show("Thành công ");
                         clearbutton();
@@ -219,7 +239,7 @@ namespace Gym
                 }
                 else
                     pictureBox1.Image = null;
-
+                //chọn dòng dtgrid
                 dataGridView1.CurrentRow.Selected = true;
                 txtTenKH.Text = row.Cells[1].Value.ToString();
                 txtDiaChi.Text = row.Cells[2].Value.ToString();
@@ -227,7 +247,7 @@ namespace Gym
                 MaKH.Text = row.Cells[0].Value.ToString();
                 dateNgaySinh.Text = row.Cells[4].Value.ToString();
                 //MaKH.Visible = true;
-                MaThe.Text = row.Cells[8].Value.ToString();
+                //MaThe.Text = row.Cells[8].Value.ToString();
                 if (dataGridView1.CurrentRow.Cells[5].Value.ToString() == "True")
                     nam.Checked = true;
                 else
@@ -236,18 +256,18 @@ namespace Gym
                 ricktbGhiChu.Text = row.Cells[6].Value.ToString();
 
                 //combb dịch vụ
-                cbbDichvu.DataSource = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
-                cbbDichvu.DisplayMember = "TenDV";
-                cbbDichvu.ValueMember = "MaDV";
+                //cbbDichvu.DataSource = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
+                //cbbDichvu.DisplayMember = "TenDV";
+                //cbbDichvu.ValueMember = "MaDV";
                 
                 //Dịch vụ thẻ
-                DataTable dvthe = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
-                if (dvthe.Rows.Count > 0)
-                {
-                    txtSoNgay.Text = dvthe.Rows[0]["ThoiHan"].ToString();
-                    txtGia.Text = dvthe.Rows[0]["Gia"].ToString();
-                    dateNgayBD.Text = dvthe.Rows[0]["NgayDK"].ToString();
-                }
+                //DataTable dvthe = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
+                //if (dvthe.Rows.Count > 0)
+                //{
+                //    txtSoNgay.Text = dvthe.Rows[0]["ThoiHan"].ToString();
+                //    txtGia.Text = dvthe.Rows[0]["Gia"].ToString();
+                //    dateNgayBD.Text = dvthe.Rows[0]["NgayDK"].ToString();
+                //}
              }
         }
 
@@ -294,27 +314,48 @@ namespace Gym
                 MessageBox.Show("Thất bại");
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if(KH.delete_KhachHang(MaKH.Text)>0)
+            
+            if (KH.delete_KhachHang(MaKH.Text) > 0)
             {
-                if(Th.delete_The(MaThe.Text)>0)
+                DataTable DT = Th.select_TheMa(MaKH.Text);
+                foreach (DataRow row in DT.Rows)
                 {
-                    MessageBox.Show("Thành công");
-                    clearbutton();
-                    pictureBox1.Image = null;
-                    dataGridView1.DataSource = KH.select_KhachHang();
+                    Th.delete_The(row["MaThe"].ToString());      
                 }
-                else
-                    MessageBox.Show("Thất bại");
+                MessageBox.Show("Thành công");
+                clearbutton();
+                pictureBox1.Image = null;
+                dataGridView1.DataSource = KH.select_KhachHang();
+                
             }
             else
                 MessageBox.Show("Thất bại");
+        }
+
+        
+
+        private void txtgiahan_Click(object sender, EventArgs e)
+        {
+            GiaHanThe GHThe = new GiaHanThe();
+            DataTable DT = Th.select_TheMa(MaKH.Text);
+            if(DT.Rows.Count>0)
+            {
+                //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
+                GHThe.Message = MaKH.Text;
+                GHThe.ShowDialog();
+                
+            }
+            else
+                MessageBox.Show("Khách hàng chưa có thẻ");            
+            
+
+            
+            
+           
         }
 
         

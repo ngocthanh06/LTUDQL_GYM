@@ -21,16 +21,21 @@ namespace BLLayer
             return Th.select_TheMa(MaKH);
         }
 
-        //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_The(string Mathe,string NgayDK, string MaDV)
+        public DataTable select_MaThe(string Mathe)
         {
-            return Th.insert_The( Mathe,NgayDK, MaDV);
+            return Th.select_MaThe(Mathe);
+        }
+        
+        //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
+        public int insert_The(string Mathe, string NgayDK, string MaDV, string MaKH)
+        {
+            return Th.insert_The( Mathe,NgayDK, MaDV, MaKH);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)
-        public int update_The(string Mathe, string NgayDK, string MaDV, string GhiChu)
+        public int update_The(string Mathe, string NgayDK, string MaDV)
         {
-            return Th.update_The(Mathe, NgayDK, MaDV, GhiChu);
+            return Th.update_The(Mathe, NgayDK, MaDV);
         }
 
         //phương thức này gọi phương thức sv_delete() ở lớp SinhVien_DAL (tầng DAL)

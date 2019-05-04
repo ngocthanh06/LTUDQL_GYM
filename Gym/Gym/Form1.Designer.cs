@@ -32,6 +32,7 @@
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtgiahan = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -67,9 +68,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.txtgiahan = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -110,6 +110,16 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Khách hàng";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // txtgiahan
+            // 
+            this.txtgiahan.Location = new System.Drawing.Point(775, 547);
+            this.txtgiahan.Name = "txtgiahan";
+            this.txtgiahan.Size = new System.Drawing.Size(75, 23);
+            this.txtgiahan.TabIndex = 29;
+            this.txtgiahan.Text = "Gia hạn";
+            this.txtgiahan.UseVisualStyleBackColor = true;
+            this.txtgiahan.Click += new System.EventHandler(this.txtgiahan_Click);
             // 
             // button4
             // 
@@ -169,7 +179,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(713, 210);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            
             // 
             // groupBox2
             // 
@@ -453,15 +463,6 @@
             this.tabPage2.Text = "Quản lý thẻ";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(871, 592);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Danh sách sản phẩm";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
             // dataGridView2
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -470,14 +471,14 @@
             this.dataGridView2.Size = new System.Drawing.Size(514, 284);
             this.dataGridView2.TabIndex = 0;
             // 
-            // txtgiahan
+            // tabPage3
             // 
-            this.txtgiahan.Location = new System.Drawing.Point(775, 547);
-            this.txtgiahan.Name = "txtgiahan";
-            this.txtgiahan.Size = new System.Drawing.Size(75, 23);
-            this.txtgiahan.TabIndex = 29;
-            this.txtgiahan.Text = "Gia hạn";
-            this.txtgiahan.UseVisualStyleBackColor = true;
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(871, 592);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Danh sách sản phẩm";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
