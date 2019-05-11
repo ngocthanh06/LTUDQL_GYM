@@ -43,8 +43,9 @@ namespace Gym
             txtGia.Clear();
             dateNgayBD.ResetText();
             dateNgaySinh.ResetText();
+            pictureBox1.Image = null;
         }
-
+        
         //tạo mã hóa đơn tự tăng
         string createMaKH()
         {
@@ -61,26 +62,13 @@ namespace Gym
                 }
             }
             MaKH++;
-
+            if (MaKH < 10)
+                return "KH0" + MaKH;
+            else
             return "KH" + MaKH;
         }
-        //Tạo mã thẻ tự tăng
-        string createMaThe()
-        {
-            int Mathe = 0;
-            foreach(DataGridViewRow row in dataGridView1.Rows)
-            {
-                if(!row.IsNewRow)
-                {
-                    string b = row.Cells[8].Value.ToString().Substring(2);
-                    int c = Convert.ToInt32(b);
-                    if (Mathe < c)
-                        Mathe = c;
-                }
-            }
-            Mathe++;
-            return "MT" + Mathe;
-        }
+       
+        
         //Giới tính
         bool RadioBT()
         {
@@ -96,18 +84,52 @@ namespace Gym
             cbbDichvu.DisplayMember = "TenDV";
             cbbDichvu.ValueMember = "MaDV";
         }
+        void loadcbbLoaihang()
+        {
+            cbbloaihang.DataSource = LH.select_LoaiHang();
+            cbbloaihang.DisplayMember = "TenLH";
+            cbbloaihang.ValueMember = "MaLH";
+        }
         public Form1()
         {
             InitializeComponent();
+
         }
 
        
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Khách hàng
             dataGridView1.DataSource = KH.select_KhachHang();
             MaKH.Visible = false;
             MaThe.Visible = false;
+            MaNV.Visible = false;
+            matk.Visible = false;
+            //mahh.Visible = false;
+            
+            
+            //loaihang
+            dtgdsloaihang.DataSource = LH.select_LoaiHang();           
+            //nhân viên
+            dtgnhanvien.DataSource = NV.select_NhanVien();
+            //hanghoa
+            dtgLoaiHang.DataSource = HH.select_HangHoa();
+
+            //foreach (DataGridViewRow row in dtgdsloaihang.Rows)
+            //{
+            //    if (!row.IsNewRow)
+            //    {
+            //        mahh.Text = row.Cells[4].Value.ToString();
+            //    }
+               
+            //    //if (a == "")
+            //    //{
+
+            //    //    //this.dtgdsloaihang.Rows.Add("4", "Không xác định");
+            //    //    // row.Cells[4].Value = "Không xác định";
+            //    //}
+            //}
         }
 
 
@@ -163,7 +185,7 @@ namespace Gym
         {
             clearbutton();
         }
-
+        //Thêm KH
         private void button2_Click(object sender, EventArgs e)
         {
             int MaKHCu = 1;
@@ -181,6 +203,7 @@ namespace Gym
             }
             MaKHCu++;
           
+            //Mã thẻ
             DataTable dtMathe = Th.select_The();
             foreach (DataRow row in dtMathe.Rows)
             {
@@ -241,11 +264,11 @@ namespace Gym
                     pictureBox1.Image = null;
                 //chọn dòng dtgrid
                 dataGridView1.CurrentRow.Selected = true;
-                txtTenKH.Text = row.Cells[1].Value.ToString();
-                txtDiaChi.Text = row.Cells[2].Value.ToString();
-                txtSDT.Text = row.Cells[3].Value.ToString();
-                MaKH.Text = row.Cells[0].Value.ToString();
-                dateNgaySinh.Text = row.Cells[4].Value.ToString();
+                txtTenKH.Text = row.Cells[1].Value.ToString().Trim();
+                txtDiaChi.Text = row.Cells[2].Value.ToString().Trim();
+                txtSDT.Text = row.Cells[3].Value.ToString().Trim();
+                MaKH.Text = row.Cells[0].Value.ToString().Trim();
+                dateNgaySinh.Text = row.Cells[4].Value.ToString().Trim();
                 //MaKH.Visible = true;
                 //MaThe.Text = row.Cells[8].Value.ToString();
                 if (dataGridView1.CurrentRow.Cells[5].Value.ToString() == "True")
@@ -255,19 +278,6 @@ namespace Gym
 
                 ricktbGhiChu.Text = row.Cells[6].Value.ToString();
 
-                //combb dịch vụ
-                //cbbDichvu.DataSource = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
-                //cbbDichvu.DisplayMember = "TenDV";
-                //cbbDichvu.ValueMember = "MaDV";
-                
-                //Dịch vụ thẻ
-                //DataTable dvthe = DV.select_DichVu_TheByMa(row.Cells[8].Value.ToString());
-                //if (dvthe.Rows.Count > 0)
-                //{
-                //    txtSoNgay.Text = dvthe.Rows[0]["ThoiHan"].ToString();
-                //    txtGia.Text = dvthe.Rows[0]["Gia"].ToString();
-                //    dateNgayBD.Text = dvthe.Rows[0]["NgayDK"].ToString();
-                //}
              }
         }
 
@@ -291,10 +301,7 @@ namespace Gym
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
+       //Sửa KH
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -303,34 +310,41 @@ namespace Gym
             byte[] arr;
             ImageConverter converter = new ImageConverter();
             arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-
-            if (KH.update_KhachHang(MaKH.Text, txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
+            if (pictureBox1.Image != null && txtTenKH.Text != null)
             {
-                MessageBox.Show("Thành công");
-                clearbutton();
-                dataGridView1.DataSource = KH.select_KhachHang();
+                if (KH.update_KhachHang(MaKH.Text, txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    clearbutton();
+                    dataGridView1.DataSource = KH.select_KhachHang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
             }
+            else if (txtTenKH.Text == "")
+                MessageBox.Show("Chưa có tên khách hàng");
             else
-                MessageBox.Show("Thất bại");
+                MessageBox.Show("Chưa có ảnh");
         }
 
         
-
+        //Xóa KH
         private void button4_Click(object sender, EventArgs e)
         {
             
+            DataTable DT = Th.select_TheMa(MaKH.Text);
+            //Xóa thẻ trong csdl
+            foreach (DataRow row in DT.Rows)
+            {
+                Th.delete_The(row["Mathe"].ToString());
+            }
+            //Xóa khách hàng
             if (KH.delete_KhachHang(MaKH.Text) > 0)
             {
-                DataTable DT = Th.select_TheMa(MaKH.Text);
-                foreach (DataRow row in DT.Rows)
-                {
-                    Th.delete_The(row["MaThe"].ToString());      
-                }
                 MessageBox.Show("Thành công");
                 clearbutton();
                 pictureBox1.Image = null;
                 dataGridView1.DataSource = KH.select_KhachHang();
-                
             }
             else
                 MessageBox.Show("Thất bại");
@@ -350,13 +364,521 @@ namespace Gym
                 
             }
             else
-                MessageBox.Show("Khách hàng chưa có thẻ");            
-            
-
-            
-            
+                MessageBox.Show("Khách hàng chưa có thẻ");               
            
         }
+
+        /* NHÂN VIÊN
+         * Nhân viên 
+         * Nhân viên
+         */
+        //clear button nhân viên
+        //Nhân viên
+        //Xử lý lỗi của dtgnhanvien load ảnh
+        private void dtgnhanvien_DataError_1(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+        
+        void clearbuttonNV()
+        {
+            txtTenNV.Clear();
+            txtSDTNV.Clear();
+            txtDiachiNV.Clear();
+            dtpickngaysinhNV.ResetText();
+            richghichuNV.Clear();
+            pictureNV.Image = null;
+        }
+        bool RadioBTNV()
+        {
+            if (nvnam.Checked == true)
+                return true;
+            else
+                return false;
+        }
+        bool RadioBTTrangThai()
+        {
+            if (lamviec.Checked == true)
+                return true;
+            else
+                return false;
+        }
+        private void btlammoiNV_Click(object sender, EventArgs e)
+        {
+            clearbuttonNV();
+        }
+
+        string createMaNV()
+        {
+            int MaNV = 0;
+            foreach (DataGridViewRow row in dtgnhanvien.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string b = row.Cells[0].Value.ToString().Substring(2);
+                    int c = Convert.ToInt32(b);
+                    if (MaNV < c)
+                        MaNV = c;
+                }
+            }
+            MaNV++;
+            if (MaNV < 10)
+                return "NV0" + MaNV;
+            else
+                return "NV" + MaNV;
+        }
+
+        string createMaTKNV()
+        {
+            int MaTK = 0;
+            foreach (DataGridViewRow row in dtgnhanvien.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string b = row.Cells[6].Value.ToString().Substring(2);
+                    int c = Convert.ToInt32(b);
+                    if (MaTK < c)
+                        MaTK = c;
+                }
+            }
+            MaTK++;
+            if (MaTK < 10)
+                return "TK" + MaTK;
+            else
+                return "TK" + MaTK;
+        }
+
+        private void dtgnhanvien_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+                dtgnhanvien.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dtgnhanvien.Rows[e.RowIndex];
+
+                //Hiển thị ảnh
+                //Kiểm tra tồn tại của ảnh
+                if (!Convert.IsDBNull(row.Cells[7].Value))
+                {
+                    var data = (Byte[])(row.Cells[7].Value);
+                    var stream = new MemoryStream(data);
+                    pictureNV.Image = Image.FromStream(stream);
+                }
+                else
+                    pictureNV.Image = null;
+                txtTenNV.Text = row.Cells[1].Value.ToString().Trim();
+                dtpickngaysinhNV.Text = row.Cells[2].Value.ToString().Trim();
+                txtDiachiNV.Text = row.Cells[4].Value.ToString().Trim();
+                txtSDTNV.Text = row.Cells[5].Value.ToString().Trim();
+                matk.Text = row.Cells[6].Value.ToString().Trim();
+                MaNV.Text = row.Cells[0].Value.ToString().Trim();
+                if (dtgnhanvien.CurrentRow.Cells[9].Value.ToString() == "True")
+                    lamviec.Checked = true;
+                else
+                    nghilam.Checked = true;
+                if (dtgnhanvien.CurrentRow.Cells[3].Value.ToString() == "True")
+                    nvnam.Checked = true;
+                else
+                    nvnu.Checked = true;
+
+                richghichuNV.Text = row.Cells[8].Value.ToString().Trim();
+
+            }
+        }
+
+        private void btThemNV_Click(object sender, EventArgs e)
+        {
+            if (txtTenNV.Text != "" && pictureNV.Image != null)
+            {
+                //Xử lý ảnh
+                Image imgNV = pictureNV.Image;
+                byte[] arrNV;
+                ImageConverter converter = new ImageConverter();
+                arrNV = (byte[])converter.ConvertTo(imgNV, typeof(byte[]));
+                //Thêm nhân viên không cần user, pass
+                if (TK.insert_TaiKhoan(createMaTKNV(), "", "", 0) > 0)
+                {
+                    if (NV.insert_NhanVien(createMaNV(), txtTenNV.Text, dtpickngaysinhNV.Value.ToString(), RadioBTNV(), txtDiachiNV.Text, txtSDTNV.Text, createMaTKNV(), arrNV, richghichuNV.Text, RadioBTTrangThai()) > 0)
+                    {
+                        MessageBox.Show("Thành công");
+                        clearbuttonNV();
+                        dtgnhanvien.DataSource = NV.select_NhanVien();
+                    }
+                    else
+                        MessageBox.Show("Thất bại");
+
+                }
+            }
+            //Bắt lỗi thêm số ký tự
+            else if (txtTenNV.Text == "")
+                MessageBox.Show("Bạn chưa nhập tên nhân viên");
+            else
+                MessageBox.Show("Bạn chưa có ảnh");
+        }
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            String imageLocationNV = "";
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocationNV = dialog.FileName;
+                    pictureNV.ImageLocation = imageLocationNV;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btsuaNV_Click(object sender, EventArgs e)
+        {
+            //Xử lý ảnh
+            Image imgNV = pictureNV.Image;
+            byte[] arrNV;
+            ImageConverter converter = new ImageConverter();
+            arrNV = (byte[])converter.ConvertTo(imgNV, typeof(byte[]));
+            if (txtTenNV.Text != "" && pictureNV.Image != null)
+            {
+                if (NV.update_NhanVien(MaNV.Text, txtTenNV.Text, dtpickngaysinhNV.Value.ToString(), RadioBTNV(), txtDiachiNV.Text, txtSDT.Text, arrNV, richghichuNV.Text, RadioBTTrangThai()) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    clearbuttonNV();
+                    dtgnhanvien.DataSource = NV.select_NhanVien();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            //Bắt lỗi thêm số ký tự
+            else if (txtTenNV.Text == "")
+                MessageBox.Show("Bạn chưa nhập tên nhân viên");
+            else
+                MessageBox.Show("Bạn chưa có ảnh");
+        }
+
+        private void btxoaNV_Click(object sender, EventArgs e)
+        {
+            if (NV.delete_NhanVien(MaNV.Text) > 0)
+            {
+                if (TK.delete_TaiKhoan(matk.Text) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    clearbuttonNV();
+                    dtgnhanvien.DataSource = NV.select_NhanVien();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else
+                MessageBox.Show("Thất bại");
+        }
+
+        private void bthienthiNV_Click(object sender, EventArgs e)
+        {
+            TaikhoanNV TKNV = new TaikhoanNV();
+            DataTable DT = NV.select_NhanVienMa(MaNV.Text);
+            if (DT.Rows.Count > 0)
+            {
+                //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
+                TKNV.Message = matk.Text;
+                TKNV.ShowDialog();
+
+            }
+            else
+                MessageBox.Show("Chưa chọn nhân viên");  
+        }
+
+        /* Hàng Hóa
+         * Hàng Hóa 
+         * Hàng Hóa
+         */
+        //Loadcbb loại hàng
+        void loadloaihang()
+        {
+                txtTenLH.Clear();
+                txtDongia.Clear();
+                datehansudung.ResetText();
+                richghichuLH.Clear();
+                numericUpDown1.Value = 0;
+                pictureLoaiHang.Image = null;
+        }
+        private void cbbloaihang_DropDown(object sender, EventArgs e)
+        {
+            loadcbbLoaihang();
+        }
+        //Tạo mã hàng hóa
+        string createMahh()
+        {
+            int MaLH = 0;
+            foreach (DataGridViewRow row in dtgLoaiHang.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string b = row.Cells[0].Value.ToString().Substring(2);
+                    int c = Convert.ToInt32(b);
+                    if (MaLH < c)
+                        MaLH = c;
+                }
+            }
+            MaLH++;
+            if(MaLH<10)
+                return "LH0" + MaLH;
+            else
+                 return "LH" + MaLH;
+        }
+        //load cbb
+        private void dtgLoaiHang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+
+                dtgLoaiHang.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dtgLoaiHang.Rows[e.RowIndex];
+                //Hiển thị ảnh
+                //Kiểm tra tồn tại của ảnh
+                if (!Convert.IsDBNull(row.Cells[5].Value))
+                {
+                    var data = (Byte[])(row.Cells[5].Value);
+                    var stream = new MemoryStream(data);
+                    pictureLoaiHang.Image = Image.FromStream(stream);
+                }
+                else
+                    pictureLoaiHang.Image = null;
+
+                txtTenLH.Text = row.Cells[1].Value.ToString().Trim();
+                txtDongia.Text = row.Cells[2].Value.ToString().Trim();
+                datehansudung.Text = row.Cells[6].Value.ToString().Trim();
+                richghichuLH.Text = row.Cells[7].Value.ToString().Trim();
+                numericUpDown1.Value = Convert.ToInt32(row.Cells[3].Value.ToString());
+                cbbloaihang.DataSource = LH.select_LoaiHangMa(row.Cells[4].Value.ToString());
+                cbbloaihang.DisplayMember = "TenLH";
+                cbbloaihang.ValueMember = "MaLH";
+                mahh.Text = row.Cells[0].Value.ToString().Trim();
+                
+                
+            }
+        }
+        //load ảnh
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            String imageLocationNV = "";
+            try
+            {              
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocationNV = dialog.FileName;
+                    pictureLoaiHang.ImageLocation = imageLocationNV;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnlammoi_Click(object sender, EventArgs e)
+        {
+            loadloaihang();
+        }
+
+        private void btnthem_Click(object sender, EventArgs e)
+        {
+            //Xử lý ảnh
+            Image imgNV = pictureLoaiHang.Image;
+            byte[] arrLH;
+            ImageConverter converter = new ImageConverter();
+            arrLH = (byte[])converter.ConvertTo(imgNV, typeof(byte[]));
+            //Kiểm tra điều kiện
+            if (cbbloaihang.SelectedValue != null && txtTenLH.Text != "" && pictureLoaiHang.Image != null)
+            {
+                //Chuyển đơn giá
+                string a = txtDongia.Text;
+                float dongia = Convert.ToInt32(a);
+                //Chuyển số lượng
+                string b = numericUpDown1.Value.ToString();
+                int soluong = Convert.ToInt32(b);
+                if (HH.insert_HangHoa(createMahh(), txtTenLH.Text, dongia, soluong, cbbloaihang.SelectedValue.ToString(), arrLH, datehansudung.Value.ToString(), richghichuLH.Text) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    //Loại hàng
+                    dtgLoaiHang.DataSource = HH.select_HangHoa();
+                    loadloaihang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else if (cbbloaihang.SelectedValue == null)
+                MessageBox.Show("Bạn chưa chọn loại hàng");
+            else if (pictureLoaiHang.Image == null)
+                MessageBox.Show("Bạn chưa chọn ảnh");
+            else
+                MessageBox.Show("Tên sản phẩm không được để trống");
+        }
+
+        private void btnsua_Click(object sender, EventArgs e)
+        {
+            //Xử lý ảnh
+            Image imgNV = pictureLoaiHang.Image;
+            byte[] arrLH;
+            ImageConverter converter = new ImageConverter();
+            arrLH = (byte[])converter.ConvertTo(imgNV, typeof(byte[]));
+            //Kiểm tra điều kiện
+            if (cbbloaihang.SelectedValue != null && txtTenLH.Text != "" && pictureLoaiHang.Image != null)
+            {
+                //Chuyển đơn giá
+                string a = txtDongia.Text;
+                float dongia = Convert.ToInt32(a);
+                //Chuyển số lượng
+                string b = numericUpDown1.Value.ToString();
+                int soluong = Convert.ToInt32(b);
+                if (HH.update_HangHoa(mahh.Text, txtTenLH.Text, dongia, soluong, cbbloaihang.SelectedValue.ToString(), arrLH, datehansudung.Value.ToString(), richghichuLH.Text) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    //Loại hàng
+                    dtgLoaiHang.DataSource = HH.select_HangHoa();
+                    loadloaihang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else if (cbbloaihang.SelectedValue == null)
+                MessageBox.Show("Bạn chưa chọn loại hàng");
+            else if (pictureLoaiHang.Image == null)
+                MessageBox.Show("Bạn chưa chọn ảnh");
+            else
+                MessageBox.Show("Tên sản phẩm không được để trống");
+        }
+
+        private void btnxoa_Click(object sender, EventArgs e)
+        {
+            if(HH.delete_HangHoa(mahh.Text)>0)
+            {
+                MessageBox.Show("Thành công");
+                //Loại hàng
+                dtgLoaiHang.DataSource = HH.select_HangHoa();
+                loadloaihang();
+            }
+            else
+                MessageBox.Show("Thất bại");
+        }
+        /*Loại hàng
+         * Loại hàng
+         * 
+         * */
+        void loadlhang()
+        {
+            txtmalh.Clear();
+            TenLHtxt.Clear();
+        }
+        //Tạo mã loại hàng
+        string createMaLH()
+        {
+            int MaLH = 0;
+            foreach (DataGridViewRow row in dtgdsloaihang.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    string b = row.Cells[0].Value.ToString().Substring(2);
+                    int c = Convert.ToInt32(b);
+                    if (MaLH < c)
+                        MaLH = c;
+                }
+            }
+            MaLH++;
+            if(MaLH<10)
+                return "LH0" + MaLH;
+            else
+                return "LH" + MaLH;
+        }
+
+        private void dtgdsloaihang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+
+                dtgdsloaihang.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dtgdsloaihang.Rows[e.RowIndex];
+                txtmalh.Enabled = false;
+                txtmalh.Text = row.Cells[0].Value.ToString();
+                TenLHtxt.Text = row.Cells[1].Value.ToString();
+                richghichuLoaiH.Text = row.Cells[2].Value.ToString();
+
+            }
+           
+        }
+
+        private void bthlammoilh_Click(object sender, EventArgs e)
+        {
+            loadlhang();
+            txtmalh.Enabled = true;  
+        }
+
+        private void btnthemlh_Click(object sender, EventArgs e)
+        {
+            if (TenLHtxt.Text != "")
+            {
+                if (LH.insert_LoaiHang(createMaLH(), TenLHtxt.Text,richghichuLoaiH.Text) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loadlhang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else
+                MessageBox.Show("Chưa nhập tên loại hàng");
+        }
+
+        private void btnsualh_Click(object sender, EventArgs e)
+        {
+            if (TenLHtxt.Text != "")
+            {
+                if(LH.update_LoaiHang(txtmalh.Text,TenLHtxt.Text,richghichuLoaiH.Text)>0)
+                {
+                    MessageBox.Show("Thành công");
+                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loadlhang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
+            else
+                MessageBox.Show("Chưa nhập tên loại hàng");
+        }
+
+        private void btnxoalh_Click(object sender, EventArgs e)
+        {
+            if(LH.delete_LoaiHang(txtmalh.Text)>0)
+            {
+                MessageBox.Show("Thành công");
+                dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                loadlhang();
+            }
+            else
+                MessageBox.Show("Thất bại");
+        }
+
+        
+
+        
+        
+       
+
+     
+
+       
+
+       
+
+        
 
         
 

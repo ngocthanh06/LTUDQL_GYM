@@ -39,11 +39,33 @@ namespace Gym
             set { txtMaKh.Text = value; }
         }
 
-        private void SetValue(String value)
+        //private void SetValue(String value)
+        //{
+        //    this.txtMaKh.Text = value;
+        //}
+        void loadngay()
         {
-            this.txtMaKh.Text = value;
-        }
+            //Tính số ngày còn lại
+            //Ngày hiện tại
+            DateTime now = DateTime.Now;
+            //Ngày trong cbbdichvu
+            int ngay = Convert.ToInt32(txtthoihan.Text);
+            //Ngày đăng ký
+            DateTime songaydk = dateTimePicker1.Value;
+            //Ngày dự đoán hết hạn
+            DateTime songaytt = songaydk.AddDays(ngay);
 
+            if (DateTime.Compare(songaytt, now) < 0)
+                txtSongaycon.Text = "Hết hạn";
+
+            else
+            {
+                TimeSpan Time = songaytt - now;
+                int songay = Time.Days;
+                txtSongaycon.Text = "Còn lại: " + songay + " ngày";
+
+            }
+        }
         void load()
         {
             txtthoihan.Clear();
@@ -52,22 +74,11 @@ namespace Gym
             dateTimePicker1.Value = DateTime.Now;
             txtSongaycon.Clear();
         }
-        private void GiaHanThe_Load(object sender, EventArgs e)
+        void loaddtgdanhsachthe()
         {
-            //Tính số ngày còn lại
-            //    //Ngày hiện tại
-            DateTime now = DateTime.Now;
-            //    //Ngày trong cbbdichvu
-            //    int ngay = Convert.ToInt32(Dichvu.Rows[0]["Thoihan"].ToString());
-            //    //Ngày đăng ký
-            //    DateTime songaydk = dateTimePicker1.Value;
-            //    //Ngày dự đoán hết hạn
-            //    DateTime songaytt = songaydk.AddDays(ngay);
-            //    if (DateTime.Compare(songaytt, now) < 0)
-            //        row.DefaultCellStyle.BackColor = Color.Red;
-            dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
-            foreach(DataGridViewRow row in dtgdanhsachthe.Rows)
+            foreach (DataGridViewRow row in dtgdanhsachthe.Rows)
             {
+                DateTime now = DateTime.Now;
                 // int ngay = Convert.ToInt32(row.Cells[1]);
                 DataTable DTB = DV.select_DichVuMa(row.Cells[2].Value.ToString());
 
@@ -80,7 +91,15 @@ namespace Gym
                 if (DateTime.Compare(songayttp, now) < 0)
                     row.DefaultCellStyle.BackColor = Color.Red;
 
-                }
+            }
+        }
+        private void GiaHanThe_Load(object sender, EventArgs e)
+        {
+            //Tính số ngày còn lại
+            //    //Ngày hiện tại
+            
+            dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
+            loaddtgdanhsachthe();
 
             txtMaThe.Enabled = false;
             cbbDichVu.DataSource = DV.select_DichVu();
@@ -102,11 +121,7 @@ namespace Gym
                 }
                 else
                     pictureBox1.Image = null;
-            }
-            
-
-            
-           
+            }    
         }
 
         private void cbbDichVu_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,6 +131,7 @@ namespace Gym
             {
                 txtthoihan.Text = Dichvu.Rows[0]["Thoihan"].ToString();
                 txtGia.Text = Dichvu.Rows[0]["Gia"].ToString();
+                loadngay();
             }
 
         }
@@ -144,26 +160,7 @@ namespace Gym
                 txtthoihan.Text = Dichvu.Rows[0]["Thoihan"].ToString();
                 txtGia.Text = Dichvu.Rows[0]["Gia"].ToString();
 
-                //Tính số ngày còn lại
-                //Ngày hiện tại
-                DateTime now = DateTime.Now;
-                //Ngày trong cbbdichvu
-                int ngay = Convert.ToInt32(txtthoihan.Text);
-                //Ngày đăng ký
-                DateTime songaydk = dateTimePicker1.Value;
-                //Ngày dự đoán hết hạn
-                DateTime songaytt = songaydk.AddDays(ngay);
-
-                if (DateTime.Compare(songaytt, now) < 0)
-                    txtSongaycon.Text = "Hết hạn";     
-           
-                else
-                {
-                    TimeSpan Time = songaytt - now;
-                    int songay = Time.Days;
-                    txtSongaycon.Text = "Còn lại: "+songay+" ngày";
-
-                }
+                loadngay();
                     
             }
         }
@@ -204,6 +201,7 @@ namespace Gym
                 MessageBox.Show("Thành công");
                 load();
                 dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
+                loaddtgdanhsachthe();
             }
             else
                 MessageBox.Show("Thất bại");

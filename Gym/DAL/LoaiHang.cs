@@ -19,26 +19,27 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu("select_LoaiHang");
         }
-        public DataTable select_LoaiHangMa(string MaKH)
+        public DataTable select_LoaiHangMa(string MaLH)
         {
             name = new string[1];
             value = new object[1];
-            name[0] = "@MaKH"; value[0] = MaKH;
+            name[0] = "@MaLH"; value[0] = MaLH;
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_LoaiHangMa", name, value, 1);
         }
         
 
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện insert
-        public int insert_LoaiHang(string TenLH, string GhiChu)
+        public int insert_LoaiHang(string MaLH,string TenLH, string GhiChu)
         {
             //thaotac.KetnoiCSDL();
-            name = new string[2];
-            value = new object[2];
-            name[0] = "@TenLH"; value[0] = TenLH;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
-            name[1] = "@GhiChu"; value[1] = GhiChu;
+            name = new string[3];
+            value = new object[3];
+            name[0] = "@MaLH"; value[0] = MaLH;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
+            name[1] = "@TenLH"; value[1] = TenLH;
+            name[2] = "@GhiChu"; value[2] = GhiChu;
             
-            return thaotac.SQL_Thuchien("Insert_LoaiHang", name, value, 2);
+            return thaotac.SQL_Thuchien("Insert_LoaiHang", name, value, 3);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện update
         public int update_LoaiHang(string MaLH, string TenLH, string GhiChu)

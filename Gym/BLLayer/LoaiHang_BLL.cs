@@ -16,15 +16,15 @@ namespace BLLayer
             return LH.select_LoaiHang();
         }
 
-        public DataTable select_LoaiHangMa(string MaKH)
+        public DataTable select_LoaiHangMa(string MaLH)
         {
-            return LH.select_LoaiHangMa( MaKH);
+            return LH.select_LoaiHangMa( MaLH);
         }
 
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_LoaiHang(string TenLH, string GhiChu)
+        public int insert_LoaiHang(string MaLH, string TenLH, string GhiChu)
         {
-            return LH.insert_LoaiHang( TenLH,  GhiChu);
+            return LH.insert_LoaiHang(MaLH,TenLH, GhiChu);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)

@@ -22,15 +22,15 @@ namespace BLLayer
         }
 
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_NhanVien(string TenNV, string NgaySinh, bool GioiTinh, string DiaChi, string SDT, string MaTK)
+        public int insert_NhanVien(string @MaNV,string TenNV, string NgaySinh, bool GioiTinh, string DiaChi, string SDT, string MaTK,object hinhanh,string ghichu ,bool trangthai)
         {
-            return NV.insert_NhanVien(TenNV, NgaySinh, GioiTinh, DiaChi, SDT, MaTK);
+            return NV.insert_NhanVien(@MaNV,TenNV, NgaySinh, GioiTinh, DiaChi, SDT, MaTK, hinhanh, ghichu, trangthai);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)
-        public int update_NhanVien(string MaNV, string TenNV, string NgaySinh, bool GioiTinh, string DiaChi, string SDT, string MaTK)
+        public int update_NhanVien(string MaNV, string TenNV, string NgaySinh, bool GioiTinh, string DiaChi, string SDT,  object hinhanh, string ghichu, bool trangthai)
         {
-            return NV.update_NhanVien(MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, MaTK);
+            return NV.update_NhanVien(MaNV, TenNV, NgaySinh, GioiTinh, DiaChi, SDT, hinhanh, ghichu , trangthai);
         }
 
         //phương thức này gọi phương thức sv_delete() ở lớp SinhVien_DAL (tầng DAL)

@@ -22,9 +22,9 @@ namespace BLLayer
         }
 
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_TaiKhoan(string TenDN, string MatKhau, int quyen)
+        public int insert_TaiKhoan(string MaTK,string TenDN, string MatKhau, int quyen)
         {
-            return TK.insert_TaiKhoan( TenDN,  MatKhau, quyen);
+            return TK.insert_TaiKhoan( MaTK,TenDN,  MatKhau, quyen);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)

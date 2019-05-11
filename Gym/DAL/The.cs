@@ -52,7 +52,7 @@ namespace DAL
             name[3] = "@MaKH"; value[3] = MaKH;
            
 
-            return thaotac.SQL_Thuchien("Insert_The", name, value, 4);
+            return thaotac.SQL_Thuchien("insert_The", name, value, 4);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện update
         public int update_The(string Mathe, string NgayDK, string MaDV)
@@ -63,7 +63,7 @@ namespace DAL
             name[1] = "@NgayDK"; value[1] = NgayDK;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
             name[2] = "@MaDV"; value[2] = MaDV;
             
-            return thaotac.SQL_Thuchien("Update_The", name, value, 3);
+            return thaotac.SQL_Thuchien("update_The", name, value, 3);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện delete
         public int delete_The(string Mathe)
@@ -71,7 +71,7 @@ namespace DAL
             name = new string[1];
             value = new object[1];
             name[0] = "@Mathe"; value[0] = Mathe;
-            return thaotac.SQL_Thuchien("Delete_The", name, value, 1);
+            return thaotac.SQL_Thuchien("delete_The", name, value, 1);
         }
     }
 }
