@@ -27,8 +27,15 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_HangHoaMa", name, value, 1);
         }
-        
 
+        public DataTable select_HangHoaMaLH(string MaLH)
+        {
+            name = new string[1];
+            value = new object[1];
+            name[0] = "@MaLH"; value[0] = MaLH;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_HangHoaMaLH", name, value, 1);
+        }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện insert
         public int insert_HangHoa(string MaHang, string TenHang, float DonGia, int SLCon, string MaLH, object hinhanh, string hansudung, string ghichu)
         {

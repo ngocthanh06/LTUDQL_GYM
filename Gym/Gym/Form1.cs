@@ -29,6 +29,19 @@ namespace Gym
         The_BLL Th = new The_BLL();
 
         
+        //contructor
+
+        public string Message
+        {
+            get { return tennguoidung.Text; }
+            set { tennguoidung.Text = value; }
+        }
+
+        public string Quyen
+        {
+            get { return quyen.Text; }
+            set { quyen.Text = value; }
+        }
 
         //string strfilePath = "";
         //Image DefaultImage;
@@ -107,32 +120,34 @@ namespace Gym
             MaNV.Visible = false;
             matk.Visible = false;
             //mahh.Visible = false;
+            DataTable DT = NV.select_NhanVienMaTK(tennguoidung.Text);
+            tennguoidung.Text = "Xin chào, "+DT.Rows[0]["TenNV"].ToString();
+            if (!Convert.IsDBNull(DT.Rows[0]["hinhanh"]))
+            {
+                var data = (Byte[])(DT.Rows[0]["hinhanh"]);
+                var stream = new MemoryStream(data);
+                pictureuser.Image = Image.FromStream(stream);
+            }
+            else
+                pictureuser.Image = null;
+            closeTabcontrol();
+               
             
-            
-            //loaihang
-            dtgdsloaihang.DataSource = LH.select_LoaiHang();           
             //nhân viên
             dtgnhanvien.DataSource = NV.select_NhanVien();
             //hanghoa
             dtgLoaiHang.DataSource = HH.select_HangHoa();
-
-            //foreach (DataGridViewRow row in dtgdsloaihang.Rows)
-            //{
-            //    if (!row.IsNewRow)
-            //    {
-            //        mahh.Text = row.Cells[4].Value.ToString();
-            //    }
-               
-            //    //if (a == "")
-            //    //{
-
-            //    //    //this.dtgdsloaihang.Rows.Add("4", "Không xác định");
-            //    //    // row.Cells[4].Value = "Không xác định";
-            //    //}
-            //}
+            //loaihang
+            dtgdsloaihang.DataSource = LH.select_LoaiHang(); 
+            
         }
 
-
+        void closeTabcontrol()
+        {
+            tabControl1.TabPages.Remove(tabPage2);
+            tabControl1.TabPages.Remove(tabPage3);
+            tabControl1.TabPages.Remove(tabPage4);
+        }
         
 
         private void cbbDichvu_SelectedIndexChanged(object sender, EventArgs e)
@@ -856,15 +871,61 @@ namespace Gym
 
         private void btnxoalh_Click(object sender, EventArgs e)
         {
-            if(LH.delete_LoaiHang(txtmalh.Text)>0)
+            DataTable DT = HH.select_HangHoaMaLH(txtmalh.Text);
+            if (DT.Rows.Count > 0)
             {
-                MessageBox.Show("Thành công");
-                dtgdsloaihang.DataSource = LH.select_LoaiHang();
-                loadlhang();
+                MessageBox.Show("Loại hàng đã chứa trong sản phẩm. Bạn không thể xóa.!");
             }
             else
-                MessageBox.Show("Thất bại");
+            {
+                if (LH.delete_LoaiHang(txtmalh.Text) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loadlhang();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage1);
+            tabControl1.SelectTab(tabPage1);
+            khachhang.Enabled = true;
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage2);
+            tabControl1.SelectTab(tabPage2);
+            nhanvien.Enabled = true;
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage3);
+            tabControl1.SelectTab(tabPage3);
+            sanpham.Enabled = true;
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage4);
+            tabControl1.SelectTab(tabPage4);
+            loaihang.Enabled = true;
+            
+        }
+
 
         
 

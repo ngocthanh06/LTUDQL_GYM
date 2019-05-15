@@ -21,6 +21,10 @@ namespace BLLayer
             return NV.select_NhanVienMa(MaNV);
         }
 
+        public DataTable select_NhanVienMaTK(string MaTK)
+        {
+            return NV.select_NhanVienMaTK(MaTK);
+        }
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
         public int insert_NhanVien(string @MaNV,string TenNV, string NgaySinh, bool GioiTinh, string DiaChi, string SDT, string MaTK,object hinhanh,string ghichu ,bool trangthai)
         {

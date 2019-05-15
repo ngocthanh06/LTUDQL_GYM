@@ -21,6 +21,11 @@ namespace BLLayer
             return TK.select_TaiKhoanMa(MaKH);
         }
 
+        public DataTable select_loginTK(string TenDN, string Matkhau)
+        {
+            return TK.select_loginTK( TenDN, Matkhau);
+        }
+        
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
         public int insert_TaiKhoan(string MaTK,string TenDN, string MatKhau, int quyen)
         {

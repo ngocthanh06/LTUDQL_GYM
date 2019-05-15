@@ -21,6 +21,11 @@ namespace BLLayer
             return HH.select_HangHoaMa(MaHang);
         }
 
+        public DataTable select_HangHoaMaLH(string MaLH)
+        {
+            return HH.select_HangHoaMaLH(MaLH);
+        }
+
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
         public int insert_HangHoa(string MaHang, string TenHang, float DonGia, int SLCon, string MaLH, object hinhanh, string hansudung, string ghichu)
         {
