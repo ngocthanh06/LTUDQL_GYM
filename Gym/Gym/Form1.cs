@@ -43,6 +43,8 @@ namespace Gym
             set { quyen.Text = value; }
         }
 
+        
+
         //string strfilePath = "";
         //Image DefaultImage;
         //Byte[] ImageByteArray;
@@ -131,14 +133,25 @@ namespace Gym
             else
                 pictureuser.Image = null;
             closeTabcontrol();
-               
-            
+
+            textMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             //nhân viên
             dtgnhanvien.DataSource = NV.select_NhanVien();
             //hanghoa
             dtgLoaiHang.DataSource = HH.select_HangHoa();
             //loaihang
             dtgdsloaihang.DataSource = LH.select_LoaiHang(); 
+            //Dịch vụ
+            dtgkhachhang.DataSource = KH.select_KhachHang();
+            dtgsanpham.DataSource = HH.select_HangHoa();
+            textMaKH.Enabled = false;
+            textMaLH.Enabled = false;
+            textMaNV.Enabled = false;
+            numericUpDown2.Increment = 1;
+            numericUpDown2.DecimalPlaces = 0;
+            numericUpDown2.Minimum = -9999;
+            numericUpDown2.Maximum = 9999;
+          
             
         }
 
@@ -148,8 +161,45 @@ namespace Gym
             tabControl1.TabPages.Remove(tabPage3);
             tabControl1.TabPages.Remove(tabPage4);
         }
-        
-
+        //Thêm mã khách hàng
+        string ThemMaKH()
+        {
+            int MaKHCu = 0;
+            DataTable dtAdd = KH.select_KhachHang();
+            //Xử lý lấy mã KH
+            foreach (DataRow row in dtAdd.Rows)
+            {
+                string b = row["MaKH"].ToString();
+                string c = b.Substring(2);
+                int Ma = Convert.ToInt32(c);
+                if (Ma > MaKHCu)
+                    MaKHCu = Ma;
+            }
+            MaKHCu++;
+            if (MaKHCu > 10)
+                return "KH" + MaKHCu;
+            else
+                return "KH0"+MaKHCu;
+        }
+        //Thêm mã thẻ
+        string Themmathe()
+        {
+            int MaThecu = 0;
+            DataTable dtMathe = Th.select_The();
+            foreach (DataRow row in dtMathe.Rows)
+            {
+                string b = row["MaThe"].ToString();
+                string c = b.Substring(2);
+                int Mathe = Convert.ToInt32(c);
+                if (Mathe > MaThecu)
+                    MaThecu = Mathe;
+            }
+            MaThecu++;
+            if (MaThecu > 10)
+                return "MT" + MaThecu;
+            else
+                return "MT0"+MaThecu;
+        }
         private void cbbDichvu_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -195,7 +245,7 @@ namespace Gym
             dataTable.AcceptChanges();
             clearbutton();
         }
-
+        //Làm mới 
         private void button1_Click(object sender, EventArgs e)
         {
             clearbutton();
@@ -203,34 +253,10 @@ namespace Gym
         //Thêm KH
         private void button2_Click(object sender, EventArgs e)
         {
-            int MaKHCu = 1;
-            int MaThecu = 1;
             //int MaKHMoi = 0;
-            DataTable dtAdd = KH.select_KhachHang();
-            //Xử lý lấy mã KH
-            foreach (DataRow row in dtAdd.Rows)
-            {
-                string b = row["MaKH"].ToString();
-                string c = b.Substring(2);
-                int Ma = Convert.ToInt32(c);
-                if (Ma > MaKHCu)
-                    MaKHCu = Ma;
-            }
-            MaKHCu++;
-          
+            
             //Mã thẻ
-            DataTable dtMathe = Th.select_The();
-            foreach (DataRow row in dtMathe.Rows)
-            {
-                string b = row["MaThe"].ToString();
-                string c = b.Substring(2);
-                int Mathe = Convert.ToInt32(c);
-                if (Mathe > MaThecu)
-                    MaThecu = Mathe;
-            }
-            MaThecu++;
-
-
+            string a = ThemMaKH();
 
             if (pictureBox1.Image != null && txtTenKH.Text != null && cbbDichvu.SelectedValue != null)
             {
@@ -239,9 +265,9 @@ namespace Gym
                 byte[] arr;
                 ImageConverter converter = new ImageConverter();
                 arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
-                if (KH.insert_KhachHang("KH" + MaKHCu.ToString(), txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
+                if (KH.insert_KhachHang(a, txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
                 {
-                    if (Th.insert_The("MT" + MaThecu.ToString(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(), "KH" + MaKHCu.ToString()) > 0)
+                    if (Th.insert_The(Themmathe(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(),a) > 0)
                     {
                         MessageBox.Show("Thành công ");
                         clearbutton();
@@ -394,7 +420,7 @@ namespace Gym
         {
             e.Cancel = true;
         }
-        
+        //Làm mới
         void clearbuttonNV()
         {
             txtTenNV.Clear();
@@ -458,7 +484,7 @@ namespace Gym
             }
             MaTK++;
             if (MaTK < 10)
-                return "TK" + MaTK;
+                return "TK0" + MaTK;
             else
                 return "TK" + MaTK;
         }
@@ -790,6 +816,7 @@ namespace Gym
         {
             txtmalh.Clear();
             TenLHtxt.Clear();
+            richghichuLoaiH.Clear();
         }
         //Tạo mã loại hàng
         string createMaLH()
@@ -889,6 +916,179 @@ namespace Gym
             }
         }
 
+        /*Dịch vụ
+         * Dịch vụ
+         * Dịch vụ
+         * 
+         * */
+        //Tạo mã hóa đơn
+        string createMaHD()
+        {
+            int MaHD = 0;
+            DataTable DT = HD.select_HoaDon();
+            foreach (DataRow row in DT.Rows)
+            {
+                string a = row["MaHD"].ToString().Substring(2);
+                int b = Convert.ToInt32(a);
+                if (MaHD < b)
+                    MaHD = b; 
+            }
+            MaHD++;
+            if (MaHD < 10)
+                return "HD0" + MaHD;
+            else
+                return "HD" + MaHD;
+        }
+        private void dtgkhachhang_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+
+                dtgkhachhang.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dtgkhachhang.Rows[e.RowIndex];
+                textTenKH.Text = row.Cells[1].Value.ToString().Trim();
+                textMaKH.Text = row.Cells[0].Value.ToString().Trim();
+            }
+
+        }
+
+        private void dtgsanpham_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+                dtgsanpham.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dtgsanpham.Rows[e.RowIndex];
+                //Hiển thị ảnh
+                //Kiểm tra tồn tại của ảnh
+                if (!Convert.IsDBNull(row.Cells[5].Value))
+                {
+                    var data = (Byte[])(row.Cells[5].Value);
+                    var stream = new MemoryStream(data);
+                    pictureSanP.Image = Image.FromStream(stream);
+                }
+                else
+                    pictureSanP.Image = null;
+
+
+                texttensp.Text = row.Cells[1].Value.ToString().Trim();
+                textMaLH.Text = row.Cells[0].Value.ToString().Trim();
+                textgia.Text = row.Cells[2].Value.ToString().Trim();
+            }
+        }
+
+        private void button11_Click_1(object sender, EventArgs e)
+        {
+            textMaKH.Clear();
+            textMaLH.Clear();
+
+            textTenKH.Text = "Khách vãn lai";
+            textMaKH.Text = ThemMaKH();
+        }
+        //Add vào bảng phụ
+        private void button9_Click_1(object sender, EventArgs e)
+        {
+            
+            DateTime now = new DateTime();
+            //Nếu thông tin trống sẽ không được thực hiện           
+            if (textMaLH.Text != "" && textMaKH.Text != "" && numericUpDown2.Value != 0)
+            {
+                string malh="";
+                int b = Convert.ToInt32(numericUpDown2.Value.ToString());
+                int gia = Convert.ToInt32(textgia.Text);
+
+                
+                //Tạo tiêu đề cột
+                dataGridView4.ColumnCount = 8;
+                dataGridView4.Columns[0].Name = "Mã Hóa đơn";
+                dataGridView4.Columns[1].Name = "Mã Hàng";
+                dataGridView4.Columns[2].Name = "Tên Hàng";
+                dataGridView4.Columns[3].Name = "Số Lượng";
+                dataGridView4.Columns[4].Name = "Đơn giá";
+                dataGridView4.Columns[5].Name = "Ngày Hóa Đơn";
+                dataGridView4.Columns[6].Name = "Mã Khách Hàng";
+                dataGridView4.Columns[7].Name = "Mã Nhân Viên";
+                    
+                //Kiểm tra khi dữ liệu đã có trong bảng
+                string makh = textMaKH.Text;
+                foreach (DataGridViewRow ro in dataGridView4.Rows)
+                {
+                    int soluong = Convert.ToInt32(ro.Cells[3].Value.ToString());
+                    malh = ro.Cells[1].Value.ToString();
+                    makh = ro.Cells[6].Value.ToString();
+                    if (textMaLH.Text == malh && textMaKH.Text == ro.Cells[6].Value.ToString())
+                    {
+                        makh = ro.Cells[6].Value.ToString();
+                        int c = soluong + b;
+                        int dongia = gia * c;
+                        //Xóa dòng khi số lượng bằng 0
+                        if (c <= 0)
+                        {
+                            dataGridView4.Rows.RemoveAt(ro.Index);
+                        }
+                        //Thực hiện thêm dòng sản phẩm trong hóa đơn
+                        else
+                        {
+                            ro.Cells[3].Value = c.ToString();
+                            ro.Cells[4].Value = dongia.ToString();
+                        }
+                        numericUpDown2.Value = 0;
+                        break;
+                    }
+                    else if (textMaKH.Text != makh)
+                    {
+                        MessageBox.Show("Việc thay đổi khách hàng là không được phép");
+                        break;
+                    }
+                    
+                    
+                }
+                //Nếu khách hàng không đúng sẽ không được thêm vào hóa đơn
+                if (textMaKH.Text == makh)
+                {
+                    //Tạo dữ liệu đầu tiên
+                    if (textMaLH.Text != malh && numericUpDown2.Value > 0)
+                    {
+                        int dongia = b * gia;
+                        //Thêm dòng sản phẩm trong hóa đơn
+                        string[] row = new string[] { createMaHD(), textMaLH.Text, texttensp.Text, b.ToString(), dongia.ToString(), now.ToString(), textMaKH.Text, textMaNV.Text };
+                        dataGridView4.Rows.Add(row);
+                        numericUpDown2.Value = 0;
+                    }
+
+                    else if (numericUpDown2.Value < 0) MessageBox.Show("Số lượng không được nhỏ hơn 0");
+                }
+
+            }
+            else if (numericUpDown2.Value == 0)
+                        MessageBox.Show("Bạn chưa nhập số lượng");
+            else if (textMaKH.Text == "")
+                MessageBox.Show("Bạn chưa chọn khách hàng");
+            else
+                MessageBox.Show("Bạn chưa nhập sản phẩm");
+
+            
+        }
+        //Làm mới
+        private void button16_Click(object sender, EventArgs e)
+        {
+            textMaKH.Clear();
+            textMaLH.Clear();
+            textTenKH.Clear();
+            texttensp.Clear();
+            textgia.Clear();
+            numericUpDown2.Value = 0;
+            pictureSanP.Image = null;
+            dataGridView4.Rows.Clear();
+            dataGridView4.Refresh();
+        }
+
+        /*
+         * 
+         * 
+         * 
+         * */
         private void button7_Click(object sender, EventArgs e)
         {
             closeTabcontrol();
@@ -925,6 +1125,16 @@ namespace Gym
             loaihang.Enabled = true;
             
         }
+
+        
+
+       
+
+
+
+        
+
+      
 
 
         
