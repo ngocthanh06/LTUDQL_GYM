@@ -37,7 +37,10 @@ namespace BLLayer
         {
             return HH.update_HangHoa(MaHang, TenHang, DonGia, SLCon, MaLH, hinhanh, hansudung, ghichu);
         }
-
+        public int update_SLConHangHoa(string MaHang, int SLCon)
+        {
+            return HH.update_SLConHangHoa(MaHang, SLCon);
+        }
         //phương thức này gọi phương thức sv_delete() ở lớp SinhVien_DAL (tầng DAL)
         public int delete_HangHoa(string MaHang)
         {

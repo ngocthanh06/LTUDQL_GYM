@@ -30,14 +30,15 @@ namespace DAL
         }
 
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện insert
-        public int insert_CTHD( string MaHang, int SL)
+        public int insert_CTHD(string MaHD, string MaHang, int SL)
         {
             //thaotac.KetnoiCSDL();
-            name = new string[2];
-            value = new object[2];
-            name[0] = "@MaHang"; value[0] = MaHang;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
-            name[1] = "@SL"; value[1] = SL;
-            return thaotac.SQL_Thuchien("Insert_CTHD", name, value, 2);
+            name = new string[3];
+            value = new object[3];
+            name[0] = "@MaHD"; value[0] = MaHD;
+            name[1] = "@MaHang"; value[1] = MaHang;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
+            name[2] = "@SL"; value[2] = SL;
+            return thaotac.SQL_Thuchien("Insert_CTHD", name, value, 3);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện update
         public int update_CTHD(string MaHD, string MaHang, int SL)

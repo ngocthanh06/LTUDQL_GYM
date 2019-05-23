@@ -24,9 +24,9 @@ namespace BLLayer
         }
 
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_CTHD(string MaHang, int SL)
+        public int insert_CTHD(string MaHD,string MaHang, int SL)
         {
-            return CTHD.insert_CTHD(MaHang, SL);
+            return CTHD.insert_CTHD(MaHD,MaHang, SL);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)

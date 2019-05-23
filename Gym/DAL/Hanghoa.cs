@@ -53,12 +53,12 @@ namespace DAL
             return thaotac.SQL_Thuchien("Insert_HangHoa", name, value, 8);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện update
-        public int update_HangHoa(string TenHang, string DVT, float DonGia, int SLCon, string MaLH, object hinhanh, string hansudung, string ghichu)
+        public int update_HangHoa(string MaHang, string TenHang, float DonGia, int SLCon, string MaLH, object hinhanh, string hansudung, string ghichu)
         {
             name = new string[8];
             value = new object[8];
-            name[0] = "@MaHang"; value[0] = TenHang;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
-            name[1] = "@TenHang"; value[1] = DVT;
+            name[0] = "@MaHang"; value[0] = MaHang;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
+            name[1] = "@TenHang"; value[1] = TenHang;
             name[2] = "@DonGia"; value[2] = DonGia;
             name[3] = "@SLCon"; value[3] = SLCon;
             name[4] = "@MaLH"; value[4] = MaLH;
@@ -66,6 +66,16 @@ namespace DAL
             name[6] = "@hansudung"; value[6] = hansudung;
             name[7] = "@ghichu"; value[7] = ghichu;
             return thaotac.SQL_Thuchien("Update_HangHoa", name, value, 8);
+        }
+
+        public int update_SLConHangHoa(string MaHang, int SLCon)
+        {
+            name = new string[2];
+            value = new object[2];
+            name[0] = "@MaHang"; value[0] = MaHang;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
+            name[1] = "@SLCon"; value[1] = SLCon;
+
+            return thaotac.SQL_Thuchien("update_SLConHangHoa", name, value, 2);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện delete
         public int delete_HangHoa(string MaHang)
