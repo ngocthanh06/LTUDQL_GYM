@@ -27,6 +27,15 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMa", name, value, 1);
         }
+        public DataTable select_HoaDontimkiem(string MaHD)
+        {
+            name = new string[1];
+            value = new object[1];
+            name[0] = "@MaHD"; value[0] = MaHD;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_HoaDontimkiem", name, value, 1);
+        }
+
         //MaNV
         public DataTable select_HoaDonByMaNV(string MaNV)
         {
@@ -36,15 +45,25 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_HoaDonByMaNV", name, value, 1);
         }
-        //Mã NV và ngày
-        public DataTable select_HoaDonMaNVbyday(string MaNV, string NgayHD)
+
+        public DataTable select_HoaDonNVvaKH(string MaHD)
         {
-            name = new string[2];
-            value = new object[2];
-            name[0] = "@MaNV"; value[0] = MaNV;
-            name[1] = "@NgayHD"; value[1] = NgayHD;
+            name = new string[1];
+            value = new object[1];
+            name[0] = "@MaHD"; value[0] = MaHD;
             //thaotac.KetnoiCSDL();
-            return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMaNVbyday", name, value, 2);
+            return thaotac.SQL_Laydulieu_CoDK("select_HoaDonNVvaKH", name, value, 1);
+        }
+        //Mã NV và ngày
+        public DataTable select_HoaDonMaNVbyday(string MaNV, string NgayBD, string NgayKT)
+        {
+            name = new string[3];
+            value = new object[3];
+            name[0] = "@MaNV"; value[0] = MaNV;
+            name[1] = "@NgayBD"; value[1] = NgayBD;
+            name[2] = "@NgayKT"; value[2] = NgayKT;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMaNVbyday", name, value, 3);
         }
         //MaNV, MaHD, NgayHD
         public DataTable select_HoaDonMaHDvaMaNVbyday(string MaNV,string MaHD, string NgayHD)
@@ -56,6 +75,18 @@ namespace DAL
             name[2]= "@NgayHD"; value[2] = NgayHD;
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMaHDvaMaNVbyday", name, value, 3);
+        }
+        //MaNV, Thang
+
+        public DataTable select_HoaDonMaNVbyMonth(string MaNV, int Thang, int Nam)
+        {
+            name = new string[3];
+            value = new object[3];
+            name[0] = "@MaNV"; value[0] = MaNV;
+            name[1] = "@Thang"; value[1] = Thang;
+            name[2] = "@nam"; value[2] = Nam;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMaNVbyMonth", name, value, 3);
         }
         //MaNV MaHD
         public DataTable select_HoaDonMaHDvaMaNV(string MaNV, string MaHD)

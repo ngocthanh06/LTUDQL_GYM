@@ -121,9 +121,11 @@ namespace Gym
             MaThe.Visible = false;
             MaNV.Visible = false;
             matk.Visible = false;
+            labelMaNV.Visible = false;
             //mahh.Visible = false;
             DataTable DT = NV.select_NhanVienMaTK(tennguoidung.Text);
             tennguoidung.Text = "Xin chào, "+DT.Rows[0]["TenNV"].ToString();
+            labelMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             if (!Convert.IsDBNull(DT.Rows[0]["hinhanh"]))
             {
                 var data = (Byte[])(DT.Rows[0]["hinhanh"]);
@@ -155,8 +157,16 @@ namespace Gym
             numericUpDown2.Minimum = -9999;
             numericUpDown2.Maximum = 9999;
             //Danh sách hóa đơn
-            
-        
+            if (radioNV.Checked == true)
+                textmahd.Enabled = false;
+            ngaybatdau.Enabled = false;
+            ngayketthuc.Enabled = false;
+            datengayhd.Enabled = false;
+            tongtienhd.Enabled = false;
+            //Danh sách thẻ
+            cbbNvthe.Enabled = false;
+            datenvthe.Enabled = false;
+            checkBox1.Enabled = false;
            
         }
         
@@ -166,6 +176,7 @@ namespace Gym
             tabControl1.TabPages.Remove(tabPage3);
             tabControl1.TabPages.Remove(tabPage4);
             tabControl1.TabPages.Remove(tabPage5);
+            tabControl1.TabPages.Remove(tabPage6);
         }
         //Thêm mã khách hàng
         string ThemMaKH()
@@ -246,7 +257,7 @@ namespace Gym
                 arr = (byte[])converter.ConvertTo(img, typeof(byte[]));
                 if (KH.insert_KhachHang(a, txtTenKH.Text, txtDiaChi.Text, txtSDT.Text, dateNgaySinh.Value.ToString(), RadioBT(), ricktbGhiChu.Text, arr) > 0)
                 {
-                    if (Th.insert_The(Themmathe(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(),a) > 0)
+                    if (Th.insert_The(Themmathe(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(),a,labelMaNV.Text) > 0)
                     {
                         MessageBox.Show("Thành công ");
                         clearbutton();
@@ -380,6 +391,7 @@ namespace Gym
             {
                 //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
                 GHThe.Message = MaKH.Text;
+                GHThe.MaNV = labelMaNV.Text;
                 GHThe.ShowDialog();
                 
             }
@@ -1186,6 +1198,15 @@ namespace Gym
             loaihang.Enabled = true;
             
         }
+
+        private void button17_Click_1(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage6);
+            tabControl1.SelectTab(tabPage6);
+            hoadon.Enabled = true;
+        }
         //Dịch vụ
         /*Dịch vụ
          * Dịch vụ
@@ -1210,23 +1231,113 @@ namespace Gym
             tabControl1.SelectTab(tabPage5);
             loaihang.Enabled = true;
         }
-
+        //hiển thị theo ngày
+        void showday()
+        {
+            ngaybatdau.Enabled = true;
+            textngaybd.Enabled = true;
+            ngayketthuc.Enabled = true;
+            textngaykt.Enabled = true;
+        }
+        //Hiển thị theo tháng
+        void showmonth()
+        {
+            textthang.Enabled = true;
+            datengayhd.Enabled = true;
+        }
+        //ân theo ngày
+        void hideday()
+        {
+            ngaybatdau.Enabled = false;
+            textngaybd.Enabled = false;
+            ngayketthuc.Enabled = false;
+            textngaykt.Enabled = false;
+        }
+        //Ẩn theo tháng
+        void hideMonth()
+        {
+            textthang.Enabled = false;
+            datengayhd.Enabled = false;
+        }
+        //Tìm kiếm
         private void button17_Click(object sender, EventArgs e)
         {
-
-            if (cbbTennv.SelectedValue != null)
-            {
-                MessageBox.Show(datengayhd.Value.ToString());
-                dtgdshoadon.DataSource = HD.select_HoaDonByMaNV(cbbTennv.SelectedValue.ToString().Trim());
-                
-            }
-            //Radiongay();
-            //if (thang.Checked == true) 
-            //if(cbbTennv.SelectedValue != null && datengayhd.Value != null)
-            //{
-            //    dtgdshoadon.DataSource = HD.select_HoaDonMaNVbyday(cbbTennv.SelectedValue.ToString(), datengayhd.Value.Month.ToString());
-            //}
             
+            //Hóa đơn theo mã nvien
+            if (cbbTennv.SelectedValue != null && textmahd.Text ==""&&toanthoigian.Checked == true)
+            {  
+                cbbdshoadon.DataSource = HD.select_HoaDonByMaNV(cbbTennv.SelectedValue.ToString().Trim());
+                cbbdshoadon.DisplayMember = "TenHD";
+                cbbdshoadon.ValueMember = "MaHD";
+                if (cbbdshoadon.SelectedItem == null)
+                {
+                    cbbdshoadon.SelectedIndex = -1;
+                    cbbdshoadon.ResetText();
+                    MessageBox.Show("Không có dữ liệu hóa đơn");
+                }
+            }
+            //Hóa đơn theo mã nv +  ngày bắt đầ kết thúc
+            if (cbbTennv.SelectedValue != null && theongay.Checked == true && textmahd.Text == "")
+            {
+                cbbdshoadon.DataSource = HD.select_HoaDonMaNVbyday(cbbTennv.SelectedValue.ToString().Trim(), ngaybatdau.Value.ToString().Trim(), ngayketthuc.Value.ToString().Trim());
+                cbbdshoadon.DisplayMember = "TenHD";
+                cbbdshoadon.ValueMember = "MaHD";
+                if (cbbdshoadon.SelectedItem == null)
+                {
+                    cbbdshoadon.SelectedIndex = -1;
+                    cbbdshoadon.ResetText();
+                    MessageBox.Show("Không có dữ liệu hóa đơn");
+                }
+            }
+            //Hóa đơn theo mã nv + tháng
+            if (cbbTennv.SelectedValue != null && thang.Checked == true && textmahd.Text == "")
+            {
+                int Month = datengayhd.Value.Month;
+                int Year = datengayhd.Value.Year;
+                cbbdshoadon.DataSource = HD.select_HoaDonMaNVbyMonth(cbbTennv.SelectedValue.ToString(), Month, Year);
+                cbbdshoadon.DisplayMember = "TenHD";
+                cbbdshoadon.ValueMember = "MaHD";
+                if (cbbdshoadon.SelectedItem == null)
+                {
+                    cbbdshoadon.SelectedIndex = -1;
+                    cbbdshoadon.ResetText();
+                    MessageBox.Show("Không có dữ liệu hóa đơn");
+                }
+            }
+            
+            //Mã hóa đơn
+            if (textmahd.Text != "")
+            {
+                dtgdshoadon.DataSource = HD.select_HoaDontimkiem(textmahd.Text);
+                int a = 0;
+                int tong = 0;
+                //ĐỔi mã thành tên
+                dtgdshoadon.Columns[5].HeaderText = "Tên Khách Hàng";
+                dtgdshoadon.Columns[6].HeaderText = "Tên Nhân Viên";
+                foreach (DataGridViewRow row in dtgdshoadon.Rows)
+                {
+                    if (!row.IsNewRow)
+                    {
+                        DataTable DT = HD.select_HoaDonNVvaKH(textmahd.Text);
+                        foreach (DataRow ro in DT.Rows)
+                        {
+                            row.Cells[5].Value = ro[1].ToString();
+                            row.Cells[6].Value = ro[0].ToString();
+                        }
+                        a = Convert.ToInt32(row.Cells[2].Value.ToString()) * Convert.ToInt32(row.Cells[3].Value.ToString());
+                        tong = tong + a;
+                    }
+                }
+                if (dtgdshoadon.Rows.Count <= 1)
+                {
+                    MessageBox.Show("Không có dữ liệu về hóa đơn");
+                }
+                tongtienhd.Text = tong.ToString();
+            }
+            //Bắt lỗi
+            if (cbbTennv.SelectedValue == null && textmahd.Text == "")
+                MessageBox.Show("Bạn chưa chọn tên mục tìm kiếm");
+
         }
 
         private void cbbTennv_DropDown(object sender, EventArgs e)
@@ -1235,6 +1346,256 @@ namespace Gym
             cbbTennv.DisplayMember = "TenNV".Trim();
             cbbTennv.ValueMember = "MaNV";
         }
+
+        private void theongay_CheckedChanged(object sender, EventArgs e)
+        {
+            hideMonth();
+            showday();
+        }
+
+        private void thang_CheckedChanged(object sender, EventArgs e)
+        {
+            hideday();
+            showmonth();
+        }
+
+        private void toanthoigian_CheckedChanged(object sender, EventArgs e)
+        {
+            hideday();
+            hideMonth();
+        }
+
+        private void radioNV_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            cbbTennv.Enabled = true;
+            textmahd.Enabled = false;
+            textmahd.Clear();
+        }
+
+        private void radioHD_CheckedChanged(object sender, EventArgs e)
+        {
+            textmahd.Enabled = true;
+            cbbTennv.Enabled = false;
+            cbbdshoadon.Enabled = false;
+        }
+
+        private void cbbdshoadon_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbdshoadon.SelectedValue != null)
+            {
+                dtgdshoadon.DataSource = HD.select_HoaDontimkiem(cbbdshoadon.SelectedValue.ToString());
+                int tong = 0;
+                int a = 0;
+                //ĐỔi mã thành tên
+                foreach (DataGridViewRow row in dtgdshoadon.Rows)
+                {
+                    
+                    
+                    if (!row.IsNewRow)
+                    {
+                        a = Convert.ToInt32(row.Cells[2].Value.ToString()) * Convert.ToInt32(row.Cells[3].Value.ToString());
+                        tong = tong + a;
+                    }
+                    if (row.Cells.Count<=1)
+                        MessageBox.Show("Không có dữ liệu về hóa đơn");
+                }
+                tongtienhd.Text = tong.ToString();
+            }
+        }
+        /*
+         * Danh sách thẻ
+         * Danh sách thẻ
+         * Danh sách thẻ
+         * */
+        private void button17_Click_2(object sender, EventArgs e)
+        {
+            
+            if(allradio.Checked == true)
+            {
+                dsthe.DataSource = Th.select_ThebyDichvuAll();
+                foreach (DataGridViewRow row in dsthe.Rows)
+                {
+                    if(!row.IsNewRow)
+                    {
+                        DateTime ngaydk = Convert.ToDateTime(row.Cells[3].Value.ToString());
+                        DateTime today = DateTime.Now;
+                        TimeSpan time = today - ngaydk;
+                        int Songaydk = time.Days;
+
+                        int thoihan = Convert.ToInt32(row.Cells[4].Value.ToString());
+
+                        if (Songaydk - thoihan >=0)
+                            row.DefaultCellStyle.BackColor = Color.Red;
+                        else if (Songaydk < thoihan && Songaydk - thoihan >= -3)
+                            row.DefaultCellStyle.BackColor = Color.Green;
+                    }
+                }
+            }
+            else if(danghoatdongradio.Checked == true)
+            {
+                dsthe.DataSource = Th.select_ThebyDichvuAll();
+                for (int i = 0; i < dsthe.Rows.Count; i++)
+                {
+                    if (dsthe.Rows[i].Cells[0].Value != null)
+                    {
+                        DateTime ngaydk = Convert.ToDateTime(dsthe.Rows[i].Cells[3].Value.ToString());
+                        DateTime today = DateTime.Now;
+                        TimeSpan time = today - ngaydk;
+                        int Songaydk = time.Days;
+
+                        int thoihan = Convert.ToInt32(dsthe.Rows[i].Cells[4].Value.ToString());
+
+                        
+                        if (Songaydk > thoihan)
+                        {
+                            dsthe.Rows.Remove(dsthe.Rows[i]);
+                            if (i != 0)
+                                i--;
+                        }      
+                        if (Songaydk < thoihan && Songaydk - thoihan  >= -3)
+                        {
+                            dsthe.Rows.Remove(dsthe.Rows[i]);
+                            if (i != 0)
+                                i--;
+                        }
+                    }
+                }     
+            }
+            else if (hethanradio.Checked == true)
+            {
+                dsthe.DataSource = Th.select_ThebyDichvuAll();
+                for (int i = 0; i < dsthe.Rows.Count; i++)
+                {
+                    if (dsthe.Rows[i].Cells[0].Value != null)
+                    {
+                        DateTime ngaydk = Convert.ToDateTime(dsthe.Rows[i].Cells[3].Value.ToString());
+                        DateTime today = DateTime.Now;
+                        TimeSpan time = today - ngaydk;
+                        int Songaydk = time.Days;
+
+                        int thoihan = Convert.ToInt32(dsthe.Rows[i].Cells[4].Value.ToString());
+
+
+                        if (Songaydk > thoihan )
+                            dsthe.DefaultCellStyle.BackColor = Color.White;
+                        else if (Songaydk < thoihan && Songaydk - thoihan >= -3)
+                        {
+                            dsthe.Rows.Remove(dsthe.Rows[i]);
+                            if (i != 0)
+                                i--;
+                        }
+                        else if (Songaydk < thoihan && Songaydk - thoihan < -3)
+                        {
+                            dsthe.Rows.Remove(dsthe.Rows[i]);
+                            if (i != 0)
+                                i--;
+                        }
+                    }
+                }     
+            }
+            else if(NVradio.Checked == true)
+            {
+               int day = Convert.ToInt32(datenvthe.Value.Day.ToString());
+               int Month = Convert.ToInt32(datenvthe.Value.Month.ToString());
+               int Year = Convert.ToInt32(datenvthe.Value.Year.ToString());
+               DateTime now = DateTime.Now;
+               if (checkBox1.Checked == true)
+                   dsthe.DataSource = Th.select_ThebyDichvuMaNV(cbbNvthe.SelectedValue.ToString());
+               else
+                 dsthe.DataSource = Th.select_ThebyDichvuMaNVandMonthYear(cbbNvthe.SelectedValue.ToString(), Month, Year);
+                  
+
+            }
+        }
+
+        private void NVradio_CheckedChanged(object sender, EventArgs e)
+        {
+            cbbNvthe.Enabled = true;
+            datenvthe.Enabled = true;
+            checkBox1.Enabled = true;
+            cbbNvthe.DataSource = NV.select_NhanVien();
+            cbbNvthe.DisplayMember = "TenNV";
+            cbbNvthe.ValueMember = "MaNV";
+        }
+
+        private void dsthe_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                //chọn dòng dtgrid
+                dsthe.CurrentRow.Selected = true;
+                DataGridViewRow row = this.dsthe.Rows[e.RowIndex];
+                
+                GiaHanThe GHThe = new GiaHanThe();
+                DataTable DT = Th.select_TheMa(row.Cells[6].Value.ToString().Trim());
+                if (DT.Rows.Count > 0)
+                {
+                    //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
+                    GHThe.Message = row.Cells[6].Value.ToString().Trim(); ;
+                    GHThe.MaNV = labelMaNV.Text;
+                    GHThe.ShowDialog();
+
+                }
+                else
+                    MessageBox.Show("Khách hàng chưa có thẻ");
+            }
+
+        }
+
+        private void comboBox1_DropDown(object sender, EventArgs e)
+        {
+            cbbtheKH.DataSource = KH.select_KhachHang();
+            cbbtheKH.DisplayMember = "TenKH";
+            cbbtheKH.ValueMember = "MaKH";
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            dsthe.DataSource = Th.select_TheMa(cbbtheKH.SelectedValue.ToString());
+            foreach (DataGridViewRow row in dsthe.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    DateTime ngaydk = Convert.ToDateTime(row.Cells[3].Value.ToString());
+                    DateTime today = DateTime.Now;
+                    TimeSpan time = today - ngaydk;
+                    int Songaydk = time.Days;
+
+                    int thoihan = Convert.ToInt32(row.Cells[4].Value.ToString());
+
+                    if (Songaydk - thoihan >= 0)
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                    else if (Songaydk < thoihan && Songaydk - thoihan >= -3)
+                        row.DefaultCellStyle.BackColor = Color.Green;
+                }
+            }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            GiaHanThe GHThe = new GiaHanThe();
+            DataTable DT = Th.select_TheMa(cbbtheKH.SelectedValue.ToString());
+            if (DT.Rows.Count > 0)
+            {
+                //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
+                GHThe.Message = cbbtheKH.SelectedValue.ToString();
+                GHThe.MaNV = labelMaNV.Text;
+                GHThe.ShowDialog();
+
+            }
+            else
+                MessageBox.Show("Khách hàng chưa có thẻ");
+        }
+
+        
+        
+
+        
+
+       
+
+        
 
         
 
@@ -1252,24 +1613,6 @@ namespace Gym
 
       
 
-
-        
-
-        
-        
-       
-
-     
-
-       
-
-       
-
-        
-
-        
-
-        
 
        
     }

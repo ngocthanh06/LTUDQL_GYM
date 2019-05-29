@@ -27,6 +27,7 @@ namespace Gym
         NhanVien_BLL NV = new NhanVien_BLL();
         TaiKhoan_BLL TK = new TaiKhoan_BLL();
         The_BLL Th = new The_BLL();
+        string MaNV1;
         public GiaHanThe()
         {
             InitializeComponent();
@@ -38,7 +39,12 @@ namespace Gym
             get { return txtMaKh.Text; }
             set { txtMaKh.Text = value; }
         }
-
+        //Mã nhân viên
+        public string MaNV
+        {
+            get { return MaNV1 ; }
+            set {MaNV1 = value ;}
+        }
         //private void SetValue(String value)
         //{
         //    this.txtMaKh.Text = value;
@@ -82,14 +88,14 @@ namespace Gym
                 // int ngay = Convert.ToInt32(row.Cells[1]);
                 DataTable DTB = DV.select_DichVuMa(row.Cells[2].Value.ToString());
 
-                int ngay = Convert.ToInt32(DTB.Rows[0]["ThoiHan"]);
-                //Ngày đăng ký
-                dateTimePicker1.Text = row.Cells[1].Value.ToString();
-                DateTime songaydky = dateTimePicker1.Value;
-                //Ngày dự đoán hết hạn
-                DateTime songayttp = songaydky.AddDays(ngay);
-                if (DateTime.Compare(songayttp, now) < 0)
-                    row.DefaultCellStyle.BackColor = Color.Red;
+                //int ngay = Convert.ToInt32(DTB.Rows[0]["ThoiHan"]);
+                ////Ngày đăng ký
+                //dateTimePicker1.Text = row.Cells[1].Value.ToString();
+                //DateTime songaydky = dateTimePicker1.Value;
+                ////Ngày dự đoán hết hạn
+                //DateTime songayttp = songaydky.AddDays(ngay);
+                //if (DateTime.Compare(songayttp, now) < 0)
+                //    row.DefaultCellStyle.BackColor = Color.Red;
 
             }
         }
@@ -184,7 +190,7 @@ namespace Gym
                     a = Ma;
             }
             a++;
-            if (Th.insert_The("MT" + a, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text) > 0)
+            if (Th.insert_The("MT" + a, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text,MaNV1) > 0)
             {
                 MessageBox.Show("Thành công");
                 load();
