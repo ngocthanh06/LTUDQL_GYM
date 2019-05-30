@@ -77,7 +77,7 @@ namespace Gym
             txtthoihan.Clear();
             txtGia.Clear();
             cbbDichVu.DataSource = DV.select_DichVu();
-            dateTimePicker1.Value = DateTime.Now;
+            dateTimePicker1.ResetText();
             txtSongaycon.Clear();
         }
         void loaddtgdanhsachthe()
@@ -85,17 +85,16 @@ namespace Gym
             foreach (DataGridViewRow row in dtgdanhsachthe.Rows)
             {
                 DateTime now = DateTime.Now;
-                // int ngay = Convert.ToInt32(row.Cells[1]);
-                DataTable DTB = DV.select_DichVuMa(row.Cells[2].Value.ToString());
+               // int ngay = Convert.ToInt32(row.Cells[1]);
+                DataTable DTB = DV.select_DichVuMa(row.Cells[4].Value.ToString());
 
-                //int ngay = Convert.ToInt32(DTB.Rows[0]["ThoiHan"]);
-                ////Ngày đăng ký
-                //dateTimePicker1.Text = row.Cells[1].Value.ToString();
-                //DateTime songaydky = dateTimePicker1.Value;
-                ////Ngày dự đoán hết hạn
-                //DateTime songayttp = songaydky.AddDays(ngay);
-                //if (DateTime.Compare(songayttp, now) < 0)
-                //    row.DefaultCellStyle.BackColor = Color.Red;
+                int ngay = Convert.ToInt32(DTB.Rows[0]["ThoiHan"]);
+                //Ngày đăng ký
+                DateTime songaydky = Convert.ToDateTime(row.Cells[5].Value.ToString());
+                //Ngày dự đoán hết hạn
+                DateTime songayttp = songaydky.AddDays(ngay);
+                if (DateTime.Compare(songayttp, now) < 0)
+                    row.DefaultCellStyle.BackColor = Color.Red;
 
             }
         }
@@ -174,34 +173,68 @@ namespace Gym
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             load();
+            loaddtgdanhsachthe();
         }
-
+        bool check ()
+        {
+            return true;
+        }
         private void button3_Click(object sender, EventArgs e)
         {
-            DataTable DT = Th.select_The();
+            int checka = 0;
+            int checkb = 0;
+            foreach (DataGridViewRow row in dtgdanhsachthe.Rows)
+            {
+                DateTime now = DateTime.Now;
+                // int ngay = Convert.ToInt32(row.Cells[1]);
+                DataTable DTB = DV.select_DichVuMa(row.Cells[4].Value.ToString());
+
+                int ngay = Convert.ToInt32(DTB.Rows[0]["ThoiHan"]);
+                //Ngày đăng ký
+                DateTime songaydky = Convert.ToDateTime(row.Cells[5].Value.ToString());
+                //Ngày dự đoán hết hạn
+                DateTime songayttp = songaydky.AddDays(ngay);
+                if (DateTime.Compare(songayttp, now) < 0)
+                  checka++; 
+                else 
+                {
+                    MessageBox.Show("Thẻ còn trong thời gian sử dụng, không thể thêm thẻ");
+                    checkb++;
+                    break;
+                }
+            }
             
-            int a = 1;
-            foreach(DataRow row in DT.Rows)
-            {
-                string b = row["Mathe"].ToString();
-                string c = b.Substring(2);
-                int Ma = Convert.ToInt32(c);
-                if (Ma > a)
-                    a = Ma;
-            }
-            a++;
-            if (Th.insert_The("MT" + a, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text,MaNV1) > 0)
-            {
-                MessageBox.Show("Thành công");
-                load();
-                dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
-            }
-            else
-                MessageBox.Show("Thất bại");
+           if(checka>0 && checkb==0)
+           {
+               DataTable DT = Th.select_The();
+
+               int a = 1;
+               foreach (DataRow row in DT.Rows)
+               {
+                   string b = row["Mathe"].ToString();
+                   string c = b.Substring(2);
+                   int Ma = Convert.ToInt32(c);
+                   if (Ma > a)
+                       a = Ma;
+               }
+               a++;
+
+               if (Th.insert_The("MT" + a, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text, MaNV1) > 0)
+               {
+                   MessageBox.Show("Thành công");
+                   load();
+                   dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
+                   loaddtgdanhsachthe();
+               }
+               else
+                   MessageBox.Show("Thất bại");
+           }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+          
             if (Th.update_The(txtMaThe.Text, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString()) > 0)
             {
                 MessageBox.Show("Thành công");
@@ -220,6 +253,7 @@ namespace Gym
                 MessageBox.Show("Thành Công");
                 load();
                 dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
+                loaddtgdanhsachthe();
             }
             else
                 MessageBox.Show("Thất bại");

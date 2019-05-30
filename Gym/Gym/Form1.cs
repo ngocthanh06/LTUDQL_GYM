@@ -177,6 +177,7 @@ namespace Gym
             tabControl1.TabPages.Remove(tabPage4);
             tabControl1.TabPages.Remove(tabPage5);
             tabControl1.TabPages.Remove(tabPage6);
+            tabControl1.TabPages.Remove(tabPage7);
         }
         //Thêm mã khách hàng
         string ThemMaKH()
@@ -1207,6 +1208,14 @@ namespace Gym
             tabControl1.SelectTab(tabPage6);
             hoadon.Enabled = true;
         }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage7);
+            tabControl1.SelectTab(tabPage7);
+            thehoivien.Enabled = true;
+        }
         //Dịch vụ
         /*Dịch vụ
          * Dịch vụ
@@ -1500,6 +1509,7 @@ namespace Gym
                int Month = Convert.ToInt32(datenvthe.Value.Month.ToString());
                int Year = Convert.ToInt32(datenvthe.Value.Year.ToString());
                DateTime now = DateTime.Now;
+               
                if (checkBox1.Checked == true)
                    dsthe.DataSource = Th.select_ThebyDichvuMaNV(cbbNvthe.SelectedValue.ToString());
                else
@@ -1587,6 +1597,8 @@ namespace Gym
             else
                 MessageBox.Show("Khách hàng chưa có thẻ");
         }
+
+        
 
         
         

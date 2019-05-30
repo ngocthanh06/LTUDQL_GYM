@@ -202,7 +202,14 @@
             this.cbbdshoadon = new System.Windows.Forms.ComboBox();
             this.dtgdshoadon = new System.Windows.Forms.DataGridView();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.button21 = new System.Windows.Forms.Button();
+            this.cbbtheKH = new System.Windows.Forms.ComboBox();
+            this.button20 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.label50 = new System.Windows.Forms.Label();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.hethanradio = new System.Windows.Forms.RadioButton();
             this.button17 = new System.Windows.Forms.Button();
             this.danghoatdongradio = new System.Windows.Forms.RadioButton();
@@ -221,7 +228,7 @@
             this.khachhang = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.nhanvien = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
+            this.thehoivien = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.hoadon = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
@@ -231,13 +238,6 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.groupBox20 = new System.Windows.Forms.GroupBox();
-            this.label50 = new System.Windows.Forms.Label();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.cbbtheKH = new System.Windows.Forms.ComboBox();
-            this.button21 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -278,13 +278,13 @@
             this.groupBox15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgdshoadon)).BeginInit();
             this.tabPage7.SuspendLayout();
+            this.groupBox20.SuspendLayout();
             this.groupBox19.SuspendLayout();
             this.groupBox18.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dsthe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureuser)).BeginInit();
             this.groupBox9.SuspendLayout();
-            this.groupBox20.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -1997,6 +1997,67 @@
             this.tabPage7.Text = "Danh sách thẻ";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.button21);
+            this.groupBox20.Controls.Add(this.cbbtheKH);
+            this.groupBox20.Controls.Add(this.button20);
+            this.groupBox20.Controls.Add(this.button19);
+            this.groupBox20.Controls.Add(this.label50);
+            this.groupBox20.Location = new System.Drawing.Point(543, 4);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(331, 150);
+            this.groupBox20.TabIndex = 12;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "In thẻ";
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(4, 115);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(103, 29);
+            this.button21.TabIndex = 12;
+            this.button21.Text = "Gia hạn";
+            this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
+            // 
+            // cbbtheKH
+            // 
+            this.cbbtheKH.FormattingEnabled = true;
+            this.cbbtheKH.Location = new System.Drawing.Point(101, 23);
+            this.cbbtheKH.Name = "cbbtheKH";
+            this.cbbtheKH.Size = new System.Drawing.Size(144, 21);
+            this.cbbtheKH.TabIndex = 15;
+            this.cbbtheKH.DropDown += new System.EventHandler(this.comboBox1_DropDown);
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(222, 115);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(103, 29);
+            this.button20.TabIndex = 14;
+            this.button20.Text = "Tìm kiếm";
+            this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(113, 115);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(103, 29);
+            this.button19.TabIndex = 12;
+            this.button19.Text = "In thẻ";
+            this.button19.UseVisualStyleBackColor = true;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(6, 26);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(89, 13);
+            this.label50.TabIndex = 12;
+            this.label50.Text = "Tên Khách Hàng";
+            // 
             // groupBox19
             // 
             this.groupBox19.Controls.Add(this.checkBox1);
@@ -2014,6 +2075,16 @@
             this.groupBox19.TabIndex = 11;
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "Tìm kiếm";
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(313, 59);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(57, 17);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Tất cả";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // hethanradio
             // 
@@ -2167,14 +2238,15 @@
             this.nhanvien.UseVisualStyleBackColor = true;
             this.nhanvien.Click += new System.EventHandler(this.button9_Click);
             // 
-            // button10
+            // thehoivien
             // 
-            this.button10.Location = new System.Drawing.Point(478, 9);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(125, 46);
-            this.button10.TabIndex = 33;
-            this.button10.Text = "In thẻ";
-            this.button10.UseVisualStyleBackColor = true;
+            this.thehoivien.Location = new System.Drawing.Point(478, 9);
+            this.thehoivien.Name = "thehoivien";
+            this.thehoivien.Size = new System.Drawing.Size(125, 46);
+            this.thehoivien.TabIndex = 33;
+            this.thehoivien.Text = "Thẻ hội viên";
+            this.thehoivien.UseVisualStyleBackColor = true;
+            this.thehoivien.Click += new System.EventHandler(this.button10_Click);
             // 
             // groupBox9
             // 
@@ -2183,7 +2255,7 @@
             this.groupBox9.Controls.Add(this.button13);
             this.groupBox9.Controls.Add(this.loaihang);
             this.groupBox9.Controls.Add(this.sanpham);
-            this.groupBox9.Controls.Add(this.button10);
+            this.groupBox9.Controls.Add(this.thehoivien);
             this.groupBox9.Controls.Add(this.khachhang);
             this.groupBox9.Controls.Add(this.button8);
             this.groupBox9.Controls.Add(this.nhanvien);
@@ -2260,77 +2332,6 @@
             this.button7.Text = "Đăng xuất";
             this.button7.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(313, 59);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(57, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "Tất cả";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox20
-            // 
-            this.groupBox20.Controls.Add(this.button21);
-            this.groupBox20.Controls.Add(this.cbbtheKH);
-            this.groupBox20.Controls.Add(this.button20);
-            this.groupBox20.Controls.Add(this.button19);
-            this.groupBox20.Controls.Add(this.label50);
-            this.groupBox20.Location = new System.Drawing.Point(543, 4);
-            this.groupBox20.Name = "groupBox20";
-            this.groupBox20.Size = new System.Drawing.Size(331, 150);
-            this.groupBox20.TabIndex = 12;
-            this.groupBox20.TabStop = false;
-            this.groupBox20.Text = "In thẻ";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(6, 26);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(89, 13);
-            this.label50.TabIndex = 12;
-            this.label50.Text = "Tên Khách Hàng";
-            // 
-            // button19
-            // 
-            this.button19.Location = new System.Drawing.Point(113, 115);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(103, 29);
-            this.button19.TabIndex = 12;
-            this.button19.Text = "In thẻ";
-            this.button19.UseVisualStyleBackColor = true;
-            // 
-            // button20
-            // 
-            this.button20.Location = new System.Drawing.Point(222, 115);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(103, 29);
-            this.button20.TabIndex = 14;
-            this.button20.Text = "Tìm kiếm";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // cbbtheKH
-            // 
-            this.cbbtheKH.FormattingEnabled = true;
-            this.cbbtheKH.Location = new System.Drawing.Point(101, 23);
-            this.cbbtheKH.Name = "cbbtheKH";
-            this.cbbtheKH.Size = new System.Drawing.Size(144, 21);
-            this.cbbtheKH.TabIndex = 15;
-            this.cbbtheKH.DropDown += new System.EventHandler(this.comboBox1_DropDown);
-            // 
-            // button21
-            // 
-            this.button21.Location = new System.Drawing.Point(4, 115);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(103, 29);
-            this.button21.TabIndex = 12;
-            this.button21.Text = "Gia hạn";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2401,6 +2402,8 @@
             this.groupBox15.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtgdshoadon)).EndInit();
             this.tabPage7.ResumeLayout(false);
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
             this.groupBox19.ResumeLayout(false);
             this.groupBox19.PerformLayout();
             this.groupBox18.ResumeLayout(false);
@@ -2408,8 +2411,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureuser)).EndInit();
             this.groupBox9.ResumeLayout(false);
-            this.groupBox20.ResumeLayout(false);
-            this.groupBox20.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2528,7 +2529,7 @@
         private System.Windows.Forms.Label tennguoidung;
         private System.Windows.Forms.PictureBox pictureuser;
         private System.Windows.Forms.Label quyen;
-        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button thehoivien;
         private System.Windows.Forms.Button nhanvien;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button khachhang;
