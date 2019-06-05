@@ -93,9 +93,15 @@ namespace Gym
                 DateTime songaydky = Convert.ToDateTime(row.Cells[5].Value.ToString());
                 //Ngày dự đoán hết hạn
                 DateTime songayttp = songaydky.AddDays(ngay);
+                //hiệu 2 ngày
+                TimeSpan time = now - songaydky ;
+                int hieu = time.Days;
                 if (DateTime.Compare(songayttp, now) < 0)
                     row.DefaultCellStyle.BackColor = Color.Red;
-
+                else if (hieu - ngay>=-3 && hieu <ngay)
+                {
+                    row.DefaultCellStyle.BackColor = Color.Green;
+                }
             }
         }
         private void GiaHanThe_Load(object sender, EventArgs e)
@@ -183,6 +189,7 @@ namespace Gym
         {
             int checka = 0;
             int checkb = 0;
+            DateTime songayttp= new DateTime();
             foreach (DataGridViewRow row in dtgdanhsachthe.Rows)
             {
                 DateTime now = DateTime.Now;
@@ -193,42 +200,56 @@ namespace Gym
                 //Ngày đăng ký
                 DateTime songaydky = Convert.ToDateTime(row.Cells[5].Value.ToString());
                 //Ngày dự đoán hết hạn
-                DateTime songayttp = songaydky.AddDays(ngay);
+                songayttp = songaydky.AddDays(ngay);
+                //thẻ hết hạn
                 if (DateTime.Compare(songayttp, now) < 0)
-                  checka++; 
-                else 
                 {
-                    MessageBox.Show("Thẻ còn trong thời gian sử dụng, không thể thêm thẻ");
-                    checkb++;
+                    checka++;
+                    checkb = 0;
+                    songayttp = DateTime.Now;
+                }
+                else
+                {
+                    //còn hạn
+                    DialogResult ThongBao = MessageBox.Show("Thẻ còn trong thời gian sử dụng, bạn có muốn thêm thẻ không?", "Yêu cầu thêm thẻ mới", MessageBoxButtons.YesNo);
+                    if (ThongBao == DialogResult.Yes)
+                    {
+                        checka++;
+                        checkb = 0;
+                    }
+                    else if (ThongBao == DialogResult.No)
+                    {
+                        checkb++;
+                    }
                     break;
                 }
             }
-            
-           if(checka>0 && checkb==0)
-           {
-               DataTable DT = Th.select_The();
 
-               int a = 1;
-               foreach (DataRow row in DT.Rows)
-               {
-                   string b = row["Mathe"].ToString();
-                   string c = b.Substring(2);
-                   int Ma = Convert.ToInt32(c);
-                   if (Ma > a)
-                       a = Ma;
-               }
-               a++;
+            if (checka > 0 && checkb == 0)
+            {
+                DataTable DT = Th.select_The();
 
-               if (Th.insert_The("MT" + a, dateTimePicker1.Value.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text, MaNV1) > 0)
-               {
-                   MessageBox.Show("Thành công");
-                   load();
-                   dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
-                   loaddtgdanhsachthe();
-               }
-               else
-                   MessageBox.Show("Thất bại");
-           }
+                int a = 1;
+                foreach (DataRow ro in DT.Rows)
+                {
+                    string b = ro["Mathe"].ToString();
+                    string c = b.Substring(2);
+                    int Ma = Convert.ToInt32(c);
+                    if (Ma > a)
+                        a = Ma;
+                }
+                a++;
+
+                if (Th.insert_The("MT" + a, songayttp.ToString(), cbbDichVu.SelectedValue.ToString(), txtMaKh.Text, MaNV1) > 0)
+                {
+                    MessageBox.Show("Thành công");
+                    load();
+                    dtgdanhsachthe.DataSource = Th.select_TheMa(txtMaKh.Text);
+                    loaddtgdanhsachthe();
+                }
+                else
+                    MessageBox.Show("Thất bại");
+            }
             
         }
 

@@ -15,7 +15,11 @@ namespace BLLayer
         {
             return HD.select_HoaDon();
         }
-
+        
+        public DataTable select_InHoaDon(string MaHD)
+        {
+            return HD.select_InHoaDon( MaHD);
+        }
         public DataTable select_HoaDonMa(string MaHD)
         {
             return HD.select_HoaDonMa(MaHD);

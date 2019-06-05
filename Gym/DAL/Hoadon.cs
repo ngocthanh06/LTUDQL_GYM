@@ -19,6 +19,19 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu("select_HoaDon");
         }
+       
+        public DataTable select_InHoaDon(string MaHD)
+        {
+            name = new string[1];
+            value = new object[1];
+            name[0] = "@MaHD"; value[0] = MaHD;
+            //name[1] = "@MaKH"; value[1] = MaKH;
+            //name[2] = "@MaLH"; value[2] = MaLH;
+            //name[3] = "@MaNV"; value[3] = MaNV;
+            //name[4] = "@MaHang"; value[4] = MaHang;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_InHoaDon", name, value, 1);
+        }
         public DataTable select_HoaDonMa(string MaHD)
         {
             name = new string[1];

@@ -11,7 +11,7 @@ using BLLayer;
 using System.Drawing.Imaging;
 using System.IO;
 using Microsoft.VisualBasic;
-
+using DevExpress.XtraReports.UI;
 
 
 namespace Gym
@@ -33,14 +33,14 @@ namespace Gym
 
         public string Message
         {
-            get { return tennguoidung.Text; }
-            set { tennguoidung.Text = value; }
+            get { return labeltennguoidung.Text; }
+            set { labeltennguoidung.Text = value; }
         }
 
         public string Quyen
         {
-            get { return quyen.Text; }
-            set { quyen.Text = value; }
+            get { return labelChucvu.Text; }
+            set { labelChucvu.Text = value; }
         }
 
         
@@ -123,8 +123,8 @@ namespace Gym
             matk.Visible = false;
             labelMaNV.Visible = false;
             //mahh.Visible = false;
-            DataTable DT = NV.select_NhanVienMaTK(tennguoidung.Text);
-            tennguoidung.Text = "Xin chào, "+DT.Rows[0]["TenNV"].ToString();
+            DataTable DT = NV.select_NhanVienMaTK(labeltennguoidung.Text);
+            labeltennguoidung.Text = "Xin chào, " + DT.Rows[0]["TenNV"].ToString();
             labelMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             if (!Convert.IsDBNull(DT.Rows[0]["hinhanh"]))
             {
@@ -167,6 +167,8 @@ namespace Gym
             cbbNvthe.Enabled = false;
             datenvthe.Enabled = false;
             checkBox1.Enabled = false;
+            //CryptalReport
+            
            
         }
         
@@ -966,8 +968,7 @@ namespace Gym
             textSlcon.Clear();
             numericUpDown2.Value = 0;
             pictureSanP.Image = null;
-            dataGridView4.Rows.Clear();
-            dataGridView4.Refresh();
+            
         }
         private void dtgkhachhang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -1117,6 +1118,8 @@ namespace Gym
         private void button16_Click(object sender, EventArgs e)
         {
             clearHD();
+            dataGridView4.Rows.Clear();
+            dataGridView4.Refresh();
             checksp();
         }
         //Thực thi vào csdl
@@ -1124,18 +1127,21 @@ namespace Gym
         {
             
             int a = 0;
+            string MaHD = createMaHD();
             if (dataGridView4.Rows.Count > 0)
             {
-                foreach (DataGridViewRow row in dataGridView4.Rows)
+                //MessageBox.Show(dataGridView4.Rows.Count.ToString());
+                if (HD.insert_HoaDon(createMaHD(), DateTime.Now.Date.ToString(), textMaKH.Text, textMaNV.Text) > 0)
                 {
-                    DataTable DT = HH.select_HangHoaMa(row.Cells[1].Value.ToString());
-                    int slcon = Convert.ToInt32(DT.Rows[0]["SLCon"].ToString()) - Convert.ToInt32(row.Cells[3].Value.ToString()); 
-                    if (HD.insert_HoaDon(row.Cells[0].Value.ToString(),row.Cells[5].Value.ToString(), row.Cells[6].Value.ToString(), row.Cells[7].Value.ToString())>0)
-                    {
 
-                        if (CTHD.insert_CTHD(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString(), Convert.ToInt32(row.Cells[3].Value.ToString())) > 0)
+
+                    for (int i = 0; i < dataGridView4.Rows.Count; i++)
+                    {
+                        DataTable DT = HH.select_HangHoaMa(dataGridView4.Rows[i].Cells[1].Value.ToString());
+                        int slcon = Convert.ToInt32(DT.Rows[0]["SLCon"].ToString()) - Convert.ToInt32(dataGridView4.Rows[i].Cells[3].Value.ToString());
+                        if (CTHD.insert_CTHD(dataGridView4.Rows[i].Cells[0].Value.ToString(), dataGridView4.Rows[i].Cells[1].Value.ToString(), Convert.ToInt32(dataGridView4.Rows[i].Cells[3].Value.ToString())) > 0)
                         {
-                            if (HH.update_SLConHangHoa(row.Cells[1].Value.ToString(), slcon) > 0)
+                            if (HH.update_SLConHangHoa(dataGridView4.Rows[i].Cells[1].Value.ToString(), slcon) > 0)
                             {
                                 a++;
                                 clearHD();
@@ -1144,78 +1150,139 @@ namespace Gym
                             }
                         }
                     }
-                    if (a > 0) MessageBox.Show("Thành công");
-                    else MessageBox.Show("Thất bại");
-                   
-
                 }
+                //Hiển thị thông báo thành công và in hóa đơn
+                if (a > 0) 
+                {                  
+                   DialogResult hoadon = MessageBox.Show("Bạn có muốn in hóa đơn không?", "Lưu thành công.!!", MessageBoxButtons.OKCancel);
+                   if(hoadon == DialogResult.OK)
+                   {  
+                       XtraReport1 report = new XtraReport1();
+                       report.DataSource = HD.select_InHoaDon(MaHD);
+                       report.ShowPreview();
+                   }
+                   dataGridView4.Rows.Clear();
+                   dataGridView4.Refresh();
+                }
+                else MessageBox.Show("Thất bại");               
             }
             else
                 MessageBox.Show("Chưa có dữ liệu hóa đơn");
             
         }
+        //Hiển thị hóa đơn trong mục dshd
+        private void btn_Inhd_Click(object sender, EventArgs e)
+        {
+            XtraReport1 report = new XtraReport1();
+            report.DataSource = HD.select_InHoaDon(cbbdshoadon.SelectedValue.ToString());
+            report.ShowPreview();
+        }
+
 
         /*
          * 
          * 
          * 
          * */
-        private void button7_Click(object sender, EventArgs e)
+        //private void button7_Click(object sender, EventArgs e)
+        //{
+        //    closeTabcontrol();
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage1);
+        //    tabControl1.SelectTab(tabPage1);
+        //    khachhang.Enabled = true;
+        //}
+        //Hiển thị khách hàng
+        private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             closeTabcontrol();
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage1);
             tabControl1.SelectTab(tabPage1);
-            khachhang.Enabled = true;
+            //khachhang.Enabled = true;
         }
-
-        private void button9_Click(object sender, EventArgs e)
+        //Nhân viên
+        private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             closeTabcontrol();
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage2);
             tabControl1.SelectTab(tabPage2);
-            nhanvien.Enabled = true;
+            //nhanvien.Enabled = true;
         }
+        //private void button9_Click(object sender, EventArgs e)
+        //{
+        //    closeTabcontrol();
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage2);
+        //    tabControl1.SelectTab(tabPage2);
+        //    nhanvien.Enabled = true;
+        //}
         //click sản phẩm
-        private void button11_Click(object sender, EventArgs e)
+        private void barButtonItem19_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            
             closeTabcontrol();
-            
+
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage3);
             tabControl1.SelectTab(tabPage3);
-            sanpham.Enabled = true;
-            
+           // sanpham.Enabled = true;
         }
-
-        private void button12_Click(object sender, EventArgs e)
+        //private void button11_Click(object sender, EventArgs e)
+        //{
+            
+        //    closeTabcontrol();
+            
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage3);
+        //    tabControl1.SelectTab(tabPage3);
+        //    sanpham.Enabled = true;
+            
+        //}
+        //Loại hàng
+        private void barButtonItem24_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             closeTabcontrol();
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage4);
             tabControl1.SelectTab(tabPage4);
-            loaihang.Enabled = true;
+           // loaihang.Enabled = true;
+        }
+        //private void button12_Click(object sender, EventArgs e)
+        //{
+        //    closeTabcontrol();
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage4);
+        //    tabControl1.SelectTab(tabPage4);
+        //    loaihang.Enabled = true;
             
-        }
+        //}
 
-        private void button17_Click_1(object sender, EventArgs e)
-        {
-            closeTabcontrol();
-            tabControl1.TabPages.Remove(tabPage1);
-            tabControl1.TabPages.Add(tabPage6);
-            tabControl1.SelectTab(tabPage6);
-            hoadon.Enabled = true;
-        }
-        private void button10_Click(object sender, EventArgs e)
+        //private void button17_Click_1(object sender, EventArgs e)
+        //{
+        //    closeTabcontrol();
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage6);
+        //    tabControl1.SelectTab(tabPage6);
+        //    hoadon.Enabled = true;
+        //}
+        //Danh sách thẻ
+        private void barButtonItem29_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             closeTabcontrol();
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage7);
             tabControl1.SelectTab(tabPage7);
-            thehoivien.Enabled = true;
+            //thehoivien.Enabled = true;
         }
+        //private void button10_Click(object sender, EventArgs e)
+        //{
+        //    closeTabcontrol();
+        //    tabControl1.TabPages.Remove(tabPage1);
+        //    tabControl1.TabPages.Add(tabPage7);
+        //    tabControl1.SelectTab(tabPage7);
+        //    thehoivien.Enabled = true;
+        //}
         //Dịch vụ
         /*Dịch vụ
          * Dịch vụ
@@ -1232,13 +1299,22 @@ namespace Gym
             else
                 return false;           
         }
+        //DỊch vụ
+        private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage5);
+            tabControl1.SelectTab(tabPage5);
+            //loaihang.Enabled = true;
+        }
         private void button14_Click(object sender, EventArgs e)
         {
             closeTabcontrol();
             tabControl1.TabPages.Remove(tabPage1);
             tabControl1.TabPages.Add(tabPage5);
             tabControl1.SelectTab(tabPage5);
-            loaihang.Enabled = true;
+            //loaihang.Enabled = true;
         }
         //hiển thị theo ngày
         void showday()
@@ -1271,7 +1347,13 @@ namespace Gym
         //Tìm kiếm
         private void button17_Click(object sender, EventArgs e)
         {
-            
+            //Tất cả hóa đơn
+            if(radioAllHD.Checked == true)
+            {
+                cbbdshoadon.DataSource = HD.select_HoaDon();
+                cbbdshoadon.DisplayMember = "TenHD";
+                cbbdshoadon.ValueMember = "MaHD";
+            }
             //Hóa đơn theo mã nvien
             if (cbbTennv.SelectedValue != null && textmahd.Text ==""&&toanthoigian.Checked == true)
             {  
@@ -1344,11 +1426,28 @@ namespace Gym
                 tongtienhd.Text = tong.ToString();
             }
             //Bắt lỗi
-            if (cbbTennv.SelectedValue == null && textmahd.Text == "")
+            if (cbbTennv.SelectedValue == null && textmahd.Text == "" && radioAllHD.Checked != true)
                 MessageBox.Show("Bạn chưa chọn tên mục tìm kiếm");
 
         }
 
+        private void button18_Click(object sender, EventArgs e)
+        {
+            string MaHD = "";
+
+            //In hóa đơn vừa mới tạo
+            DataTable DT = HD.select_HoaDon();
+            foreach (DataRow row in DT.Rows)
+            {
+                MaHD = row[0].ToString();
+            }
+
+            XtraReport1 report = new XtraReport1();
+            report.DataSource = HD.select_InHoaDon(MaHD);
+            report.ShowPreview();
+
+
+        }
         private void cbbTennv_DropDown(object sender, EventArgs e)
         {
             cbbTennv.DataSource = NV.select_NhanVien();
@@ -1376,7 +1475,7 @@ namespace Gym
 
         private void radioNV_CheckedChanged(object sender, EventArgs e)
         {
-            
+            cbbdshoadon.Enabled = true;
             cbbTennv.Enabled = true;
             textmahd.Enabled = false;
             textmahd.Clear();
@@ -1387,6 +1486,7 @@ namespace Gym
             textmahd.Enabled = true;
             cbbTennv.Enabled = false;
             cbbdshoadon.Enabled = false;
+
         }
 
         private void cbbdshoadon_SelectedIndexChanged(object sender, EventArgs e)
@@ -1394,19 +1494,18 @@ namespace Gym
             if (cbbdshoadon.SelectedValue != null)
             {
                 dtgdshoadon.DataSource = HD.select_HoaDontimkiem(cbbdshoadon.SelectedValue.ToString());
+
                 int tong = 0;
                 int a = 0;
                 //ĐỔi mã thành tên
                 foreach (DataGridViewRow row in dtgdshoadon.Rows)
                 {
-                    
-                    
                     if (!row.IsNewRow)
                     {
                         a = Convert.ToInt32(row.Cells[2].Value.ToString()) * Convert.ToInt32(row.Cells[3].Value.ToString());
                         tong = tong + a;
                     }
-                    if (row.Cells.Count<=1)
+                    if (row.Cells.Count <= 1)
                         MessageBox.Show("Không có dữ liệu về hóa đơn");
                 }
                 tongtienhd.Text = tong.ToString();
@@ -1417,6 +1516,7 @@ namespace Gym
          * Danh sách thẻ
          * Danh sách thẻ
          * */
+        
         private void button17_Click_2(object sender, EventArgs e)
         {
             
@@ -1529,29 +1629,7 @@ namespace Gym
             cbbNvthe.ValueMember = "MaNV";
         }
 
-        private void dsthe_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                //chọn dòng dtgrid
-                dsthe.CurrentRow.Selected = true;
-                DataGridViewRow row = this.dsthe.Rows[e.RowIndex];
-                
-                GiaHanThe GHThe = new GiaHanThe();
-                DataTable DT = Th.select_TheMa(row.Cells[6].Value.ToString().Trim());
-                if (DT.Rows.Count > 0)
-                {
-                    //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
-                    GHThe.Message = row.Cells[6].Value.ToString().Trim(); ;
-                    GHThe.MaNV = labelMaNV.Text;
-                    GHThe.ShowDialog();
-
-                }
-                else
-                    MessageBox.Show("Khách hàng chưa có thẻ");
-            }
-
-        }
+       
 
         private void comboBox1_DropDown(object sender, EventArgs e)
         {
@@ -1567,12 +1645,15 @@ namespace Gym
             {
                 if (!row.IsNewRow)
                 {
-                    DateTime ngaydk = Convert.ToDateTime(row.Cells[3].Value.ToString());
+                    //Ngày đăng ký
+                    DateTime ngaydk = Convert.ToDateTime(row.Cells[5].Value.ToString());
+                    //Ngày hiện tại
                     DateTime today = DateTime.Now;
+                    //hiệu thời gian
                     TimeSpan time = today - ngaydk;
                     int Songaydk = time.Days;
 
-                    int thoihan = Convert.ToInt32(row.Cells[4].Value.ToString());
+                    int thoihan = Convert.ToInt32(row.Cells[6].Value.ToString());
 
                     if (Songaydk - thoihan >= 0)
                         row.DefaultCellStyle.BackColor = Color.Red;
@@ -1585,47 +1666,75 @@ namespace Gym
         private void button21_Click(object sender, EventArgs e)
         {
             GiaHanThe GHThe = new GiaHanThe();
-            DataTable DT = Th.select_TheMa(cbbtheKH.SelectedValue.ToString());
-            if (DT.Rows.Count > 0)
+            if (cbbtheKH.SelectedValue != null)
             {
-                //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
-                GHThe.Message = cbbtheKH.SelectedValue.ToString();
-                GHThe.MaNV = labelMaNV.Text;
-                GHThe.ShowDialog();
+                DataTable DT = Th.select_TheMa(cbbtheKH.SelectedValue.ToString());
+                if (DT.Rows.Count > 0)
+                {
+                    //Gọi properties để gọi chuyển dữ liệu sang fomr 2 
+                    GHThe.Message = cbbtheKH.SelectedValue.ToString();
+                    GHThe.MaNV = labelMaNV.Text;
+                    GHThe.ShowDialog();
 
+                }
+                else
+                    MessageBox.Show("Khách hàng chưa có thẻ");
             }
-            else
-                MessageBox.Show("Khách hàng chưa có thẻ");
+            else MessageBox.Show("Bạn chưa chọn khách hàng");
         }
 
-        
+        private void button13_Click(object sender, EventArgs e)
+        {
+            
+        }
 
-        
-        
+        private void datenvthe_ValueChanged(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+        }
 
-        
+        private void dsthe_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            dsthe.CurrentRow.Selected = true;
+            DataGridViewRow row = this.dsthe.Rows[e.RowIndex];
+        }
+
+        private void radioAllHD_CheckedChanged(object sender, EventArgs e)
+        {
+            //cbbdshoadon.Enabled = true;
+            cbbTennv.Enabled = false;
+            textmahd.Enabled = false;
+            textmahd.Clear();
+        }
+
+        private void barButtonItem1_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            closeTabcontrol();
+            tabControl1.TabPages.Remove(tabPage1);
+            tabControl1.TabPages.Add(tabPage1);
+            tabControl1.SelectTab(tabPage1);
+            //khachhang.Enabled = true;
+        }
+
+        private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            ThemKH ThemKH = new ThemKH();
+
+            ThemKH.MaNVKH = labelMaNV.Text;
+            ThemKH.ShowDialog();
+        }
+
+        private void barButtonItem5_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            MessageBox.Show(labelMaNV.Text);
+        }
 
        
 
-        
-
-        
-
-       
 
         
 
         
-
-       
-
-
-
-        
-
-      
-
-
        
     }
 }
