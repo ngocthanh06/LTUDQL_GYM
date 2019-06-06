@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dateNgayBD = new System.Windows.Forms.DateTimePicker();
             this.cbbDichvu = new System.Windows.Forms.ComboBox();
@@ -57,11 +59,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -86,6 +86,25 @@
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Đăng ký dịch vụ";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Image = global::Gym.Properties.Resources.image_up_icon;
+            this.simpleButton1.Location = new System.Drawing.Point(348, 17);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(104, 36);
+            this.simpleButton1.TabIndex = 29;
+            this.simpleButton1.Text = "Upload";
+            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(300, 64);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(173, 216);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 28;
+            this.pictureBox1.TabStop = false;
             // 
             // label11
             // 
@@ -333,7 +352,7 @@
             // simpleButton3
             // 
             this.simpleButton3.ImageOptions.Image = global::Gym.Properties.Resources.Refresh_icon;
-            this.simpleButton3.Location = new System.Drawing.Point(605, 346);
+            this.simpleButton3.Location = new System.Drawing.Point(548, 346);
             this.simpleButton3.Name = "simpleButton3";
             this.simpleButton3.Size = new System.Drawing.Size(139, 38);
             this.simpleButton3.TabIndex = 14;
@@ -343,31 +362,12 @@
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = global::Gym.Properties.Resources.Actions_list_add_user_icon;
-            this.simpleButton2.Location = new System.Drawing.Point(782, 346);
+            this.simpleButton2.Location = new System.Drawing.Point(734, 346);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(131, 38);
             this.simpleButton2.TabIndex = 13;
             this.simpleButton2.Text = "Thêm Khách Hàng";
             this.simpleButton2.Click += new System.EventHandler(this.simpleButton2_Click);
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Image = global::Gym.Properties.Resources.image_up_icon;
-            this.simpleButton1.Location = new System.Drawing.Point(348, 17);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(104, 36);
-            this.simpleButton1.TabIndex = 29;
-            this.simpleButton1.Text = "Upload";
-            this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(300, 64);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(173, 216);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 28;
-            this.pictureBox1.TabStop = false;
             // 
             // ThemKH
             // 
@@ -383,9 +383,9 @@
             this.Load += new System.EventHandler(this.ThemKH_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

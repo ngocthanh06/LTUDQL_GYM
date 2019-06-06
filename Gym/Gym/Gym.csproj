@@ -127,6 +127,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GYMDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="GYMDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GYMDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +157,18 @@
     </Compile>
     <Compile Include="ThemKH.Designer.cs">
       <DependentUpon>ThemKH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemNVcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemNVcs.Designer.cs">
+      <DependentUpon>ThemNVcs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="thongke.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="thongke.Designer.cs">
+      <DependentUpon>thongke.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -182,6 +199,12 @@
     <EmbeddedResource Include="ThemKH.resx">
       <DependentUpon>ThemKH.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ThemNVcs.resx">
+      <DependentUpon>ThemNVcs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="thongke.resx">
+      <DependentUpon>thongke.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="GYMDataSet.xsc">
       <DependentUpon>GYMDataSet.xsd</DependentUpon>
     </None>
@@ -192,6 +215,17 @@
     </None>
     <None Include="GYMDataSet.xss">
       <DependentUpon>GYMDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="GYMDataSet1.xsc">
+      <DependentUpon>GYMDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GYMDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GYMDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GYMDataSet1.xss">
+      <DependentUpon>GYMDataSet1.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -256,6 +290,45 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\image-up-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-info-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode-folded-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-icon %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signature-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Search-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\name-card-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preppy-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Preppy-icon1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User-Group-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\User-Group-icon %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Parcel-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chart-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

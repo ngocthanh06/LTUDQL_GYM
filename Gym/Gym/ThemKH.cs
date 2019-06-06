@@ -13,6 +13,7 @@ namespace Gym
 {
     public partial class ThemKH : Form
     {
+        Form1 form1;
         KhachHang_BLL KH = new KhachHang_BLL();
         The_BLL Th = new The_BLL();
         DichVu_BLL DV = new DichVu_BLL();
@@ -147,11 +148,13 @@ namespace Gym
                 {
                     if (Th.insert_The(Themmathe(), dateNgayBD.Value.ToString(), cbbDichvu.SelectedValue.ToString(), a, MaNV.Text) > 0)
                     {
-                        MessageBox.Show("Thành công ");
+                        
                         clearbutton();
                         pictureBox1.Image = null;
-                      //  dataGridView1.DataSource = KH.select_KhachHang();
-
+                        MessageBox.Show("Thành công ");
+                        this.Close();
+                        //load form
+                        
                     }
                     else
                         MessageBox.Show("Thất bại");
@@ -167,8 +170,14 @@ namespace Gym
         //Làm Mới
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            clearbutton();
-            
+           // clearbutton();
+
+            form1.dataGridView1.DataSource = KH.select_KhachHang();
+
         }
+        
+       
+       
+       
     }
 }
