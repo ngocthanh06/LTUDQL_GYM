@@ -20,6 +20,10 @@ namespace BLLayer
         {
             return HD.select_InHoaDon( MaHD);
         }
+        public DataTable select_HoaDonbyMonth(int thang, int nam)
+        {
+            return HD.select_HoaDonbyMonth(thang,nam);
+        }
         public DataTable select_HoaDonMa(string MaHD)
         {
             return HD.select_HoaDonMa(MaHD);
@@ -59,9 +63,9 @@ namespace BLLayer
             return HD.select_HoaDonMaNVbyMonth(MaNV, Thang, Nam);
         }
         //phương thức này gọi phương thức sv_insert() ở lớp SinhVien_DAL (tầng DAL)
-        public int insert_HoaDon(string MaHD,string NgayHD, string MaKH, string MaNV)
+        public int insert_HoaDon(string MaHD,string NgayHD, string MaKH, string MaNV, int TongHoaDon)
         {
-            return HD.insert_HoaDon( MaHD,NgayHD, MaKH, MaNV);
+            return HD.insert_HoaDon( MaHD,NgayHD, MaKH, MaNV,TongHoaDon);
         }
 
         //phương thức này gọi phương thức sv_update() ở lớp SinhVien_DAL (tầng DAL)

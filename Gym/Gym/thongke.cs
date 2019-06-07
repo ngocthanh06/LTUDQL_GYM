@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BLLayer;
+using System.Data.SqlClient;
 
 namespace Gym
 {
@@ -90,28 +91,21 @@ namespace Gym
         }
         public void dshoadon()
         {
-            double tonghoadon = 0;
-            double tongthe = 0;
+            int tonghoadon = 0;
+            int tongthe = 0;
             DataTable DSHD = HD.select_HoaDon();
             labelControl4.Text = DSHD.Rows.Count.ToString() + " Hóa đơn";
             foreach (DataRow row in DSHD.Rows)
             {
-                int cthd = 0;
-                int SL = 0;
-                int DonGia = 0;
-                DataTable DSCTHD = HD.select_HoaDontimkiem(row["MaHD"].ToString());
-                foreach (DataRow ro in DSCTHD.Rows)
-                {
-                    SL = Convert.ToInt32(ro["SL"].ToString());
-                    DonGia = Convert.ToInt32(ro["DonGia"].ToString());
-                    cthd = SL * DonGia;
-                }
-                tonghoadon += cthd;
+                tonghoadon += Convert.ToInt32(row["TongHoaDon"].ToString());
+
             }
             //Hủy đối tượng 
             DSHD.Dispose();
-
             labelControl11.Text = String.Format("{0:0,0}", tonghoadon) + "VND";
+
+            
+            //Thẻ
             DataTable DSThe = Th.select_The();
             foreach (DataRow row in DSThe.Rows)
             {
@@ -127,6 +121,10 @@ namespace Gym
                 DSDV.Dispose();
             }
             labelControl12.Text = String.Format("{0:0,0}", tongthe) + "VND";
+            //Thêm dữ liệu vào chart
+            chartControl1.Series["Chi Phí Hóa Đơn"].Points.AddPoint("Hóa Đơn", tonghoadon);
+            chartControl1.Series["Chi Phí Hóa Đơn"].Points.AddPoint("Thẻ", tongthe);
+            chartControl1.Series["Chi Phí Hóa Đơn"].Points.AddPoint("Tổng doanh thu", tonghoadon+tongthe);
             //Hủy đối tượng
             DSThe.Dispose();
         }
@@ -136,6 +134,36 @@ namespace Gym
             dskhachhang();
             dssanpham();
             dshoadon();
+
+        }
+
+
+        private void simpleButton1_Click(object sender, EventArgs e)
+        {
+            int tong = 0;
+            DateTime now = DateTime.Now;
+            int thang = Convert.ToInt32(dateTimePicker1.Value.Month.ToString());
+            int nam = Convert.ToInt32(dateTimePicker1.Value.Year.ToString());
+            DataTable DT = HD.select_HoaDonbyMonth(thang, nam);
+            foreach (DataRow row in DT.Rows)
+            {
+                //Thêm dl vào chart
+                chartControl2.Series["Sản Phẩm"].Points.AddPoint(row["NgayHD"].ToString(), Convert.ToInt32(row["TongHoaDon"].ToString()));
+                tong += Convert.ToInt32(row["TongHoaDon"].ToString());
+            }
+            //Hủy đối tượng
+            DT.Clone();
+            DataTable DT1 = Th.select_TheDichVubyMonth(thang, nam);
+            foreach (DataRow row in DT1.Rows)
+            {
+                //Thêm dl vào chart
+                chartControl2.Series["Thẻ hội viên"].Points.AddPoint(row["NgayDK"].ToString(), Convert.ToInt32(row["Gia"].ToString()));
+                tong += Convert.ToInt32(row["Gia"].ToString());
+            }
+            //Hủy đối tượng
+            DT1.Clone();
+            //Thêm dl vào chart
+            chartControl2.Series["Tổng Thu nhập"].Points.AddPoint(now.ToString(), tong);
         }
     }
 }

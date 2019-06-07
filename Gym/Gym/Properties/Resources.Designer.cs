@@ -63,6 +63,46 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _256263871 {
+            get {
+                object obj = ResourceManager.GetObject("256263871", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3d_h_nh_n_n_3d_b_c_tranh_t_ng_h_nh_n_n_cho {
+            get {
+                object obj = ResourceManager.GetObject("3d-h-nh-n-n-3d-b-c-tranh-t-ng-h-nh-n-n-cho", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _3D_wall_b_c_tranh_ph_ng_n_n_tu_ch_nh_h_nh_nh_b_jpg_640x640 {
+            get {
+                object obj = ResourceManager.GetObject("3D-wall-b-c-tranh-ph-ng-n-n-tu-ch-nh-h-nh-nh-b.jpg_640x640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _41kE7T3TatL {
+            get {
+                object obj = ResourceManager.GetObject("41kE7T3TatL", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Actions_edit_find_user_icon {
             get {
                 object obj = ResourceManager.GetObject("Actions-edit-find-user-icon", resourceCulture);
@@ -113,6 +153,16 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background_dep_de_ghep_anh_2 {
+            get {
+                object obj = ResourceManager.GetObject("background-dep-de-ghep-anh-2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap barcode_folded_icon {
             get {
                 object obj = ResourceManager.GetObject("barcode-folded-icon", resourceCulture);
@@ -126,6 +176,16 @@ namespace Gym.Properties {
         internal static System.Drawing.Bitmap Chart_icon {
             get {
                 object obj = ResourceManager.GetObject("Chart-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap chibi_hulk_625x448 {
+            get {
+                object obj = ResourceManager.GetObject("chibi-hulk-625x448", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,6 +213,17 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap depositphotos_199216916_stock_illustration_gym_logo_template_bodybuilding_fitness {
+            get {
+                object obj = ResourceManager.GetObject("depositphotos_199216916-stock-illustration-gym-logo-template-bodybuilding-fitness" +
+                        "", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap document_edit_icon {
             get {
                 object obj = ResourceManager.GetObject("document-edit-icon", resourceCulture);
@@ -173,6 +244,38 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Folders_OS_User_With_Frame_Metro_icon {
+            get {
+                object obj = ResourceManager.GetObject("Folders-OS-User-With-Frame-Metro-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gym_Sticker_Fitness_Decal_Bodybuilding_Posters_Name_Muscle_Vinyl_Wall_Decals_Parede_Decor_19_Color_Choose_jpg_640x640 {
+            get {
+                object obj = ResourceManager.GetObject("Gym-Sticker-Fitness-Decal-Bodybuilding-Posters-Name-Muscle-Vinyl-Wall-Decals-Pare" +
+                        "de-Decor-19-Color-Choose.jpg_640x640", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gym_Wall_Sticker_Vinyl_Muscle_Gym_Bodybuilding_Wall_Decal_Muscled_Man_Wall_Mural_Sport_Room_Decor {
+            get {
+                object obj = ResourceManager.GetObject("Gym-Wall-Sticker-Vinyl-Muscle-Gym-Bodybuilding-Wall-Decal-Muscled-Man-Wall-Mural-" +
+                        "Sport-Room-Decor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap id_card_icon {
             get {
                 object obj = ResourceManager.GetObject("id-card-icon", resourceCulture);
@@ -186,6 +289,36 @@ namespace Gym.Properties {
         internal static System.Drawing.Bitmap image_up_icon {
             get {
                 object obj = ResourceManager.GetObject("image-up-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap inside_logout_icon {
+            get {
+                object obj = ResourceManager.GetObject("inside-logout-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lazar_angelov_7 {
+            get {
+                object obj = ResourceManager.GetObject("lazar-angelov-7", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap LCD_Monitor_icon {
+            get {
+                object obj = ResourceManager.GetObject("LCD-Monitor-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,6 +416,16 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap s_l1600 {
+            get {
+                object obj = ResourceManager.GetObject("s-l1600", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Save_icon {
             get {
                 object obj = ResourceManager.GetObject("Save-icon", resourceCulture);
@@ -356,6 +499,46 @@ namespace Gym.Properties {
         internal static System.Drawing.Bitmap signature_icon {
             get {
                 object obj = ResourceManager.GetObject("signature-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Thanh_fitness {
+            get {
+                object obj = ResourceManager.GetObject("Thanh fitness", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Thanh_fitness__1_ {
+            get {
+                object obj = ResourceManager.GetObject("Thanh fitness (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Thanh_fitness__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("Thanh fitness (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap thumb_350_805233 {
+            get {
+                object obj = ResourceManager.GetObject("thumb-350-805233", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

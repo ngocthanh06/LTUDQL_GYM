@@ -25,12 +25,15 @@ namespace DAL
             name = new string[1];
             value = new object[1];
             name[0] = "@MaHD"; value[0] = MaHD;
-            //name[1] = "@MaKH"; value[1] = MaKH;
-            //name[2] = "@MaLH"; value[2] = MaLH;
-            //name[3] = "@MaNV"; value[3] = MaNV;
-            //name[4] = "@MaHang"; value[4] = MaHang;
-            //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_InHoaDon", name, value, 1);
+        }
+        public DataTable select_HoaDonbyMonth(int thang, int nam)
+        {
+            name = new string[2];
+            value = new object[2];
+            name[0] = "@Thang"; value[0] = thang;
+            name[1] = "@nam"; value[1] = nam;
+            return thaotac.SQL_Laydulieu_CoDK("select_HoaDonbyMonth", name, value, 2);
         }
         public DataTable select_HoaDonMa(string MaHD)
         {
@@ -112,16 +115,17 @@ namespace DAL
             return thaotac.SQL_Laydulieu_CoDK("select_HoaDonMaHDvaMaNV", name, value, 2);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện insert
-        public int insert_HoaDon(string MaHD,string NgayHD, string MaKH, string MaNV)
+        public int insert_HoaDon(string MaHD,string NgayHD, string MaKH, string MaNV, int TongHoaDon)
         {
             //thaotac.KetnoiCSDL();
-            name = new string[4];
-            value = new object[4];
+            name = new string[5];
+            value = new object[5];
             name[0] = "@MaHD"; value[0] = MaHD;
             name[1] = "@NgayHD"; value[1] = NgayHD;//@HoTen,... là các tham số phải giống với tham số khai báo ở Stores Procedures trong CSDL
             name[2] = "@MaKH"; value[2] = MaKH;
             name[3] = "@MaNV"; value[3] = MaNV;
-            return thaotac.SQL_Thuchien("Insert_HoaDon", name, value, 4);
+            name[4] = "@TongHoaDon"; value[4] = TongHoaDon;
+            return thaotac.SQL_Thuchien("Insert_HoaDon", name, value, 5);
         }
         //phương thức này gọi phương thức SQL_Thuchien ở lớp ThaoTac_CoSoDuLieu để thực hiện update
         public int update_HoaDon(string MaHD, string NgayHD, string MaKH, string MaNV)

@@ -23,6 +23,10 @@ namespace BLLayer
         {
             return Th.select_ThebyDichvuMaNV(MaNV);
         }
+        public DataTable select_TheDichVubyMonth(int thang, int nam)
+        {
+            return Th.select_TheDichVubyMonth(thang,nam);
+        }
         public DataTable select_ThebyDichvuMaNVandMonthYear(string MaNV, int Month, int Year)
         {
             return Th.select_ThebyDichvuMaNVandMonthYear(MaNV, Month, Year);

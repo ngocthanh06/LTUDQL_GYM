@@ -15,6 +15,8 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraBars.Ribbon.ViewInfo;
 using DevExpress.XtraEditors;
+using DevExpress.XtraBars.Helpers;
+
 
 namespace Gym
 {
@@ -31,6 +33,7 @@ namespace Gym
         The_BLL Th = new The_BLL();
 
         
+        
         //contructor
 
         public string Message
@@ -45,9 +48,6 @@ namespace Gym
             set { labelChucvu.Text = value; }
         }
 
-        
-
-
         void clearbutton()
         {
             txtTenKH.Clear();
@@ -58,9 +58,7 @@ namespace Gym
             dateNgaySinh.ResetText();
             pictureBox1.Image = null;
         }
-       
-       
-        
+ 
         //Giới tính
         bool RadioBT()
         {
@@ -80,7 +78,6 @@ namespace Gym
         public Form1()
         {
             InitializeComponent();
-
         }
         //Load danh sách nhân viên trong datagridview
         public void loaddsnhanvien()
@@ -93,13 +90,20 @@ namespace Gym
             }
             
         }
-
-
+        //Thay đổi giao diện
+        public void thaydoigiaodien()
+        {
+            SkinHelper.InitSkinPopupMenu(SkinsLink);
+        }
+        
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            //THay đổi giao diện
+            thaydoigiaodien();
             //Khách hàng
             dataGridView1.DataSource = KH.select_KhachHang();
+            labelChucvu.Visible = false;
+            labeltennguoidung.Visible = false;
             MaKH.Visible = false;
             MaThe.Visible = false;
             MaNV.Visible = false;
@@ -107,22 +111,22 @@ namespace Gym
             labelMaNV.Visible = false;
             //mahh.Visible = false;
             DataTable DT = NV.select_NhanVienMaTK(labeltennguoidung.Text);
-            labeltennguoidung.Text = "Xin chào, " + DT.Rows[0]["TenNV"].ToString();
-            labelMaNV.Text = DT.Rows[0]["MaNV"].ToString();
-            if (!Convert.IsDBNull(DT.Rows[0]["hinhanh"]))
+            //Phân quyền
+            if (labelChucvu.Text != "Admin")
             {
-                var data = (Byte[])(DT.Rows[0]["hinhanh"]);
-                var stream = new MemoryStream(data);
-                pictureuser.Image = Image.FromStream(stream);
+                nhanvien.Visible = false;
+                sanpham.Visible = false;
+                loaihang.Visible = false;
             }
-            else
-                pictureuser.Image = null;
+            //Label tên người dùng
+            barHeaderItem1.Caption = "Xin chào, " + DT.Rows[0]["TenNV"].ToString();
+            //Label quyền
+            barStaticItem2.Caption = labelChucvu.Text;
+            labelMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             closeTabcontrol();
-
             textMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             //nhân viên
             loaddsnhanvien();
-            
             //hanghoa
             dtgLoaiHang.DataSource = HH.select_HangHoa();
             //loaihang
@@ -131,7 +135,6 @@ namespace Gym
             //Dịch vụ
             dtgkhachhang.DataSource = KH.select_KhachHang();
             dtgsanpham.DataSource = HH.select_HangHoa();
-
             texttongtien.Enabled = false;
             textMaKH.Enabled = false;
             textMaLH.Enabled = false;
@@ -147,7 +150,6 @@ namespace Gym
             ngaybatdau.Enabled = false;
             ngayketthuc.Enabled = false;
             datengayhd.Enabled = false;
-            tongtienhd.Enabled = false;
             //Danh sách thẻ
             cbbNvthe.Enabled = false;
             datenvthe.Enabled = false;
@@ -923,6 +925,8 @@ namespace Gym
                     makh = ro.Cells[6].Value.ToString();
                     if (textMaLH.Text == malh && textMaKH.Text == ro.Cells[6].Value.ToString())
                     {
+                        int SumTien = 0;
+                        int thue = 0;
                         makh = ro.Cells[6].Value.ToString();
                         int c = soluong + b;
                         int dongia = gia * c;
@@ -938,6 +942,16 @@ namespace Gym
                             ro.Cells[4].Value = dongia.ToString();
                             sum = sum + (gia * b);
                             texttongtien.Text = sum.ToString();
+                            if (sum > 1500000)
+                                thue = sum * 10 / 100;
+                            else
+                                thue = 0;
+                            SumTien = sum + thue;
+                            GTGT.Text = String.Format("{0:0,0}", thue) + " VND";
+
+                            tongsotien.Text = String.Format("{0:0,0}", SumTien) + " VND";
+                            tongtien.Text = String.Format("{0:0,0}", sum) + " VND";
+
                         }
                         numericUpDown2.Value = 0;
                         break;
@@ -956,16 +970,21 @@ namespace Gym
                     //Tạo dữ liệu đầu tiên
                     if (textMaLH.Text != malh && numericUpDown2.Value > 0)
                     {
-
+                        int thue = 0;
+                        int SumTien = 0;
                         int dongia = b * gia;
                         //Thêm dòng sản phẩm trong hóa đơn
                         string[] row = new string[] { createMaHD(), textMaLH.Text, texttensp.Text, b.ToString(), dongia.ToString(), DateTime.Now.ToString(), textMaKH.Text, textMaNV.Text };
                         dataGridView4.Rows.Add(row);
                         numericUpDown2.Value = 0;
                         sum = sum + dongia;
-                        int thue = sum * 10 / 100;
-                        int SumTien = sum + thue;
+                        if (sum > 1500000)
+                            thue = sum * 10 / 100;
+                        else
+                            thue = 0;
+                        SumTien = sum + thue;
                         GTGT.Text = String.Format("{0:0,0}",thue)+" VND";
+
                         tongsotien.Text = String.Format("{0:0,0}",SumTien)+" VND";
                         tongtien.Text = String.Format("{0:0,0}",sum)+" VND";
 
@@ -985,54 +1004,7 @@ namespace Gym
 
       
       
-        //Thực thi vào csdl
-        private void button12_Click_1(object sender, EventArgs e)
-        {
-            
-            int a = 0;
-            string MaHD = createMaHD();
-            if (dataGridView4.Rows.Count > 0)
-            {
-                //MessageBox.Show(dataGridView4.Rows.Count.ToString());
-                if (HD.insert_HoaDon(createMaHD(), DateTime.Now.Date.ToString(), textMaKH.Text, textMaNV.Text) > 0)
-                {
-
-
-                    for (int i = 0; i < dataGridView4.Rows.Count; i++)
-                    {
-                        DataTable DT = HH.select_HangHoaMa(dataGridView4.Rows[i].Cells[1].Value.ToString());
-                        int slcon = Convert.ToInt32(DT.Rows[0]["SLCon"].ToString()) - Convert.ToInt32(dataGridView4.Rows[i].Cells[3].Value.ToString());
-                        if (CTHD.insert_CTHD(dataGridView4.Rows[i].Cells[0].Value.ToString(), dataGridView4.Rows[i].Cells[1].Value.ToString(), Convert.ToInt32(dataGridView4.Rows[i].Cells[3].Value.ToString())) > 0)
-                        {
-                            if (HH.update_SLConHangHoa(dataGridView4.Rows[i].Cells[1].Value.ToString(), slcon) > 0)
-                            {
-                                a++;
-                                clearHD();
-                                dtgsanpham.DataSource = HH.select_HangHoa();
-                                checksp();
-                            }
-                        }
-                    }
-                }
-                //Hiển thị thông báo thành công và in hóa đơn
-                if (a > 0) 
-                {                  
-                   DialogResult hoadon = MessageBox.Show("Bạn có muốn in hóa đơn không?", "Lưu thành công.!!", MessageBoxButtons.OKCancel);
-                   if(hoadon == DialogResult.OK)
-                   {  
-                       XtraReport1 report = new XtraReport1();
-                       report.DataSource = HD.select_InHoaDon(MaHD);
-                       report.ShowPreview();
-                   }
-                   dataGridView4.Rows.Clear();
-                   dataGridView4.Refresh();
-                }
-                else MessageBox.Show("Thất bại");               
-            }
-            else
-                MessageBox.Show("Chưa có dữ liệu hóa đơn");
-            
-        }
+      
         //Hiển thị hóa đơn trong mục dshd
         private void btn_Inhd_Click(object sender, EventArgs e)
         {
@@ -1138,11 +1110,7 @@ namespace Gym
             dtgdsloaihang.DataSource = LH.select_LoaiHang();
         }
        
-        //Danh sách thẻ
-        private void barButtonItem29_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            
-        }
+       
        
         //Dịch vụ
         /*Dịch vụ
@@ -1160,6 +1128,10 @@ namespace Gym
             dataGridView4.Rows.Clear();
             dataGridView4.Refresh();
             checksp();
+            GTGT.Text = "";
+            tongsotien.Text = "";
+            sum = 0;
+            tongtien.Text = "";
         }
         private void barButtonItem13_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1204,7 +1176,6 @@ namespace Gym
             //Tất cả hóa đơn
             if (radioAllHD.Checked == true)
             {
-                
                 cbbdshoadon.DataSource = HD.select_HoaDon();
                 cbbdshoadon.DisplayMember = "TenHD";
                 cbbdshoadon.ValueMember = "MaHD";
@@ -1278,7 +1249,7 @@ namespace Gym
                 {
                     MessageBox.Show("Không có dữ liệu về hóa đơn");
                 }
-                tongtienhd.Text = tong.ToString();
+                Tongtienhd.Text = String.Format("{0:0,0}",tong)+" VN";
             }
             //Bắt lỗi
             if (cbbTennv.SelectedValue == null && textmahd.Text == "" && radioAllHD.Checked != true)
@@ -1290,10 +1261,12 @@ namespace Gym
         {
             int a = 0;
             string MaHD = createMaHD();
+            string tien = Convert.ToDecimal(tongsotien.Text.Remove(tongtien.Text.Length - 4, 4)).ToString("#");
+            int tongMoney = Convert.ToInt32(tien);
             if (dataGridView4.Rows.Count > 0)
             {
                 //MessageBox.Show(dataGridView4.Rows.Count.ToString());
-                if (HD.insert_HoaDon(createMaHD(), DateTime.Now.Date.ToString(), textMaKH.Text, textMaNV.Text) > 0)
+                if (HD.insert_HoaDon(createMaHD(), DateTime.Now.Date.ToString(), textMaKH.Text, textMaNV.Text,tongMoney) > 0)
                 {
 
 
@@ -1397,6 +1370,7 @@ namespace Gym
                 dtgdshoadon.DataSource = HD.select_HoaDontimkiem(cbbdshoadon.SelectedValue.ToString());
 
                 int tong = 0;
+                
                 int a = 0;
                 //ĐỔi mã thành tên
                 foreach (DataGridViewRow row in dtgdshoadon.Rows)
@@ -1409,7 +1383,10 @@ namespace Gym
                     if (row.Cells.Count <= 1)
                         MessageBox.Show("Không có dữ liệu về hóa đơn");
                 }
-                tongtienhd.Text = tong.ToString();
+                if (tong > 1500000)
+                    tong = tong + tong * 10 / 100;
+
+                Tongtienhd.Text = String.Format("{0:0,0}", tong) + " VND";
             }
         }
         /*
@@ -1624,10 +1601,7 @@ namespace Gym
             tabControl1.SelectTab(tabPage6);
         }
 
-        private void barButtonItem50_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            
-        }
+        
 
         private void barButtonItem51_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -1635,10 +1609,28 @@ namespace Gym
             form.ShowDialog();
         }
 
-        
-       
+        private void barButtonItem55_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            DialogResult Mes = MessageBox.Show("Bạn có thực sự muốn đăng xuất?", "Thông báo.!!", MessageBoxButtons.YesNo);
+            if (Mes == DialogResult.Yes)
+            {
+                
+                Login lg = new Login();
+                lg.Show();
+                
+            }
+        }
 
-   
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+             DialogResult Mes = MessageBox.Show("Bạn có muốn đóng chương trình không?", "Thông báo.!!", MessageBoxButtons.YesNo);
+                if (Mes == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+        }
+
+      
        
     }
 }

@@ -129,8 +129,9 @@ namespace Gym
         {
             // cắt chuỗi vnd cuối cùng để chuyển đổi
             sotienbangchu.Text = ChuyenSo(Convert.ToDecimal(tongtien.Text.Remove(tongtien.Text.Length -4,4)).ToString("#"));
-
+            
         }
+        
         
         
 

@@ -29,13 +29,13 @@ namespace Gym
         {
             InitializeComponent();
         }
-
+        
         private void Login_Load(object sender, EventArgs e)
         {
             
         }
-
         
+     
 
 
         private void btnlogin_Click(object sender, EventArgs e)
@@ -55,8 +55,8 @@ namespace Gym
 
                         Form.Quyen = a;
                         this.Hide();
-                        Form.ShowDialog();
-                        this.Close();
+                        Form.Show();
+                       // this.Close();
                         //Form.Show();
                     }
                     else
@@ -66,7 +66,9 @@ namespace Gym
                         Form1 Form = new Form1();
                         Form.Message = DT.Rows[0]["MaTK"].ToString();
                         Form.Quyen = a;
-                        Form.ShowDialog();
+                        this.Hide();
+                        Form.Show();
+                        //this.Close();
                     }
                 }
                 else

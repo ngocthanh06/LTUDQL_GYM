@@ -33,6 +33,15 @@ namespace DAL
             //thaotac.KetnoiCSDL();
             return thaotac.SQL_Laydulieu_CoDK("select_ThebyDichvuMaNV", name, value, 1);
         }
+        public DataTable select_TheDichVubyMonth(int thang, int nam)
+        {
+            name = new string[2];
+            value = new object[2];
+            name[0] = "@Thang"; value[0] = thang;
+            name[1] = "@nam";value[1]= nam;
+            //thaotac.KetnoiCSDL();
+            return thaotac.SQL_Laydulieu_CoDK("select_TheDichVubyMonth", name, value, 2);
+        }
         public DataTable select_ThebyDichvuMaNVandMonthYear(string MaNV, int Month, int Year)
         {
             name = new string[3];

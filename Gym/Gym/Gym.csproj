@@ -36,6 +36,7 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.BonusSkins.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.CodeParser.v17.1, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Dashboard.v17.1.Core, Version=17.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -120,7 +121,6 @@
     </Compile>
     <Compile Include="GYMDataSet.cs">
       <DependentUpon>GYMDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="GYMDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -131,6 +131,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GYMDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="GYMDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GYMDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -205,6 +210,9 @@
     <EmbeddedResource Include="thongke.resx">
       <DependentUpon>thongke.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="thongke.vi.resx">
+      <DependentUpon>thongke.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="GYMDataSet.xsc">
       <DependentUpon>GYMDataSet.xsd</DependentUpon>
     </None>
@@ -226,6 +234,17 @@
     </None>
     <None Include="GYMDataSet1.xss">
       <DependentUpon>GYMDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="GYMDataSet2.xsc">
+      <DependentUpon>GYMDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="GYMDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>GYMDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="GYMDataSet2.xss">
+      <DependentUpon>GYMDataSet2.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -329,6 +348,60 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Chart-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thanh fitness %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thanh fitness %281%291.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Thanh fitness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3d-h-nh-n-n-3d-b-c-tranh-t-ng-h-nh-n-n-cho.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3D-wall-b-c-tranh-ph-ng-n-n-tu-ch-nh-h-nh-nh-b.jpg_640x640.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\41kE7T3TatL.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chibi-hulk-625x448.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\background-dep-de-ghep-anh-2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lazar-angelov-7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\depositphotos_199216916-stock-illustration-gym-logo-template-bodybuilding-fitness.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\256263871.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gym-Sticker-Fitness-Decal-Bodybuilding-Posters-Name-Muscle-Vinyl-Wall-Decals-Parede-Decor-19-Color-Choose.jpg_640x640.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Gym-Wall-Sticker-Vinyl-Muscle-Gym-Bodybuilding-Wall-Decal-Muscled-Man-Wall-Mural-Sport-Room-Decor.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\s-l1600.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thumb-350-805233.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LCD-Monitor-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Folders-OS-User-With-Frame-Metro-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inside-logout-icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

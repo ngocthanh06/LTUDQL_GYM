@@ -29,18 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
             this.gymDataSet1 = new Gym.GYMDataSet();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.pictureuser = new System.Windows.Forms.PictureBox();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
@@ -92,8 +91,7 @@
             this.thang = new System.Windows.Forms.RadioButton();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.btn_Inhd = new DevExpress.XtraEditors.SimpleButton();
-            this.label48 = new System.Windows.Forms.Label();
-            this.tongtienhd = new System.Windows.Forms.TextBox();
+            this.Tongtienhd = new System.Windows.Forms.Label();
             this.label45 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.cbbdshoadon = new System.Windows.Forms.ComboBox();
@@ -244,8 +242,8 @@
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelMaNV = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.labelMaNV = new System.Windows.Forms.Label();
             this.MaThe = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.MaKH = new System.Windows.Forms.Label();
@@ -322,6 +320,19 @@
             this.barButtonItem49 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem50 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem51 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem52 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem53 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem54 = new DevExpress.XtraBars.BarButtonItem();
+            this.SkinLink = new DevExpress.XtraBars.BarButtonItem();
+            this.barLinkContainerItem1 = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.SkinsLink = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.barLinkContainerItem2 = new DevExpress.XtraBars.BarLinkContainerItem();
+            this.skinRibbonGalleryBarItem1 = new DevExpress.XtraBars.SkinRibbonGalleryBarItem();
+            this.barEditItem1 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemProgressBar1 = new DevExpress.XtraEditors.Repository.RepositoryItemProgressBar();
+            this.barEditItem2 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.barButtonItem55 = new DevExpress.XtraBars.BarButtonItem();
             this.khachhang = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup9 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup10 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -347,12 +358,20 @@
             this.thehoivien = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup8 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGroup19 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup20 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup21 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.labeltennguoidung = new DevExpress.XtraEditors.LabelControl();
-            this.labelChucvu = new DevExpress.XtraEditors.LabelControl();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.labelChucvu = new DevExpress.XtraEditors.LabelControl();
+            this.barHeaderItem1 = new DevExpress.XtraBars.BarHeaderItem();
+            this.barStaticItem2 = new DevExpress.XtraBars.BarStaticItem();
+            this.barEditItem3 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemColorEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemColorEdit();
+            this.barEditItem4 = new DevExpress.XtraBars.BarEditItem();
+            this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gymDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureuser)).BeginInit();
             this.tabPage7.SuspendLayout();
             this.groupBox20.SuspendLayout();
             this.groupBox19.SuspendLayout();
@@ -396,23 +415,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).BeginInit();
             this.SuspendLayout();
             // 
             // gymDataSet1
             // 
             this.gymDataSet1.DataSetName = "GYMDataSet";
             this.gymDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // pictureuser
-            // 
-            this.pictureuser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureuser.Location = new System.Drawing.Point(1153, 51);
-            this.pictureuser.Name = "pictureuser";
-            this.pictureuser.Size = new System.Drawing.Size(46, 58);
-            this.pictureuser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureuser.TabIndex = 21;
-            this.pictureuser.TabStop = false;
             // 
             // tabPage7
             // 
@@ -606,14 +619,14 @@
             // dsthe
             // 
             this.dsthe.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dsthe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dsthe.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
             this.dsthe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dsthe.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column51,
@@ -906,8 +919,7 @@
             // groupBox15
             // 
             this.groupBox15.Controls.Add(this.btn_Inhd);
-            this.groupBox15.Controls.Add(this.label48);
-            this.groupBox15.Controls.Add(this.tongtienhd);
+            this.groupBox15.Controls.Add(this.Tongtienhd);
             this.groupBox15.Controls.Add(this.label45);
             this.groupBox15.Controls.Add(this.label44);
             this.groupBox15.Controls.Add(this.cbbdshoadon);
@@ -928,21 +940,16 @@
             this.btn_Inhd.Text = "In hóa đơn";
             this.btn_Inhd.Click += new System.EventHandler(this.btn_Inhd_Click);
             // 
-            // label48
+            // Tongtienhd
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(507, 74);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(30, 13);
-            this.label48.TabIndex = 12;
-            this.label48.Text = "VND";
-            // 
-            // tongtienhd
-            // 
-            this.tongtienhd.Location = new System.Drawing.Point(417, 70);
-            this.tongtienhd.Name = "tongtienhd";
-            this.tongtienhd.Size = new System.Drawing.Size(84, 20);
-            this.tongtienhd.TabIndex = 5;
+            this.Tongtienhd.AutoSize = true;
+            this.Tongtienhd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Tongtienhd.ForeColor = System.Drawing.Color.Crimson;
+            this.Tongtienhd.Location = new System.Drawing.Point(420, 72);
+            this.Tongtienhd.Name = "Tongtienhd";
+            this.Tongtienhd.Size = new System.Drawing.Size(37, 17);
+            this.Tongtienhd.TabIndex = 12;
+            this.Tongtienhd.Text = "VND";
             // 
             // label45
             // 
@@ -974,14 +981,14 @@
             // dtgdshoadon
             // 
             this.dtgdshoadon.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgdshoadon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgdshoadon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle23;
             this.dtgdshoadon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgdshoadon.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column44,
@@ -1101,7 +1108,7 @@
             this.tongsotien.BackColor = System.Drawing.Color.Transparent;
             this.tongsotien.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tongsotien.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.tongsotien.Location = new System.Drawing.Point(556, 287);
+            this.tongsotien.Location = new System.Drawing.Point(533, 287);
             this.tongsotien.Name = "tongsotien";
             this.tongsotien.Size = new System.Drawing.Size(0, 26);
             this.tongsotien.TabIndex = 38;
@@ -1583,14 +1590,14 @@
             // 
             this.dtgdsloaihang.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dtgdsloaihang.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgdsloaihang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgdsloaihang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle24;
             this.dtgdsloaihang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgdsloaihang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column25,
@@ -1809,14 +1816,14 @@
             // dtgLoaiHang
             // 
             this.dtgLoaiHang.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgLoaiHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle25.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle25.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle25.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle25.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle25.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgLoaiHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle25;
             this.dtgLoaiHang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgLoaiHang.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column17,
@@ -1930,7 +1937,7 @@
             // simpleButton2
             // 
             this.simpleButton2.ImageOptions.Image = global::Gym.Properties.Resources.image_up_icon;
-            this.simpleButton2.Location = new System.Drawing.Point(101, 317);
+            this.simpleButton2.Location = new System.Drawing.Point(102, 350);
             this.simpleButton2.Name = "simpleButton2";
             this.simpleButton2.Size = new System.Drawing.Size(106, 37);
             this.simpleButton2.TabIndex = 29;
@@ -1952,7 +1959,7 @@
             this.pictureNV.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureNV.ErrorImage")));
             this.pictureNV.Location = new System.Drawing.Point(63, 19);
             this.pictureNV.Name = "pictureNV";
-            this.pictureNV.Size = new System.Drawing.Size(207, 271);
+            this.pictureNV.Size = new System.Drawing.Size(207, 325);
             this.pictureNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureNV.TabIndex = 9;
             this.pictureNV.TabStop = false;
@@ -2134,14 +2141,14 @@
             // 
             this.dtgnhanvien.AllowUserToAddRows = false;
             this.dtgnhanvien.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dtgnhanvien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle26.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dtgnhanvien.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.dtgnhanvien.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgnhanvien.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
@@ -2246,14 +2253,14 @@
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle27.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
@@ -2263,15 +2270,15 @@
             this.Column6,
             this.Column7,
             this.Column8});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle28.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle28.Padding = new System.Windows.Forms.Padding(0, 4, 0, 4);
+            dataGridViewCellStyle28.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle28.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.Location = new System.Drawing.Point(3, 16);
             this.dataGridView1.Name = "dataGridView1";
@@ -2325,8 +2332,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.simpleButton1);
-            this.groupBox1.Controls.Add(this.labelMaNV);
             this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Controls.Add(this.labelMaNV);
             this.groupBox1.Controls.Add(this.MaThe);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.MaKH);
@@ -2353,12 +2360,22 @@
             // simpleButton1
             // 
             this.simpleButton1.ImageOptions.Image = global::Gym.Properties.Resources.image_up_icon;
-            this.simpleButton1.Location = new System.Drawing.Point(438, 281);
+            this.simpleButton1.Location = new System.Drawing.Point(85, 365);
             this.simpleButton1.Name = "simpleButton1";
             this.simpleButton1.Size = new System.Drawing.Size(116, 36);
             this.simpleButton1.TabIndex = 29;
             this.simpleButton1.Text = "Upload";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(24, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(235, 327);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 28;
+            this.pictureBox1.TabStop = false;
             // 
             // labelMaNV
             // 
@@ -2368,16 +2385,6 @@
             this.labelMaNV.Size = new System.Drawing.Size(37, 13);
             this.labelMaNV.TabIndex = 20;
             this.labelMaNV.Text = "MaNV";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(368, 50);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(235, 225);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 28;
-            this.pictureBox1.TabStop = false;
             // 
             // MaThe
             // 
@@ -2391,7 +2398,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(343, 28);
+            this.label11.Location = new System.Drawing.Point(6, 16);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(26, 13);
             this.label11.TabIndex = 27;
@@ -2408,7 +2415,7 @@
             // 
             // dateNgaySinh
             // 
-            this.dateNgaySinh.Location = new System.Drawing.Point(111, 142);
+            this.dateNgaySinh.Location = new System.Drawing.Point(387, 140);
             this.dateNgaySinh.Name = "dateNgaySinh";
             this.dateNgaySinh.Size = new System.Drawing.Size(200, 20);
             this.dateNgaySinh.TabIndex = 17;
@@ -2416,7 +2423,7 @@
             // nu
             // 
             this.nu.AutoSize = true;
-            this.nu.Location = new System.Drawing.Point(180, 189);
+            this.nu.Location = new System.Drawing.Point(456, 187);
             this.nu.Name = "nu";
             this.nu.Size = new System.Drawing.Size(39, 17);
             this.nu.TabIndex = 16;
@@ -2428,7 +2435,7 @@
             // 
             this.nam.AutoSize = true;
             this.nam.Checked = true;
-            this.nam.Location = new System.Drawing.Point(111, 189);
+            this.nam.Location = new System.Drawing.Point(387, 187);
             this.nam.Name = "nam";
             this.nam.Size = new System.Drawing.Size(47, 17);
             this.nam.TabIndex = 15;
@@ -2438,7 +2445,7 @@
             // 
             // ricktbGhiChu
             // 
-            this.ricktbGhiChu.Location = new System.Drawing.Point(21, 258);
+            this.ricktbGhiChu.Location = new System.Drawing.Point(297, 256);
             this.ricktbGhiChu.Name = "ricktbGhiChu";
             this.ricktbGhiChu.Size = new System.Drawing.Size(290, 135);
             this.ricktbGhiChu.TabIndex = 12;
@@ -2447,7 +2454,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 227);
+            this.label6.Location = new System.Drawing.Point(294, 225);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 10;
@@ -2455,21 +2462,21 @@
             // 
             // txtSDT
             // 
-            this.txtSDT.Location = new System.Drawing.Point(111, 103);
+            this.txtSDT.Location = new System.Drawing.Point(387, 101);
             this.txtSDT.Name = "txtSDT";
             this.txtSDT.Size = new System.Drawing.Size(200, 20);
             this.txtSDT.TabIndex = 7;
             // 
             // txtDiaChi
             // 
-            this.txtDiaChi.Location = new System.Drawing.Point(111, 64);
+            this.txtDiaChi.Location = new System.Drawing.Point(387, 62);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(200, 20);
             this.txtDiaChi.TabIndex = 6;
             // 
             // txtTenKH
             // 
-            this.txtTenKH.Location = new System.Drawing.Point(111, 28);
+            this.txtTenKH.Location = new System.Drawing.Point(387, 26);
             this.txtTenKH.Name = "txtTenKH";
             this.txtTenKH.Size = new System.Drawing.Size(200, 20);
             this.txtTenKH.TabIndex = 5;
@@ -2477,7 +2484,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 189);
+            this.label5.Location = new System.Drawing.Point(294, 187);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(47, 13);
             this.label5.TabIndex = 4;
@@ -2486,7 +2493,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 148);
+            this.label4.Location = new System.Drawing.Point(294, 146);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 3;
@@ -2495,7 +2502,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 106);
+            this.label3.Location = new System.Drawing.Point(294, 104);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 13);
             this.label3.TabIndex = 2;
@@ -2504,7 +2511,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 67);
+            this.label2.Location = new System.Drawing.Point(294, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(40, 13);
             this.label2.TabIndex = 1;
@@ -2513,7 +2520,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 31);
+            this.label1.Location = new System.Drawing.Point(294, 29);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 13);
             this.label1.TabIndex = 0;
@@ -2528,7 +2535,7 @@
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Location = new System.Drawing.Point(0, 24);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1314, 663);
@@ -2552,8 +2559,11 @@
             // 
             // ribbonControl1
             // 
+            this.ribbonControl1.BackColor = System.Drawing.Color.CadetBlue;
+            this.ribbonControl1.ColorScheme = DevExpress.XtraBars.Ribbon.RibbonControlColorScheme.Orange;
             this.ribbonControl1.ExpandCollapseItem.AllowDrawArrow = false;
             this.ribbonControl1.ExpandCollapseItem.Id = 0;
+            this.ribbonControl1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.ribbonControl1.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbonControl1.ExpandCollapseItem,
             this.barButtonItem1,
@@ -2610,11 +2620,29 @@
             this.barButtonItem48,
             this.barButtonItem49,
             this.barButtonItem50,
-            this.barButtonItem51});
+            this.barButtonItem51,
+            this.barButtonItem52,
+            this.barButtonItem53,
+            this.barButtonItem54,
+            this.SkinLink,
+            this.barLinkContainerItem1,
+            this.SkinsLink,
+            this.barLinkContainerItem2,
+            this.skinRibbonGalleryBarItem1,
+            this.barEditItem1,
+            this.barEditItem2,
+            this.barButtonItem55,
+            this.barHeaderItem1,
+            this.barStaticItem2,
+            this.barEditItem3,
+            this.barEditItem4});
             this.ribbonControl1.Location = new System.Drawing.Point(0, 0);
-            this.ribbonControl1.MaxItemId = 25;
+            this.ribbonControl1.MaxItemId = 40;
             this.ribbonControl1.Name = "ribbonControl1";
-            this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItem31);
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.skinRibbonGalleryBarItem1);
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.barButtonItem55);
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.barHeaderItem1);
+            this.ribbonControl1.PageHeaderItemLinks.Add(this.barStaticItem2);
             this.ribbonControl1.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.khachhang,
             this.nhanvien,
@@ -2622,7 +2650,13 @@
             this.sanpham,
             this.loaihang,
             this.hoadon,
-            this.thehoivien});
+            this.thehoivien,
+            this.ribbonPage1});
+            this.ribbonControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemProgressBar1,
+            this.repositoryItemButtonEdit1,
+            this.repositoryItemColorEdit1,
+            this.repositoryItemPictureEdit1});
             this.ribbonControl1.Size = new System.Drawing.Size(1314, 141);
             this.ribbonControl1.ToolbarLocation = DevExpress.XtraBars.Ribbon.RibbonQuickAccessToolbarLocation.Above;
             this.ribbonControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ribbonControl1_MouseClick);
@@ -2879,7 +2913,6 @@
             this.barButtonItem29.ImageOptions.Image = global::Gym.Properties.Resources.id_card_icon;
             this.barButtonItem29.Name = "barButtonItem29";
             this.barButtonItem29.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.barButtonItem29.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem29_ItemClick);
             // 
             // barStaticItem1
             // 
@@ -3064,7 +3097,6 @@
             this.barButtonItem50.ImageOptions.Image = global::Gym.Properties.Resources.Chart_icon;
             this.barButtonItem50.Name = "barButtonItem50";
             this.barButtonItem50.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            this.barButtonItem50.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem50_ItemClick);
             // 
             // barButtonItem51
             // 
@@ -3074,6 +3106,96 @@
             this.barButtonItem51.Name = "barButtonItem51";
             this.barButtonItem51.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             this.barButtonItem51.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem51_ItemClick);
+            // 
+            // barButtonItem52
+            // 
+            this.barButtonItem52.Caption = "barButtonItem52";
+            this.barButtonItem52.Id = 25;
+            this.barButtonItem52.Name = "barButtonItem52";
+            this.barButtonItem52.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem53
+            // 
+            this.barButtonItem53.Caption = "barButtonItem53";
+            this.barButtonItem53.Id = 26;
+            this.barButtonItem53.ImageOptions.Image = global::Gym.Properties.Resources.add_1_icon;
+            this.barButtonItem53.Name = "barButtonItem53";
+            this.barButtonItem53.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem54
+            // 
+            this.barButtonItem54.Caption = "Thông tin";
+            this.barButtonItem54.Id = 27;
+            this.barButtonItem54.ImageOptions.Image = global::Gym.Properties.Resources.Folders_OS_User_With_Frame_Metro_icon;
+            this.barButtonItem54.Name = "barButtonItem54";
+            this.barButtonItem54.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // SkinLink
+            // 
+            this.SkinLink.Caption = "Thay đổi giao diện";
+            this.SkinLink.Id = 28;
+            this.SkinLink.Name = "SkinLink";
+            this.SkinLink.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barLinkContainerItem1
+            // 
+            this.barLinkContainerItem1.Caption = "barLinkContainerItem1";
+            this.barLinkContainerItem1.Id = 29;
+            this.barLinkContainerItem1.Name = "barLinkContainerItem1";
+            // 
+            // SkinsLink
+            // 
+            this.SkinsLink.Caption = "Thay Đổi Giao Diện";
+            this.SkinsLink.Id = 30;
+            this.SkinsLink.ImageOptions.Image = global::Gym.Properties.Resources.LCD_Monitor_icon;
+            this.SkinsLink.Name = "SkinsLink";
+            this.SkinsLink.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barLinkContainerItem2
+            // 
+            this.barLinkContainerItem2.Caption = "barLinkContainerItem2";
+            this.barLinkContainerItem2.Id = 31;
+            this.barLinkContainerItem2.Name = "barLinkContainerItem2";
+            // 
+            // skinRibbonGalleryBarItem1
+            // 
+            this.skinRibbonGalleryBarItem1.Caption = "skinRibbonGalleryBarItem1";
+            this.skinRibbonGalleryBarItem1.Id = 32;
+            this.skinRibbonGalleryBarItem1.Name = "skinRibbonGalleryBarItem1";
+            // 
+            // barEditItem1
+            // 
+            this.barEditItem1.Caption = "barEditItem1";
+            this.barEditItem1.Edit = this.repositoryItemProgressBar1;
+            this.barEditItem1.Id = 33;
+            this.barEditItem1.Name = "barEditItem1";
+            // 
+            // repositoryItemProgressBar1
+            // 
+            this.repositoryItemProgressBar1.Name = "repositoryItemProgressBar1";
+            // 
+            // barEditItem2
+            // 
+            this.barEditItem2.Caption = "barEditItem2";
+            this.barEditItem2.Edit = this.repositoryItemButtonEdit1;
+            this.barEditItem2.Id = 34;
+            this.barEditItem2.Name = "barEditItem2";
+            // 
+            // repositoryItemButtonEdit1
+            // 
+            this.repositoryItemButtonEdit1.AutoHeight = false;
+            this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton()});
+            this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
+            // 
+            // barButtonItem55
+            // 
+            this.barButtonItem55.Caption = "Đăng xuất";
+            this.barButtonItem55.Id = 35;
+            this.barButtonItem55.ImageOptions.Image = global::Gym.Properties.Resources.inside_logout_icon;
+            this.barButtonItem55.Name = "barButtonItem55";
+            this.barButtonItem55.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItem55.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.barButtonItem55_ItemClick);
             // 
             // khachhang
             // 
@@ -3264,9 +3386,29 @@
             this.ribbonPageGroup19.Name = "ribbonPageGroup19";
             this.ribbonPageGroup19.Text = "ribbonPageGroup19";
             // 
+            // ribbonPage1
+            // 
+            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup20,
+            this.ribbonPageGroup21});
+            this.ribbonPage1.Name = "ribbonPage1";
+            this.ribbonPage1.Text = "Thông tin tài khoản";
+            // 
+            // ribbonPageGroup20
+            // 
+            this.ribbonPageGroup20.ItemLinks.Add(this.barButtonItem54);
+            this.ribbonPageGroup20.ItemLinks.Add(this.SkinsLink);
+            this.ribbonPageGroup20.Name = "ribbonPageGroup20";
+            this.ribbonPageGroup20.Text = "ribbonPageGroup20";
+            // 
+            // ribbonPageGroup21
+            // 
+            this.ribbonPageGroup21.Name = "ribbonPageGroup21";
+            this.ribbonPageGroup21.Text = "ribbonPageGroup21";
+            // 
             // labeltennguoidung
             // 
-            this.labeltennguoidung.Appearance.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.labeltennguoidung.Appearance.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.labeltennguoidung.Appearance.Options.UseBackColor = true;
             this.labeltennguoidung.Location = new System.Drawing.Point(1205, 51);
             this.labeltennguoidung.Name = "labeltennguoidung";
@@ -3274,9 +3416,13 @@
             this.labeltennguoidung.TabIndex = 2;
             this.labeltennguoidung.Text = "Tên người dùng\r\n";
             // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            // 
             // labelChucvu
             // 
-            this.labelChucvu.Appearance.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.labelChucvu.Appearance.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.labelChucvu.Appearance.Options.UseBackColor = true;
             this.labelChucvu.Location = new System.Drawing.Point(1224, 70);
             this.labelChucvu.Name = "labelChucvu";
@@ -3284,9 +3430,43 @@
             this.labelChucvu.TabIndex = 3;
             this.labelChucvu.Text = "Chức vụ";
             // 
-            // xtraTabbedMdiManager1
+            // barHeaderItem1
             // 
-            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.barHeaderItem1.Caption = "Tên người dùng";
+            this.barHeaderItem1.Id = 36;
+            this.barHeaderItem1.Name = "barHeaderItem1";
+            // 
+            // barStaticItem2
+            // 
+            this.barStaticItem2.Caption = "Admin";
+            this.barStaticItem2.Id = 37;
+            this.barStaticItem2.Name = "barStaticItem2";
+            // 
+            // barEditItem3
+            // 
+            this.barEditItem3.Caption = "barEditItem3";
+            this.barEditItem3.Edit = this.repositoryItemColorEdit1;
+            this.barEditItem3.Id = 38;
+            this.barEditItem3.Name = "barEditItem3";
+            // 
+            // repositoryItemColorEdit1
+            // 
+            this.repositoryItemColorEdit1.AutoHeight = false;
+            this.repositoryItemColorEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemColorEdit1.Name = "repositoryItemColorEdit1";
+            // 
+            // barEditItem4
+            // 
+            this.barEditItem4.Caption = "barEditItem4";
+            this.barEditItem4.Edit = this.repositoryItemPictureEdit1;
+            this.barEditItem4.Id = 39;
+            this.barEditItem4.Name = "barEditItem4";
+            // 
+            // repositoryItemPictureEdit1
+            // 
+            this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
+            this.repositoryItemPictureEdit1.ZoomAccelerationFactor = 1D;
             // 
             // Form1
             // 
@@ -3295,17 +3475,16 @@
             this.ClientSize = new System.Drawing.Size(1314, 681);
             this.Controls.Add(this.labelChucvu);
             this.Controls.Add(this.labeltennguoidung);
-            this.Controls.Add(this.pictureuser);
             this.Controls.Add(this.ribbonControl1);
             this.Controls.Add(this.tabControl1);
             this.IsMdiContainer = true;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Quản lý phòng gym";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gymDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureuser)).EndInit();
             this.tabPage7.ResumeLayout(false);
             this.groupBox20.ResumeLayout(false);
             this.groupBox20.PerformLayout();
@@ -3363,7 +3542,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemProgressBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemColorEdit1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemPictureEdit1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3373,7 +3556,6 @@
 
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.PictureBox pictureuser;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private XtraReport1 xtraReport11;
         private System.Windows.Forms.TabPage tabPage7;
@@ -3412,8 +3594,7 @@
         private System.Windows.Forms.DateTimePicker ngaybatdau;
         private System.Windows.Forms.RadioButton theongay;
         private System.Windows.Forms.GroupBox groupBox15;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.TextBox tongtienhd;
+        private System.Windows.Forms.Label Tongtienhd;
         private System.Windows.Forms.Label label45;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.ComboBox cbbdshoadon;
@@ -3562,7 +3743,6 @@
         private DevExpress.XtraBars.BarDockingMenuItem barDockingMenuItem1;
         private DevExpress.XtraBars.BarButtonItem barButtonItem30;
         private DevExpress.XtraEditors.LabelControl labeltennguoidung;
-        private DevExpress.XtraEditors.LabelControl labelChucvu;
         private DevExpress.XtraBars.BarButtonItem barButtonItem31;
         private DevExpress.XtraBars.BarButtonItem barButtonItem32;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
@@ -3686,6 +3866,29 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.Label tongtien;
         private System.Windows.Forms.Label GTGT;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem52;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem53;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup20;
+        private DevExpress.XtraEditors.LabelControl labelChucvu;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem54;
+        private DevExpress.XtraBars.BarButtonItem SkinLink;
+        private DevExpress.XtraBars.BarLinkContainerItem barLinkContainerItem1;
+        private DevExpress.XtraBars.BarLinkContainerItem SkinsLink;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup21;
+        private DevExpress.XtraBars.BarLinkContainerItem barLinkContainerItem2;
+        private DevExpress.XtraBars.SkinRibbonGalleryBarItem skinRibbonGalleryBarItem1;
+        private DevExpress.XtraBars.BarEditItem barEditItem1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemProgressBar repositoryItemProgressBar1;
+        private DevExpress.XtraBars.BarEditItem barEditItem2;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEdit1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem55;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItem1;
+        private DevExpress.XtraBars.BarStaticItem barStaticItem2;
+        private DevExpress.XtraBars.BarEditItem barEditItem3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemColorEdit repositoryItemColorEdit1;
+        private DevExpress.XtraBars.BarEditItem barEditItem4;
+        private DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit repositoryItemPictureEdit1;
     }
 }
 

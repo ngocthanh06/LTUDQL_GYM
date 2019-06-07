@@ -715,7 +715,7 @@
             // 
             this.calculatedField3.DataMember = "select_InHoaDon";
             this.calculatedField3.DisplayName = "ThueGTGT";
-            this.calculatedField3.Expression = "sum([calculatedField1]*10/100)";
+            this.calculatedField3.Expression = "Iif([calculatedField1]>1500000,sum([calculatedField1]*10/100),0)";
             this.calculatedField3.Name = "calculatedField3";
             // 
             // xrLabel8
