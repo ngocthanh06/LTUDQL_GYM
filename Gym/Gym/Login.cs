@@ -25,6 +25,7 @@ namespace Gym
         NhanVien_BLL NV = new NhanVien_BLL();
         TaiKhoan_BLL TK = new TaiKhoan_BLL();
         The_BLL Th = new The_BLL();
+        int error = 0;
         public Login()
         {
             InitializeComponent();
@@ -37,14 +38,14 @@ namespace Gym
         
      
 
-
+        //xử lý nút đăng nhập
         private void btnlogin_Click(object sender, EventArgs e)
         {
-            
+            //Xét điều kiện
             if (txtusername.Text != "" && txtpass.Text != "")
             {
                 DataTable DT = TK.select_loginTK(txtusername.Text,txtpass.Text);
-                if (DT.Rows.Count > 0)
+                if (DT.Rows.Count > 0 && error <= 5)
                 {
                     if (DT.Rows[0]["Quyen"].ToString() == "1")
                     {
@@ -55,9 +56,7 @@ namespace Gym
 
                         Form.Quyen = a;
                         this.Hide();
-                        Form.Show();
-                       // this.Close();
-                        //Form.Show();
+                        Form.Show(); 
                     }
                     else
                     {
@@ -68,11 +67,18 @@ namespace Gym
                         Form.Quyen = a;
                         this.Hide();
                         Form.Show();
-                        //this.Close();
                     }
                 }
-                else
+                else if (DT.Rows.Count == 0 && error <= 5)
+                {
                     MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu");
+                    error++;
+                }
+                else
+                {
+                    MessageBox.Show("Phiên làm việc đã hết");
+                    this.Close();
+                }
             }
             else if (txtusername.Text == "")
                 MessageBox.Show("Tên đăng nhập không được để trống");
@@ -82,15 +88,17 @@ namespace Gym
 
         private void btnres_Click(object sender, EventArgs e)
         {
-            
-            
-        }
 
-        private void progressBar1_Click(object sender, EventArgs e)
+
+        }
+        //Sự kiện Enter ở textbox
+        private void txtpass_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+                 {
+                     btnlogin.PerformClick();
+                 }
         }
-
         
     }
 }

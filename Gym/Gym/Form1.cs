@@ -35,7 +35,6 @@ namespace Gym
         
         
         //contructor
-
         public string Message
         {
             get { return labeltennguoidung.Text; }
@@ -47,7 +46,7 @@ namespace Gym
             get { return labelChucvu.Text; }
             set { labelChucvu.Text = value; }
         }
-
+        //refresh button, textbox
         void clearbutton()
         {
             txtTenKH.Clear();
@@ -68,7 +67,6 @@ namespace Gym
                 return false;
         }
         //loadcombobox Dịch vụ
-        
         void loadcbbLoaihang()
         {
             cbbloaihang.DataSource = LH.select_LoaiHang();
@@ -95,7 +93,7 @@ namespace Gym
         {
             SkinHelper.InitSkinPopupMenu(SkinsLink);
         }
-        
+        //Load form
         private void Form1_Load(object sender, EventArgs e)
         {
             //THay đổi giao diện
@@ -158,7 +156,7 @@ namespace Gym
            
            
         }
-        
+        //Đóng các tabControl chính
         void closeTabcontrol()
         {
 
@@ -190,16 +188,12 @@ namespace Gym
             else
                 return "KH0"+MaKHCu;
         }
-       
-
-
+ 
         //Làm mới khách hàng
         private void barButtonItem7_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             clearbutton();
         }
-
-        
 
         //Đổ dữ liệu trong lưới của danh sách thành viên
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -331,15 +325,12 @@ namespace Gym
         //THêm Khách Hàng
         private void barButtonItem4_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ThemKH ThemKH = new ThemKH();
-
+            ThemKH ThemKH = new ThemKH(dataGridView1);
             ThemKH.MaNVKH = labelMaNV.Text;
             ThemKH.ShowDialog();
         }
       
         //load cbb view form child
-        
-       
 
         /* NHÂN VIÊN
          * Nhân viên 
@@ -1508,7 +1499,7 @@ namespace Gym
         }
 
        
-
+        
         private void comboBox1_DropDown(object sender, EventArgs e)
         {
             cbbtheKH.DataSource = KH.select_KhachHang();
@@ -1542,9 +1533,7 @@ namespace Gym
                 }
             }
         }
-
-       
-
+        //Gia hạn thẻ
         private void simpleButton6_Click(object sender, EventArgs e)
         {
             GiaHanThe GHThe = new GiaHanThe();
@@ -1563,20 +1552,19 @@ namespace Gym
                     MessageBox.Show("Khách hàng chưa có thẻ");
             }
             else MessageBox.Show("Bạn chưa chọn khách hàng");
-        }
-        
-
+        } 
+        //Checkbox tìm kiếm nhân viên theo thẻ
         private void datenvthe_ValueChanged(object sender, EventArgs e)
         {
             checkBox1.Checked = false;
         }
-
+        //Chọn ds thẻ trong datagridview
         private void dsthe_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             dsthe.CurrentRow.Selected = true;
             DataGridViewRow row = this.dsthe.Rows[e.RowIndex];
         }
-
+        //Check hóa đơn
         private void radioAllHD_CheckedChanged(object sender, EventArgs e)
         {
             cbbTennv.DataSource = null;
@@ -1586,13 +1574,13 @@ namespace Gym
             textmahd.Clear();
             
         }
-
+        //Thêm Nhân viên
         private void barButtonItem9_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            ThemNVcs NV = new ThemNVcs();
-            NV.ShowDialog();
+            ThemNVcs NV = new ThemNVcs(dtgnhanvien);
+            NV.Show();
         }
-        
+        //Hiển thị hóa đơn
         private void barButtonItem40_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             closeTabcontrol();
@@ -1600,36 +1588,39 @@ namespace Gym
             tabControl1.TabPages.Add(tabPage6);
             tabControl1.SelectTab(tabPage6);
         }
-
-        
-
+        //Thống kê
         private void barButtonItem51_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             thongke form = new thongke();
             form.ShowDialog();
         }
-
+        //Đăng xuất
         private void barButtonItem55_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            DialogResult Mes = MessageBox.Show("Bạn có thực sự muốn đăng xuất?", "Thông báo.!!", MessageBoxButtons.YesNo);
+            DialogResult Mes = MessageBox.Show("Bạn có thực sự muốn đăng xuất?", "Thông báo.!!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
             if (Mes == DialogResult.Yes)
             {
-                
+                this.Hide();
                 Login lg = new Login();
                 lg.Show();
                 
             }
         }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        //Đóng form
+      
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-             DialogResult Mes = MessageBox.Show("Bạn có muốn đóng chương trình không?", "Thông báo.!!", MessageBoxButtons.YesNo);
-                if (Mes == DialogResult.Yes)
-                {
-                    Application.Exit();
-                }
+            DialogResult Mes = MessageBox.Show("BẠN MUỐN ĐÓNG FORM?", "Thông báo.!!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+            if (Mes == DialogResult.No)
+            {
+                //xử lí khác
+                e.Cancel = true;
+            }
+            else
+                Application.Exit();
         }
 
+        
       
        
     }

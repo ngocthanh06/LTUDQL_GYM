@@ -25,18 +25,13 @@ namespace Gym
         NhanVien_BLL NV = new NhanVien_BLL();
         TaiKhoan_BLL TK = new TaiKhoan_BLL();
         The_BLL Th = new The_BLL();
+        int radio;
         public TaikhoanNV()
         {
             InitializeComponent();
         }
         //quyền
-        bool RadioBT()
-        {
-            if (admin.Checked == true)
-                return true;
-            else
-                return false;
-        }
+
         //Chuyển dữ liệu từ form 1 sang
         public string Message
         {
@@ -45,7 +40,21 @@ namespace Gym
         }
         private void button2_Click(object sender, EventArgs e)
         {
+            if (admin.Checked == true)
+            {
+                radio = 1;             
+            }
+            else
+            {
+                radio = 0;  
+            }
 
+            if (TK.update_TaiKhoan(txtmatk.Text, txtusername.Text, txtpassword.Text, radio) > 0)
+            {
+                MessageBox.Show("Thành công");
+            }
+            else
+                MessageBox.Show("Thất bại");
         }
 
         private void TaikhoanNV_Load(object sender, EventArgs e)

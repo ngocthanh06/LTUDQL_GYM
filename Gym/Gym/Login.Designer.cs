@@ -76,11 +76,12 @@
             this.txtpass.Size = new System.Drawing.Size(220, 20);
             this.txtpass.TabIndex = 3;
             this.txtpass.UseSystemPasswordChar = true;
+            this.txtpass.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpass_KeyDown);
             // 
             // btnlogin
             // 
             this.btnlogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnlogin.Location = new System.Drawing.Point(599, 237);
+            this.btnlogin.Location = new System.Drawing.Point(599, 236);
             this.btnlogin.Name = "btnlogin";
             this.btnlogin.Size = new System.Drawing.Size(85, 35);
             this.btnlogin.TabIndex = 4;
@@ -91,7 +92,7 @@
             // btnres
             // 
             this.btnres.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnres.Location = new System.Drawing.Point(437, 237);
+            this.btnres.Location = new System.Drawing.Point(436, 236);
             this.btnres.Name = "btnres";
             this.btnres.Size = new System.Drawing.Size(102, 35);
             this.btnres.TabIndex = 5;

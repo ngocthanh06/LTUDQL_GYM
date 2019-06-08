@@ -16,10 +16,18 @@ namespace Gym
         NhanVien_BLL NV = new NhanVien_BLL();
         TaiKhoan_BLL TK = new TaiKhoan_BLL();
         The_BLL Th = new The_BLL();
+        //Load form dtg từ form 1
+        DataGridView data;
+        public ThemNVcs(DataGridView dt)
+        {
+            InitializeComponent();
+            data = dt;
+        }
         public ThemNVcs()
         {
             InitializeComponent();
         }
+        //Check radiobutton
         bool RadioBTNV()
         {
             if (nvnam.Checked == true)
@@ -27,6 +35,7 @@ namespace Gym
             else
                 return false;
         }
+        //Check radiobutton
         bool RadioBTTrangThai()
         {
             if (lamviec.Checked == true)
@@ -70,6 +79,7 @@ namespace Gym
             else
                 return "NV" + MaNV;
         }
+        //Làm mới
         void clearbuttonNV()
         {
             txtTenNV.Clear();
@@ -79,7 +89,7 @@ namespace Gym
             richghichuNV.Clear();
             pictureNV.Image = null;
         }
-        
+        //Thêm NV
         private void simpleButton2_Click(object sender, EventArgs e)
         {
             string MaNV = createMaNV();
@@ -98,11 +108,10 @@ namespace Gym
                     {
                         MessageBox.Show("Thành công");
                         clearbuttonNV();
-                        //dtgnhanvien.DataSource = NV.select_NhanVien();
+                        data.DataSource = NV.select_NhanVien();
                     }
                     else
                         MessageBox.Show("Thất bại");
-
                 }
             }
             //Bắt lỗi thêm số ký tự
@@ -111,7 +120,7 @@ namespace Gym
             else
                 MessageBox.Show("Bạn chưa có ảnh");
         }
-
+        //làm mới
         private void simpleButton1_Click(object sender, EventArgs e)
         {
             clearbuttonNV();
@@ -135,7 +144,7 @@ namespace Gym
                 MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
+        //Load form
         private void ThemNVcs_Load(object sender, EventArgs e)
         {
             MaNV.Visible = false;
