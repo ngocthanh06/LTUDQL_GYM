@@ -47,27 +47,35 @@ namespace Gym
                 DataTable DT = TK.select_loginTK(txtusername.Text,txtpass.Text);
                 if (DT.Rows.Count > 0 && error <= 5)
                 {
-                    if (DT.Rows[0]["Quyen"].ToString() == "1")
+                    DataTable DT1 = NV.select_NhanVienMaTK(DT.Rows[0]["MaTK"].ToString());            
+                    if (DT1.Rows[0]["TrangThai"].ToString() == "True")
                     {
-                        string a = "Admin";
+                        if (DT.Rows[0]["Quyen"].ToString() == "1")
+                        {
+                            string a = "Admin";
 
-                        Form1 Form = new Form1();
-                        Form.Message = DT.Rows[0]["MaTK"].ToString();
+                            Form1 Form = new Form1();
+                            Form.Message = DT.Rows[0]["MaTK"].ToString();
 
-                        Form.Quyen = a;
-                        this.Hide();
-                        Form.Show(); 
+                            Form.Quyen = a;
+                            this.Hide();
+                            Form.Show();
+                        }
+                        else
+                        {
+                            string a = "Nhân viên";
+
+                            Form1 Form = new Form1();
+                            Form.Message = DT.Rows[0]["MaTK"].ToString();
+                            Form.Quyen = a;
+                            this.Hide();
+                            Form.Show();
+                        }
                     }
                     else
-                    {
-                        string a = "Nhân viên";
+                        MessageBox.Show("Bạn không có quyền sử dụng hệ thống");
+                    
 
-                        Form1 Form = new Form1();
-                        Form.Message = DT.Rows[0]["MaTK"].ToString();
-                        Form.Quyen = a;
-                        this.Hide();
-                        Form.Show();
-                    }
                 }
                 else if (DT.Rows.Count == 0 && error <= 5)
                 {
@@ -98,6 +106,11 @@ namespace Gym
                  {
                      btnlogin.PerformClick();
                  }
+        }
+
+        private void Login_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
         
     }

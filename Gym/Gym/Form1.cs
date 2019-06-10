@@ -46,14 +46,14 @@ namespace Gym
             get { return labelChucvu.Text; }
             set { labelChucvu.Text = value; }
         }
+
         //refresh button, textbox
         void clearbutton()
         {
             txtTenKH.Clear();
             txtDiaChi.Clear();
             txtSDT.Clear();
-            ricktbGhiChu.Clear();
-            
+            ricktbGhiChu.Clear();     
             dateNgaySinh.ResetText();
             pictureBox1.Image = null;
         }
@@ -66,6 +66,7 @@ namespace Gym
             else
                 return false;
         }
+
         //loadcombobox Dịch vụ
         void loadcbbLoaihang()
         {
@@ -73,41 +74,38 @@ namespace Gym
             cbbloaihang.DisplayMember = "TenLH";
             cbbloaihang.ValueMember = "MaLH";
         }
+
         public Form1()
         {
             InitializeComponent();
         }
+
         //Load danh sách nhân viên trong datagridview
         public void loaddsnhanvien()
         {
             dtgnhanvien.DataSource = NV.select_NhanVien();
             foreach (DataGridViewRow row in dtgnhanvien.Rows)
             {
-                if (row.Cells[9].Value.ToString() == "True")
+                if (row.Cells[9].Value.ToString() != "True")
                 row.DefaultCellStyle.BackColor = Color.Red;
-            }
-            
+            }  
         }
+
         //Thay đổi giao diện
         public void thaydoigiaodien()
         {
             SkinHelper.InitSkinPopupMenu(SkinsLink);
         }
-        //Load form
-        private void Form1_Load(object sender, EventArgs e)
+
+        //Load Datagridview1 khách hàng
+        void loaddtgview1()
         {
-            //THay đổi giao diện
-            thaydoigiaodien();
-            //Khách hàng
             dataGridView1.DataSource = KH.select_KhachHang();
-            labelChucvu.Visible = false;
-            labeltennguoidung.Visible = false;
-            MaKH.Visible = false;
-            MaThe.Visible = false;
-            MaNV.Visible = false;
-            matk.Visible = false;
-            labelMaNV.Visible = false;
-            //mahh.Visible = false;
+        }
+
+        //Phân quyền
+        void phanquyen()
+        {
             DataTable DT = NV.select_NhanVienMaTK(labeltennguoidung.Text);
             //Phân quyền
             if (labelChucvu.Text != "Admin")
@@ -123,16 +121,66 @@ namespace Gym
             labelMaNV.Text = DT.Rows[0]["MaNV"].ToString();
             closeTabcontrol();
             textMaNV.Text = DT.Rows[0]["MaNV"].ToString();
-            //nhân viên
-            loaddsnhanvien();
-            //hanghoa
-            dtgLoaiHang.DataSource = HH.select_HangHoa();
+        }
+
+        //loaddtgviewloaihang của hàng hóa
+        void loaddtgviewloaihang()
+        {
+            dtgLoaiHang.DataSource = HH.select_HangHoa();  
+            foreach (DataGridViewRow row in dtgLoaiHang.Rows)
+            {
+                if (!row.IsNewRow)
+                {
+                    if (Convert.ToInt32(row.Cells[3].Value.ToString()) <= 10)
+                        row.DefaultCellStyle.BackColor = Color.Green;
+                    if (Convert.ToInt32(row.Cells[3].Value.ToString()) == 11)
+                        row.DefaultCellStyle.BackColor = Color.Red;
+                }
+            }
+        }
+
+        //Datag của loại hàng
+        void loaihangload()
+        {
+            dtgdsloaihang.DataSource = LH.select_LoaiHang();
+        }
+
+        //load dtg khách hàng của dịch vụ
+        void KhachHang()
+        {
+            dtgkhachhang.DataSource = KH.select_KhachHang();
+        }
+
+        //load dtgv của hàng hóa của dịch vụ
+        void hanghoa()
+        {
+            dtgsanpham.DataSource = HH.select_HangHoa();
+        }
+        //Load form
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //THay đổi giao diện
+            thaydoigiaodien();
+
+            //Khách hàng
+            loaddtgview1();
+
+            //ẩn label
+            labelChucvu.Visible = false;
+            labeltennguoidung.Visible = false;
+            MaKH.Visible = false;
+            MaThe.Visible = false;
+            MaNV.Visible = false;
+            matk.Visible = false;
+            labelMaNV.Visible = false;
+
+            //Phân quyền
+            phanquyen();
+
             //loaihang
             mahh.Visible = false;
-            dtgdsloaihang.DataSource = LH.select_LoaiHang(); 
-            //Dịch vụ
-            dtgkhachhang.DataSource = KH.select_KhachHang();
-            dtgsanpham.DataSource = HH.select_HangHoa();
+            
+            //Dịch vụ       
             texttongtien.Enabled = false;
             textMaKH.Enabled = false;
             textMaLH.Enabled = false;
@@ -153,10 +201,32 @@ namespace Gym
             datenvthe.Enabled = false;
             checkBox1.Enabled = false;
             //CryptalReport
-           
-           
+     
         }
         //Đóng các tabControl chính
+
+        //THêm Ảnh
+        void ThemAnh(PictureBox image)
+        {
+            String imageLocation = "";
+            try
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    imageLocation = dialog.FileName;
+                    image.ImageLocation = imageLocation;
+
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
         void closeTabcontrol()
         {
 
@@ -232,21 +302,7 @@ namespace Gym
         //THêm ảnh
         private void simpleButton1_Click(object sender, EventArgs e)
         {
-            String imageLocation = "";
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    imageLocation = dialog.FileName;
-                    pictureBox1.ImageLocation = imageLocation;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ThemAnh(pictureBox1);
         }
       
 
@@ -265,7 +321,7 @@ namespace Gym
                 {
                     MessageBox.Show("Thành công");
                     clearbutton();
-                    dataGridView1.DataSource = KH.select_KhachHang();
+                    loaddtgview1();
                 }
                 else
                     MessageBox.Show("Thất bại");
@@ -275,6 +331,8 @@ namespace Gym
             else
                 MessageBox.Show("Chưa có ảnh");
         }
+        //DataTable 
+        
         //Xóa Khách hàng
         private void barButtonItem6_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
@@ -290,7 +348,7 @@ namespace Gym
                 MessageBox.Show("Thành công");
                 clearbutton();
                 pictureBox1.Image = null;
-                dataGridView1.DataSource = KH.select_KhachHang();
+                loaddtgview1();
             }
             else
                 MessageBox.Show("Thất bại");
@@ -410,6 +468,7 @@ namespace Gym
         private void barButtonItem12_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             clearbuttonNV();
+            loaddsnhanvien();
         }
         //Sửa
         private void barButtonItem10_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -426,6 +485,7 @@ namespace Gym
                     MessageBox.Show("Thành công");
                     clearbuttonNV();
                     dtgnhanvien.DataSource = NV.select_NhanVien();
+                    loaddsnhanvien();
                 }
                 else
                     MessageBox.Show("Thất bại");
@@ -446,6 +506,7 @@ namespace Gym
                     MessageBox.Show("Thành công");
                     clearbuttonNV();
                     dtgnhanvien.DataSource = NV.select_NhanVien();
+                    loaddsnhanvien();
                 }
                 else
                     MessageBox.Show("Thất bại");
@@ -456,21 +517,7 @@ namespace Gym
         //Upload
         private void simpleButton2_Click(object sender, EventArgs e)
         {
-            String imageLocationNV = "";
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    imageLocationNV = dialog.FileName;
-                    pictureNV.ImageLocation = imageLocationNV;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ThemAnh(pictureNV);
         }
        
         //Hiển thị tài khoản
@@ -566,21 +613,7 @@ namespace Gym
         //Load ảnh
         private void simpleButton3_Click(object sender, EventArgs e)
         {
-            String imageLocationNV = "";
-            try
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "jpg files(.*jpg)|*.jpg| PNG files(.*png)|*.png| All Files(*.*)|*.*"﻿;
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    imageLocationNV = dialog.FileName;
-                    pictureLoaiHang.ImageLocation = imageLocationNV;
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Lỗi Định dạng", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            ThemAnh(pictureLoaiHang);
         }
        
         //Thêm sản phẩm
@@ -604,8 +637,10 @@ namespace Gym
                 {
                     MessageBox.Show("Thành công");
                     //Loại hàng
-                    dtgLoaiHang.DataSource = HH.select_HangHoa();
+                    loaddtgviewloaihang();
                     loadloaihang();
+
+
                 }
                 else
                     MessageBox.Show("Thất bại");
@@ -643,7 +678,7 @@ namespace Gym
                 {
                     MessageBox.Show("Thành công");
                     //Loại hàng
-                    dtgLoaiHang.DataSource = HH.select_HangHoa();
+                    loaddtgviewloaihang();
                     loadloaihang();
                 }
                 else
@@ -663,7 +698,7 @@ namespace Gym
             {
                 MessageBox.Show("Thành công");
                 //Loại hàng
-                dtgLoaiHang.DataSource = HH.select_HangHoa();
+                loaddtgviewloaihang();
                 loadloaihang();
             }
             else
@@ -731,7 +766,7 @@ namespace Gym
                 if (LH.delete_LoaiHang(txtmalh.Text) > 0)
                 {
                     MessageBox.Show("Thành công");
-                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loaihangload();
                     loadlhang();
                 }
                 else
@@ -746,7 +781,7 @@ namespace Gym
                 if (LH.update_LoaiHang(txtmalh.Text, TenLHtxt.Text, richghichuLoaiH.Text) > 0)
                 {
                     MessageBox.Show("Thành công");
-                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loaihangload();
                     loadlhang();
                 }
                 else
@@ -763,7 +798,7 @@ namespace Gym
                 if (LH.insert_LoaiHang(createMaLH(), TenLHtxt.Text, richghichuLoaiH.Text) > 0)
                 {
                     MessageBox.Show("Thành công");
-                    dtgdsloaihang.DataSource = LH.select_LoaiHang();
+                    loaihangload();
                     loadlhang();
                 }
                 else
@@ -914,7 +949,7 @@ namespace Gym
                     int soluong = Convert.ToInt32(ro.Cells[3].Value.ToString());
                     malh = ro.Cells[1].Value.ToString();
                     makh = ro.Cells[6].Value.ToString();
-                    if (textMaLH.Text == malh && textMaKH.Text == ro.Cells[6].Value.ToString())
+                    if (textMaLH.Text == malh && textMaKH.Text == makh)
                     {
                         int SumTien = 0;
                         int thue = 0;
@@ -932,11 +967,14 @@ namespace Gym
                             ro.Cells[3].Value = c.ToString();
                             ro.Cells[4].Value = dongia.ToString();
                             sum = sum + (gia * b);
+
+
                             texttongtien.Text = sum.ToString();
                             if (sum > 1500000)
                                 thue = sum * 10 / 100;
                             else
                                 thue = 0;
+
                             SumTien = sum + thue;
                             GTGT.Text = String.Format("{0:0,0}", thue) + " VND";
 
@@ -1026,6 +1064,7 @@ namespace Gym
                         tabControl1.TabPages.Remove(tabPage1);
                         tabControl1.TabPages.Add(tabPage1);
                         tabControl1.SelectTab(tabPage1);
+                        loaddtgview1();
                     }
                     //Nhân viên
                     else if (ribbonControl1.SelectedPage == nhanvien)
@@ -1034,6 +1073,7 @@ namespace Gym
                         tabControl1.TabPages.Remove(tabPage1);
                         tabControl1.TabPages.Add(tabPage2);
                         tabControl1.SelectTab(tabPage2);
+                        loaddsnhanvien();
                     }
                     //Dịch vụ
                     else if (ribbonControl1.SelectedPage == dichvu)
@@ -1042,14 +1082,28 @@ namespace Gym
                         tabControl1.TabPages.Remove(tabPage1);
                         tabControl1.TabPages.Add(tabPage5);
                         tabControl1.SelectTab(tabPage5);
+                        KhachHang();
+                        hanghoa();
                     }
                     //Sản phẩm
                     else if (ribbonControl1.SelectedPage == sanpham)
                     {
+                        
                         closeTabcontrol();
                         tabControl1.TabPages.Remove(tabPage1);
                         tabControl1.TabPages.Add(tabPage3);
                         tabControl1.SelectTab(tabPage3);
+                        loaddtgviewloaihang();
+                        foreach (DataGridViewRow row in dtgLoaiHang.Rows)
+                        {
+                            if(!row.IsNewRow)
+                            {
+                                if (Convert.ToInt32(row.Cells[3].Value.ToString()) <= 10)
+                                    row.DefaultCellStyle.BackColor = Color.Green;
+                                if (Convert.ToInt32(row.Cells[3].Value.ToString()) == 11)
+                                    row.DefaultCellStyle.BackColor = Color.Red;
+                            }
+                        }
                     }
                     //Loại Hàng
                     else if (ribbonControl1.SelectedPage == loaihang)
@@ -1058,6 +1112,7 @@ namespace Gym
                         tabControl1.TabPages.Remove(tabPage1);
                         tabControl1.TabPages.Add(tabPage4);
                         tabControl1.SelectTab(tabPage4);
+                        loaihangload();
                     }
                     //Hóa đơn
                     else if (ribbonControl1.SelectedPage == hoadon)
@@ -1081,24 +1136,25 @@ namespace Gym
 
         private void barButtonItem3_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            dataGridView1.DataSource = KH.select_KhachHang();
+            loaddtgview1();
         }
         //Nhân viên
         private void barButtonItem8_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             dtgnhanvien.DataSource = NV.select_NhanVien();
+            loaddsnhanvien();
         }
         
         //click sản phẩm
         private void barButtonItem19_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            dtgLoaiHang.DataSource = HH.select_HangHoa();
+            loaddtgviewloaihang();
         }
        
         //Loại hàng
         private void barButtonItem24_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            dtgdsloaihang.DataSource = LH.select_LoaiHang();
+            loaihangload();
         }
        
        
@@ -1271,7 +1327,7 @@ namespace Gym
                             {
                                 a++;
                                 clearHD();
-                                dtgsanpham.DataSource = HH.select_HangHoa();
+                                hanghoa();
                                 checksp();
                             }
                         }
@@ -1482,8 +1538,6 @@ namespace Gym
                     dsthe.DataSource = Th.select_ThebyDichvuMaNV(cbbNvthe.SelectedValue.ToString());
                 else
                     dsthe.DataSource = Th.select_ThebyDichvuMaNVandMonthYear(cbbNvthe.SelectedValue.ToString(), Month, Year);
-
-
             }
         }
 
@@ -1620,8 +1674,20 @@ namespace Gym
                 Application.Exit();
         }
 
-        
-      
-       
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
+ 
     }
 }

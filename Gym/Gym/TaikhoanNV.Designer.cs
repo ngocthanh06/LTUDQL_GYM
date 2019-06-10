@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TaikhoanNV));
             this.txtmatk = new System.Windows.Forms.TextBox();
             this.matk = new System.Windows.Forms.Label();
             this.username = new System.Windows.Forms.Label();
@@ -42,7 +43,7 @@
             // 
             // txtmatk
             // 
-            this.txtmatk.Location = new System.Drawing.Point(268, 36);
+            this.txtmatk.Location = new System.Drawing.Point(106, 16);
             this.txtmatk.Name = "txtmatk";
             this.txtmatk.Size = new System.Drawing.Size(151, 20);
             this.txtmatk.TabIndex = 0;
@@ -50,7 +51,7 @@
             // matk
             // 
             this.matk.AutoSize = true;
-            this.matk.Location = new System.Drawing.Point(174, 39);
+            this.matk.Location = new System.Drawing.Point(12, 19);
             this.matk.Name = "matk";
             this.matk.Size = new System.Drawing.Size(73, 13);
             this.matk.TabIndex = 1;
@@ -59,7 +60,7 @@
             // username
             // 
             this.username.AutoSize = true;
-            this.username.Location = new System.Drawing.Point(174, 95);
+            this.username.Location = new System.Drawing.Point(12, 75);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(81, 13);
             this.username.TabIndex = 2;
@@ -68,7 +69,7 @@
             // password
             // 
             this.password.AutoSize = true;
-            this.password.Location = new System.Drawing.Point(174, 150);
+            this.password.Location = new System.Drawing.Point(12, 130);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(52, 13);
             this.password.TabIndex = 3;
@@ -77,7 +78,7 @@
             // quyen
             // 
             this.quyen.AutoSize = true;
-            this.quyen.Location = new System.Drawing.Point(174, 206);
+            this.quyen.Location = new System.Drawing.Point(12, 186);
             this.quyen.Name = "quyen";
             this.quyen.Size = new System.Drawing.Size(38, 13);
             this.quyen.TabIndex = 4;
@@ -85,15 +86,14 @@
             // 
             // txtusername
             // 
-            this.txtusername.Location = new System.Drawing.Point(268, 92);
+            this.txtusername.Location = new System.Drawing.Point(106, 72);
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(151, 20);
             this.txtusername.TabIndex = 5;
-           
             // 
             // txtpassword
             // 
-            this.txtpassword.Location = new System.Drawing.Point(268, 147);
+            this.txtpassword.Location = new System.Drawing.Point(106, 127);
             this.txtpassword.Name = "txtpassword";
             this.txtpassword.Size = new System.Drawing.Size(151, 20);
             this.txtpassword.TabIndex = 6;
@@ -101,7 +101,7 @@
             // admin
             // 
             this.admin.AutoSize = true;
-            this.admin.Location = new System.Drawing.Point(268, 206);
+            this.admin.Location = new System.Drawing.Point(106, 186);
             this.admin.Name = "admin";
             this.admin.Size = new System.Drawing.Size(54, 17);
             this.admin.TabIndex = 7;
@@ -112,7 +112,7 @@
             // nhanvien
             // 
             this.nhanvien.AutoSize = true;
-            this.nhanvien.Location = new System.Drawing.Point(368, 206);
+            this.nhanvien.Location = new System.Drawing.Point(206, 186);
             this.nhanvien.Name = "nhanvien";
             this.nhanvien.Size = new System.Drawing.Size(74, 17);
             this.nhanvien.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // btcapnhat
             // 
-            this.btcapnhat.Location = new System.Drawing.Point(320, 246);
+            this.btcapnhat.Location = new System.Drawing.Point(158, 226);
             this.btcapnhat.Name = "btcapnhat";
             this.btcapnhat.Size = new System.Drawing.Size(99, 31);
             this.btcapnhat.TabIndex = 10;
@@ -134,7 +134,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 348);
+            this.BackColor = System.Drawing.Color.CadetBlue;
+            this.ClientSize = new System.Drawing.Size(288, 277);
             this.Controls.Add(this.btcapnhat);
             this.Controls.Add(this.nhanvien);
             this.Controls.Add(this.admin);
@@ -145,7 +146,10 @@
             this.Controls.Add(this.username);
             this.Controls.Add(this.matk);
             this.Controls.Add(this.txtmatk);
+            this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TaikhoanNV";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TaikhoanNV";
             this.Load += new System.EventHandler(this.TaikhoanNV_Load);
             this.ResumeLayout(false);

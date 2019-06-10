@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemKH));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -99,6 +100,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::Gym.Properties.Resources.blue_user_icon;
             this.pictureBox1.Location = new System.Drawing.Point(300, 64);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(173, 216);
@@ -378,7 +380,9 @@
             this.Controls.Add(this.simpleButton2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ThemKH";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ThemKH";
             this.Load += new System.EventHandler(this.ThemKH_Load);
             this.groupBox2.ResumeLayout(false);

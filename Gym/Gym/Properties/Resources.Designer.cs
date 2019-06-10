@@ -173,6 +173,26 @@ namespace Gym.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blue_user_icon {
+            get {
+                object obj = ResourceManager.GetObject("blue-user-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Camera_icon {
+            get {
+                object obj = ResourceManager.GetObject("Camera-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Chart_icon {
             get {
                 object obj = ResourceManager.GetObject("Chart-icon", resourceCulture);
@@ -269,6 +289,16 @@ namespace Gym.Properties {
             get {
                 object obj = ResourceManager.GetObject("Gym-Wall-Sticker-Vinyl-Muscle-Gym-Bodybuilding-Wall-Decal-Muscled-Man-Wall-Mural-" +
                         "Sport-Room-Decor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon1 {
+            get {
+                object obj = ResourceManager.GetObject("icon1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

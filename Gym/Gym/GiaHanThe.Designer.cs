@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GiaHanThe));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -111,6 +112,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.GhostWhite;
+            this.pictureBox1.Image = global::Gym.Properties.Resources.blue_user_icon;
             this.pictureBox1.Location = new System.Drawing.Point(678, 81);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(222, 263);
@@ -230,6 +233,7 @@
             // dtgdanhsachthe
             // 
             this.dtgdanhsachthe.AllowUserToAddRows = false;
+            this.dtgdanhsachthe.BackgroundColor = System.Drawing.Color.White;
             this.dtgdanhsachthe.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtgdanhsachthe.Location = new System.Drawing.Point(12, 67);
             this.dtgdanhsachthe.Name = "dtgdanhsachthe";
@@ -259,6 +263,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkKhaki;
             this.ClientSize = new System.Drawing.Size(948, 402);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -283,7 +288,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GiaHanThe";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GiaHanThe";
             this.Load += new System.EventHandler(this.GiaHanThe_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

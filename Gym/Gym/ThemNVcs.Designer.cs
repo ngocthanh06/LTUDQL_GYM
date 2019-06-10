@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThemNVcs));
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.pictureNV = new System.Windows.Forms.PictureBox();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
@@ -45,7 +46,6 @@
             this.txtTenNV = new System.Windows.Forms.TextBox();
             this.txtDiachiNV = new System.Windows.Forms.TextBox();
             this.txtSDTNV = new System.Windows.Forms.TextBox();
-            this.pictureNV = new System.Windows.Forms.PictureBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -55,12 +55,13 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
-            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureNV)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox5
             // 
+            this.groupBox5.BackColor = System.Drawing.Color.LightGreen;
             this.groupBox5.Controls.Add(this.pictureNV);
             this.groupBox5.Controls.Add(this.simpleButton4);
             this.groupBox5.Controls.Add(this.simpleButton2);
@@ -83,12 +84,25 @@
             this.groupBox5.Controls.Add(this.label15);
             this.groupBox5.Controls.Add(this.label14);
             this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Location = new System.Drawing.Point(12, 12);
+            this.groupBox5.Location = new System.Drawing.Point(-1, 1);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(933, 367);
+            this.groupBox5.Size = new System.Drawing.Size(960, 392);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Thông tin";
+            // 
+            // pictureNV
+            // 
+            this.pictureNV.BackColor = System.Drawing.SystemColors.Menu;
+            this.pictureNV.BackgroundImage = global::Gym.Properties.Resources.blue_user_icon;
+            this.pictureNV.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.pictureNV.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureNV.ErrorImage")));
+            this.pictureNV.Location = new System.Drawing.Point(740, 61);
+            this.pictureNV.Name = "pictureNV";
+            this.pictureNV.Size = new System.Drawing.Size(187, 241);
+            this.pictureNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureNV.TabIndex = 9;
+            this.pictureNV.TabStop = false;
             // 
             // simpleButton4
             // 
@@ -112,6 +126,7 @@
             // 
             // simpleButton1
             // 
+            this.simpleButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.simpleButton1.ImageOptions.Image = global::Gym.Properties.Resources.Refresh_icon;
             this.simpleButton1.Location = new System.Drawing.Point(287, 298);
             this.simpleButton1.Name = "simpleButton1";
@@ -229,16 +244,6 @@
             this.txtSDTNV.Size = new System.Drawing.Size(223, 20);
             this.txtSDTNV.TabIndex = 11;
             // 
-            // pictureNV
-            // 
-            this.pictureNV.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureNV.ErrorImage")));
-            this.pictureNV.Location = new System.Drawing.Point(740, 61);
-            this.pictureNV.Name = "pictureNV";
-            this.pictureNV.Size = new System.Drawing.Size(187, 241);
-            this.pictureNV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureNV.TabIndex = 9;
-            this.pictureNV.TabStop = false;
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -315,16 +320,21 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
             this.ClientSize = new System.Drawing.Size(957, 391);
             this.Controls.Add(this.groupBox5);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ThemNVcs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ThemNVcs";
             this.Load += new System.EventHandler(this.ThemNVcs_Load);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureNV)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureNV)).EndInit();
             this.ResumeLayout(false);
 
         }
